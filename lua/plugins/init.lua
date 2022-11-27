@@ -23,12 +23,26 @@ packer.init({
     clone_timeout = 300, -- in seconds
   },
 })
+
+-- add disabled plugins here
+local ignored = {
+  'init.lua',
+}
+
+local is_ignored = function(path)
+  for _, test_path in pairs(ignored) do
+    if path:match('/' .. test_path .. '$') then
+      return true
+    end
+  end
+end
+
 return packer.startup(function(use)
-  local init_file = vim.g.PLUGINS_DIR .. 'init.lua'
-  local paths = vim.split(vim.fn.glob(vim.g.PLUGINS_DIR .. '**/*.lua'), '\n')
-  for k, v in pairs(paths) do
-    if v ~= init_file then
-      use(dofile(v))
+  local paths = vim.split(vim.fn.glob(vim.g.PLUGINS_DIR .. '*.lua'), '\n')
+  for _, path in pairs(paths) do
+    if not is_ignored(path) then
+    -- if path ~= init_file then
+      use(dofile(path))
     end
   end
 end)
