@@ -25,6 +25,9 @@ vim.g.mapleader = ' '
 -- 'jk' instead of ESC
 map('i', 'jk', '<ESC>')
 
+-- Tree nav
+map('n', '<leader>e', '<cmd>:Neotree toggle<CR>')
+
 -- Better window navigation
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
@@ -51,7 +54,8 @@ end)
 
 -- Save and close current buffer
 unmap('<C-w>')
-map('nivx', '<C-w>', '<cmd>:w|bd<CR>')
+-- map('nivx', '<C-w>', '<cmd>:w|bd<CR>')
+map('nivx', '<C-w>', '<cmd>:b#|w|bd#<CR>')
 
 -- Better paste
 map('v', 'p', '"_dP')
@@ -92,3 +96,25 @@ map('nv', '<leader>p', '"+p')
 map('nv', '<leader>P', '"+P')
 map('nv', '<leader>y', '"+y')
 map('n', '<leader>Y', '"+y$')
+
+-- tmp testing - TODO - make this a conditional-load file
+map('n', '<leader>X', function()
+  -- local utils = require('utils')
+  -- local notify = require('notify')
+  -- local tick = vim.api.nvim_buf_get_changedtick(0)
+  -- notify('tick: ' .. tick)
+
+  -- local dirty = utils.is_buffery_dirty()
+  -- notify('dirty: ' .. dirty)
+  -- local info = vim.fn.getbufinfo(0)[1]
+  -- notify('changed: ' .. info.changed)
+  -- if info.changed == 0 then
+  --   notify('it was not')
+  -- else
+  --   notify('it was changed')
+  -- end
+  -- local num = vim.api.nvim_win_get_buf(0)
+  -- notify('num: ' .. num)
+  -- local text = vim.api.nvim_buf_get_text(0)
+  -- notify('text: ' .. text)
+end)

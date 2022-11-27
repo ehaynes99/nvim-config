@@ -34,13 +34,17 @@ packer.init({
 })
 
 return packer.startup(function(use)
-  use({ 'wbthomason/packer.nvim', commit = '6afb67460283f0e990d35d229fd38fdc04063e0a' })
+  use(require('plugins.packer'))
+  use(require('plugins.plenary'))
 
   use(require('plugins.onedark'))
   use(require('plugins.nvim-notify'))
+  use(require('plugins.neo-tree'))
+  use(require('plugins.nui_nvim'))
+  use(require('plugins.nvim-web-devicons'))
+  use(require('plugins.comment_nvim'))
 
-  use({ 'rafcamlet/nvim-luapad', commit = '6efe3806c6e0d9ae684d756d4d7053cbdfb562eb' })
-  use({ 'numToStr/Comment.nvim', commit = '97a188a98b5a3a6f9b1b850799ac078faa17ab67' })
+  use(require('plugins.nvim-luapad'))
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
