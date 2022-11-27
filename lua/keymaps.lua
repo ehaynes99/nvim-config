@@ -64,14 +64,11 @@ map('v', 'p', '"_dP')
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 
--- NvimTree
--- map('n', '<leader>e', ':NvimTreeToggle<CR>')
-
 -- Telescope
--- map('n', '<leader>ff', ':Telescope find_files<CR>')
--- map('n', '<leader>ft', ':Telescope live_grep<CR>')
--- map('n', '<leader>fp', ':Telescope projects<CR>')
--- map('n', '<leader>fb', ':Telescope buffers<CR>')
+map('n', '<leader>ff', ':Telescope find_files<CR>')
+map('n', '<leader>ft', ':Telescope live_grep<CR>')
+map('n', '<leader>fp', ':Telescope projects<CR>')
+map('n', '<leader>fb', ':Telescope buffers<CR>')
 
 -- Git
 -- map('n', '<leader>gg', '<cmd>lua _LAZYGIT_TOGGLE()<CR>')
