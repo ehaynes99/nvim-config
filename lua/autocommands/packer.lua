@@ -1,4 +1,4 @@
-local utils = require('lua.utils')
+local utils = require('utils')
 
 local create_cmd = vim.api.nvim_create_autocmd
 
