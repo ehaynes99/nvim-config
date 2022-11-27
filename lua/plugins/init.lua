@@ -27,6 +27,7 @@ packer.init({
 -- add disabled plugins here
 local ignored = {
   'init.lua',
+  'neo%-tree.lua',
 }
 
 local is_ignored = function(path)
@@ -41,7 +42,7 @@ return packer.startup(function(use)
   local paths = vim.split(vim.fn.glob(vim.g.PLUGINS_DIR .. '*.lua'), '\n')
   for _, path in pairs(paths) do
     if not is_ignored(path) then
-    -- if path ~= init_file then
+      -- if path ~= init_file then
       use(dofile(path))
     end
   end

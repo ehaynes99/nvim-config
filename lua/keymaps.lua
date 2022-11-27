@@ -26,7 +26,8 @@ vim.g.mapleader = ' '
 map('i', 'jk', '<ESC>')
 
 -- Tree nav
-map('n', '<leader>e', '<cmd>:Neotree toggle<CR>')
+-- map('n', '<leader>e', '<cmd>:Neotree toggle<CR>')
+map('n', '<leader>e', ':NvimTreeToggle<CR>')
 
 -- Better window navigation
 map('n', '<C-h>', '<C-w>h')
