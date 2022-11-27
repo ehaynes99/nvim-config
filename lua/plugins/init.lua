@@ -1,25 +1,20 @@
-local fn = vim.fn
+vim.g.NVIM_CONFIG_DIR = os.getenv('MYVIMRC'):match('(.*[/\\])')
+vim.g.PLUGINS_DIR = vim.g.NVIM_CONFIG_DIR .. 'lua/plugins/'
+vim.g.COMPILED_PACKER_FILE = vim.g.NVIM_CONFIG_DIR .. 'plugin/packer_compiled.lua'
 
 -- Automatically install packer
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system({
-    'git',
-    'clone',
-    '--depth',
-    '1',
-    'https://github.com/wbthomason/packer.nvim',
-    install_path,
-  })
-  print('Installing packer close and reopen Neovim...')
-  vim.cmd([[packadd packer.nvim]])
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    print('Installing packer.')
+    vim.cmd([[packadd packer.nvim]])
+  end
+  return require('packer')
 end
 
--- local packer_loaded, packer = pcall(require, 'packer')
--- if not packer_loaded then
---   return
--- end
-local packer = require('packer')
+local packer = ensure_packer()
 
 -- Have packer use a popup window
 packer.init({
@@ -32,23 +27,12 @@ packer.init({
     clone_timeout = 300, -- in seconds
   },
 })
-
 return packer.startup(function(use)
-  use(require('plugins.packer'))
-  use(require('plugins.plenary'))
-
-  use(require('plugins.onedark'))
-  use(require('plugins.nvim-notify'))
-  use(require('plugins.neo-tree'))
-  use(require('plugins.nui_nvim'))
-  use(require('plugins.nvim-web-devicons'))
-  use(require('plugins.comment_nvim'))
-
-  use(require('plugins.nvim-luapad'))
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require('packer').sync()
+  local init_file = vim.g.PLUGINS_DIR .. 'init.lua'
+  local paths = vim.split(vim.fn.glob(vim.g.PLUGINS_DIR .. '**/*.lua'), '\n')
+  for k, v in pairs(paths) do
+    if v ~= init_file then
+      use(dofile(v))
+    end
   end
 end)

@@ -1,5 +1,3 @@
-local utils = require('utils')
-
 local create_cmd = vim.api.nvim_create_autocmd
 
 local compiled_packer_exists = function()
@@ -14,7 +12,8 @@ end
 create_cmd({ 'BufWrite' }, {
   pattern = vim.g.PLUGINS_DIR .. '**',
   callback = function(args)
-    if utils.is_buffer_dirty(args.buf) and compiled_packer_exists() then
+    local dirty = vim.fn.getbufinfo(args.buf)[1].changed ~= 0
+    if dirty and compiled_packer_exists() then
       local notify = require('notify')
       os.remove(vim.g.COMPILED_PACKER_FILE)
       notify('Removed compiled plugins')
@@ -22,13 +21,11 @@ create_cmd({ 'BufWrite' }, {
   end,
 })
 
+-- sync packer on start if compiled plugins not present
 create_cmd({ 'VimEnter' }, {
   callback = function()
     if not compiled_packer_exists() then
-      local packer_loaded, packer = pcall(require, 'packer')
-      if packer_loaded then
-        packer.sync()
-      end
+      require('packer').sync()
     end
   end,
 })
