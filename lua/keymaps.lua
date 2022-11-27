@@ -8,7 +8,7 @@ local map = function(modes, sequence, mapped, opts)
 end
 
 local unmap = function(sequence)
-  vim.keymap.set('', sequence, '<Nop>', defotps)
+  vim.keymap.set('', sequence, '<Nop>', defopts)
 end
 
 unmap('<Space>')
