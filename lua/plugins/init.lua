@@ -56,6 +56,7 @@ local is_ignored = function(path)
       return true
     end
   end
+  return false
 end
 
 return packer.startup(function(use)
@@ -66,7 +67,6 @@ return packer.startup(function(use)
     end
   end
   if packer_bootstrap or not compiled_packer_exists() then
-    print('synching packer')
     require('packer').sync()
   end
 end)
