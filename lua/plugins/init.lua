@@ -20,7 +20,7 @@ packer.init({
     end,
   },
   git = {
-    clone_timeout = 300, -- in seconds
+    default_url_format = 'git@github.com:%s',
   },
 })
 
@@ -28,6 +28,7 @@ packer.init({
 local ignored = {
   'init.lua',
   'neo-tree.lua',
+  'cmp-nvim-lsp.lua',
 }
 
 local is_ignored = function(path)
