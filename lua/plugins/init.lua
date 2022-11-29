@@ -27,9 +27,8 @@ vim.api.nvim_create_autocmd({ 'BufWrite' }, {
   callback = function(args)
     local dirty = vim.fn.getbufinfo(args.buf)[1].changed ~= 0
     if dirty and compiled_packer_exists() then
-      local notify = require('notify')
       os.remove(vim.g.COMPILED_PACKER_FILE)
-      notify('Removed compiled plugins')
+      print('Removed compiled plugins')
     end
   end,
 })
