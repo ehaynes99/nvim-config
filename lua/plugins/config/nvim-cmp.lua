@@ -1,7 +1,4 @@
-local cmp_loaded, cmp = pcall(require, 'cmp')
-if not cmp_loaded then
-  return
-end
+local cmp = require('cmp')
 local luasnip = require('luasnip')
 
 require('luasnip/loaders/from_vscode').lazy_load()
@@ -42,7 +39,7 @@ local kind_icons = {
 cmp.setup({
   snippet = {
     expand = function(args)
-      -- luasnip.lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
 
@@ -56,9 +53,8 @@ cmp.setup({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
-    -- Accept currently selected item. If none selected, `select` first item.
-    -- Set `select` to `false` to only confirm explicitly selected items.
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    -- Prevent autocomplete unless explicitly tabbing into the list
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -93,12 +89,12 @@ cmp.setup({
     format = function(entry, vim_item)
       vim_item.kind = kind_icons[vim_item.kind]
       vim_item.menu = ({
-        nvim_lsp = '',
-        nvim_lua = '',
-        luasnip = '',
-        buffer = '',
-        path = '',
-        emoji = '',
+        nvim_lsp = '[LSP]',
+        nvim_lua = '[Nvim lua]',
+        luasnip = '[Snippet]',
+        buffer = '[Buffer]',
+        path = '[Path]',
+        emoji = '[Emoji]',
       })[entry.source.name]
       return vim_item
     end,
