@@ -44,28 +44,20 @@ packer.init({
   },
 })
 
--- add disabled plugins here
-local ignored = {
-  'init.lua',
-}
-
-local is_ignored = function(path)
-  for _, ignored_file in pairs(ignored) do
-    if path == (vim.g.PLUGINS_DIR .. ignored_file) then
-      return true
-    end
-  end
-  return false
-end
-
 return packer.startup(function(use)
-  local paths = vim.split(vim.fn.glob(vim.g.PLUGINS_DIR .. '**/*.lua'), '\n')
-  for _, path in pairs(paths) do
-    if not is_ignored(path) then
-      use(dofile(path))
-    end
+  for _, plugin in pairs(require('plugins.plugins')) do
+    use(plugin)
   end
   if packer_bootstrap or not compiled_packer_exists() then
+    vim.api.nvim_create_autocmd({ 'User' }, {
+      pattern = { 'PackerComplete' },
+      callback = function()
+        require('plugins.config')
+        return true
+      end,
+    })
     require('packer').sync()
+  else
+    require('plugins.config')
   end
 end)
