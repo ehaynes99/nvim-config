@@ -16,6 +16,9 @@ return {
   { 'Pocco81/auto-save.nvim', commit = '979b6c82f60cfa80f4cf437d77446d0ded0addf0' },
   { 'kyazdani42/nvim-tree.lua', commit = '7282f7de8aedf861fe0162a559fc2b214383c51c' },
 
+  -- terminal
+  { 'akinsho/toggleterm.nvim', commit = '3ba683827c623affb4d9aa518e97b34db2623093' },
+
   -- closing brackets, html tags, and end statements
   { 'windwp/nvim-autopairs', commit = '99f696339266c22e7313d6a85a95bd538c3fc226' },
   { 'windwp/nvim-ts-autotag', commit = 'fdefe46c6807441460f11f11a167a2baf8e4534b' },
