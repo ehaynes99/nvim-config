@@ -16,6 +16,9 @@ return {
   { 'Pocco81/auto-save.nvim', commit = '979b6c82f60cfa80f4cf437d77446d0ded0addf0' },
   { 'kyazdani42/nvim-tree.lua', commit = '7282f7de8aedf861fe0162a559fc2b214383c51c' },
 
+  -- git
+  { 'sindrets/diffview.nvim', commit = '6a82dfcb59f0af1e814f34bf8344d68afe8618ec' },
+
   -- session
   { 'rmagatti/auto-session', commit = 'da03666a61af32eb0f57b37f18c020a3a33a44d4' },
 
