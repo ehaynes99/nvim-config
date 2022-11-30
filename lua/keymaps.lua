@@ -79,15 +79,15 @@ map('n', '<C-_>', "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>
 map('x', '<C-_>', '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
 
 -- DAP
--- map('n', '<leader>db', "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
--- map('n', '<leader>dc', "<cmd>lua require'dap'.continue()<cr>")
--- map('n', '<leader>di', "<cmd>lua require'dap'.step_into()<cr>")
--- map('n', '<leader>do', "<cmd>lua require'dap'.step_over()<cr>")
--- map('n', '<leader>dO', "<cmd>lua require'dap'.step_out()<cr>")
--- map('n', '<leader>dr', "<cmd>lua require'dap'.repl.toggle()<cr>")
--- map('n', '<leader>dl', "<cmd>lua require'dap'.run_last()<cr>")
--- map('n', '<leader>du', "<cmd>lua require'dapui'.toggle()<cr>")
--- map('n', '<leader>dt', "<cmd>lua require'dap'.terminate()<cr>")
+map('n', '<leader>db', "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
+map('n', '<leader>dc', "<cmd>lua require'dap'.continue()<cr>")
+map('n', '<leader>di', "<cmd>lua require'dap'.step_into()<cr>")
+map('n', '<leader>do', "<cmd>lua require'dap'.step_over()<cr>")
+map('n', '<leader>dO', "<cmd>lua require'dap'.step_out()<cr>")
+map('n', '<leader>dr', "<cmd>lua require'dap'.repl.toggle()<cr>")
+map('n', '<leader>dl', "<cmd>lua require'dap'.run_last()<cr>")
+map('n', '<leader>du', "<cmd>lua require'dapui'.toggle()<cr>")
+map('n', '<leader>dt', "<cmd>lua require'dap'.terminate()<cr>")
 
 -- System Clipboard
 map('nv', '<leader>p', '"+p')

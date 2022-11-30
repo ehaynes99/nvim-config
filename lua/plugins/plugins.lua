@@ -23,6 +23,10 @@ return {
   { 'nvim-treesitter/nvim-treesitter', commit = '8fe4e3625a4bfda2924518981fb9a08c0609e0c8' },
   { 'mg979/vim-visual-multi', commit = '724bd53adfbaf32e129b001658b45d4c5c29ca1a' },
 
+  -- debugger
+  { 'mfussenegger/nvim-dap', commit = '6b12294a57001d994022df8acbe2ef7327d30587' },
+  { 'rcarriga/nvim-dap-ui', commit = '1cd4764221c91686dcf4d6b62d7a7b2d112e0b13' },
+
   -- misc editor improvements
   { 'numToStr/Comment.nvim', commit = '97a188a98b5a3a6f9b1b850799ac078faa17ab67' },
   { 'petertriho/nvim-scrollbar', commit = '2cb0a0b36a45118e075699bb3a884ab819a85256' },

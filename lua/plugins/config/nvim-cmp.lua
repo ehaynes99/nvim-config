@@ -1,4 +1,5 @@
 local cmp = require('cmp')
+---@diagnostic disable-next-line: different-requires
 local luasnip = require('luasnip')
 
 require('luasnip/loaders/from_vscode').lazy_load()
