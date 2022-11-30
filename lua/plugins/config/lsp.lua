@@ -106,6 +106,7 @@ local null_ls_setup = function()
       formatting.stylua,
       -- formatting.google_java_format,
       diagnostics.flake8,
+      diagnostics.eslint,
     },
   })
 end
