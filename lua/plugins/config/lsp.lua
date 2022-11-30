@@ -65,7 +65,6 @@ end
 
 local lsp_formatter = function(bufnr)
   local filetype = vim.bo.filetype
-  print(filetype)
 
   local method = null_ls.methods.FORMATTING
   local has_null_ls = #null_ls_sources.get_available(filetype, method) > 0
@@ -123,7 +122,6 @@ local setup_lsp = function()
     }
 
     if server_options[server] then
-      print(server_options[server])
       opts = vim.tbl_deep_extend('force', server_options[server], opts)
     end
 
