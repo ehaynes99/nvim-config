@@ -29,6 +29,7 @@ return {
   { 'windwp/nvim-autopairs', commit = '99f696339266c22e7313d6a85a95bd538c3fc226' },
   { 'windwp/nvim-ts-autotag', commit = 'fdefe46c6807441460f11f11a167a2baf8e4534b' },
   { 'RRethy/nvim-treesitter-endwise', commit = '0cf4601c330cf724769a2394df555a57d5fd3f34' },
+  { 'kylechui/nvim-surround', commit = '6b45fbffdabb2d8cd80d310006c92e59cec8fd74' },
 
   -- file/text search - note, requires `ripgrep` and `fd`
   {
