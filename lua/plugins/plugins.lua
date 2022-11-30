@@ -30,6 +30,7 @@ return {
   { 'akinsho/bufferline.nvim', commit = '4ecfa81e470a589e74adcde3d5bb1727dd407363' },
   { 'Pocco81/auto-save.nvim', commit = '979b6c82f60cfa80f4cf437d77446d0ded0addf0' },
   { 'kyazdani42/nvim-tree.lua', commit = '7282f7de8aedf861fe0162a559fc2b214383c51c' },
+  { 'folke/which-key.nvim', commit = '61553aeb3d5ca8c11eea8be6eadf478062982ac9' },
 
   -- git
   { 'sindrets/diffview.nvim', commit = '6a82dfcb59f0af1e814f34bf8344d68afe8618ec' },
