@@ -31,6 +31,12 @@ return {
   { 'Pocco81/auto-save.nvim', commit = '979b6c82f60cfa80f4cf437d77446d0ded0addf0' },
   { 'kyazdani42/nvim-tree.lua', commit = '7282f7de8aedf861fe0162a559fc2b214383c51c' },
   { 'folke/which-key.nvim', commit = '61553aeb3d5ca8c11eea8be6eadf478062982ac9' },
+  {
+    'weilbith/nvim-code-action-menu',
+    commit = '58e12501ea028ff1171f8f06ea53891f7c6e1c3f',
+    cmd = 'CodeActionMenu',
+  },
+  { 'kosayoda/nvim-lightbulb', commit = '56b9ce31ec9d09d560fe8787c0920f76bc208297' },
 
   -- git
   { 'sindrets/diffview.nvim', commit = '6a82dfcb59f0af1e814f34bf8344d68afe8618ec' },
