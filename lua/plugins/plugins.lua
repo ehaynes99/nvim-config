@@ -15,6 +15,13 @@ return {
   { 'akinsho/bufferline.nvim', commit = '4ecfa81e470a589e74adcde3d5bb1727dd407363' },
   { 'Pocco81/auto-save.nvim', commit = '979b6c82f60cfa80f4cf437d77446d0ded0addf0' },
   { 'kyazdani42/nvim-tree.lua', commit = '7282f7de8aedf861fe0162a559fc2b214383c51c' },
+
+  -- closing brackets, html tags, and end statements
+  { 'windwp/nvim-autopairs', commit = '99f696339266c22e7313d6a85a95bd538c3fc226' },
+  { 'windwp/nvim-ts-autotag', commit = 'fdefe46c6807441460f11f11a167a2baf8e4534b' },
+  { 'RRethy/nvim-treesitter-endwise', commit = '0cf4601c330cf724769a2394df555a57d5fd3f34' },
+
+  -- file/text search - note, requires `ripgrep` and `fd`
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     commit = '65c0ee3d4bb9cb696e262bca1ea5e9af3938fc90',

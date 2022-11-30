@@ -13,4 +13,14 @@ treesitter.setup({
     -- 'python',
   },
   auto_install = true,
+
+  -- from 'windwp/nvim-ts-autotag' plugin
+  autotag = {
+    enable = true,
+  },
+
+  -- from 'RRethy/nvim-treesitter-endwise' plugin
+  endwise = {
+    enable = true,
+  },
 })
