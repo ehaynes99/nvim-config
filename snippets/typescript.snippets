@@ -17,47 +17,47 @@ snippet log 'Log a message'
         console.log('***** $1')
 
 snippet trycatch 'Try-Catch'
-				try {
-					$0
-				} catch (error) {
-					console.error(error)
-				}
+        try {
+          $0
+        } catch (error) {
+          console.error(error)
+        }
 
 snippet iife 'Immediately invoked function expression'
-				(() => {
-					$1
-				})()
+        (() => {
+          $1
+        })()
 
 snippet iife 'Immediately invoked function statement'
-				;(() => {
-					$1
-				})()
+        ;(() => {
+          $1
+        })()
 
 snippet reduce 'Array Reduce'
-				$1.reduce((result, $2) => {
-				  $0
-				  return result
-				}, ${3:{}})
+        $1.reduce((result, $2) => {
+          $0
+          return result
+        }, ${3:{}})
 
 snippet desc 'Jest describe'
-				describe('${1:description}', () => {
-				  ${2}
-				})
+        describe('${1:description}', () => {
+          ${2}
+        })
 
 snippet it 'Jest it'
-				it('${1:behavior}', async () => {
-				  ${2}
-				})
+        it('${1:behavior}', async () => {
+          ${2}
+        })
 
 snippet beforee 'Jest beforeEach'
-				beforeEach(async () => {
-				  ${0}
-				})
+        beforeEach(async () => {
+          ${0}
+        })
 
 snippet script 'basic CLI script'
-				export const run = async () => {
-				  $0
-				}
+        export const run = async () => {
+          $0
+        }
 
-				void run().catch((error) => console.error(error))
+        void run().catch((error) => console.error(error))
 
