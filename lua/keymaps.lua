@@ -25,6 +25,9 @@ vim.g.mapleader = ' '
 -- 'jk' instead of ESC
 map('i', 'jk', '<ESC>')
 
+-- stop accidentally recording a macro every 5 seconds
+map('n', '<leader>q', 'q')
+vim.keymap.set('n', 'q', '<Nop>', defopts)
 -- Tree nav
 -- map('n', '<leader>e', '<cmd>:Neotree toggle<CR>')
 map('n', '<leader>e', ':NvimTreeToggle<CR>')
