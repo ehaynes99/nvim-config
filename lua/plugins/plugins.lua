@@ -37,6 +37,7 @@ return {
   { 'kyazdani42/nvim-tree.lua', commit = '7282f7de8aedf861fe0162a559fc2b214383c51c' },
   { 'folke/which-key.nvim', commit = '61553aeb3d5ca8c11eea8be6eadf478062982ac9' },
   { 'chentoast/marks.nvim', commit = 'a69253e4b471a2421f9411bc5bba127eef878dc0' },
+  { 'ellisonleao/glow.nvim', commit = '20d1cd087f8728f21a048a3b6259f6177237b39e' },
   { 'kosayoda/nvim-lightbulb', commit = '56b9ce31ec9d09d560fe8787c0920f76bc208297' },
   -- makes lsp actions a dialog
   {
