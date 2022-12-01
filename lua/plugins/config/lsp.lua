@@ -36,6 +36,20 @@ local server_options = {
       },
     },
   },
+  tsserver = {
+    settings = {
+      diagnostics = {
+        ignoredCodes = {
+          -- some typescript diagnostics are invalid and/or are better
+          -- handled by eslint. All message codes:
+          -- https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
+          6133, -- unused variable - eslint will handle
+          6138, -- unused property - eslint will handle
+          80001, -- convert to ES module suggestion
+        },
+      },
+    },
+  },
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -51,7 +65,7 @@ local lsp_keymaps = function(bufnr)
   map('K', '<cmd>lua vim.lsp.buf.hover()<CR>')
   map('gI', '<cmd>lua vim.lsp.buf.implementation()<CR>')
   map('gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-  map('gl', '<cmd>lua vim.diagnostic.open_float()<CR>')
+  map('<leader>ld', '<cmd>lua vim.diagnostic.open_float()<CR>')
   map('<leader>lf', '<cmd>lua vim.lsp.buf.format{ async = true }<cr>')
   map('<leader>li', '<cmd>LspInfo<cr>')
   map('<leader>lI', '<cmd>LspInstallInfo<cr>')
@@ -113,7 +127,7 @@ local null_ls_setup = function()
   })
 end
 
-local setup_lsp = function()
+local lsp_setup = function()
   for _, server in pairs(servers) do
     local opts = {
       on_attach = function(client, bufnr)
@@ -171,5 +185,5 @@ local setup_lsp = function()
 end
 
 mason_setup()
-setup_lsp()
+lsp_setup()
 null_ls_setup()
