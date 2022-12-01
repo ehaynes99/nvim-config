@@ -14,5 +14,7 @@ require('plugins.config.treesitter')
 require('plugins.config.autopairs')
 require('plugins.config.toggleterm')
 require('plugins.config.nvim-surround')
+---@diagnostic disable-next-line: different-requires
 require('plugins.config.luasnip')
 require('plugins.config.nvim-lightbulb')
+require('plugins.config.marks')
