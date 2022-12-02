@@ -57,22 +57,26 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 local lsp_keymaps = function(bufnr)
-  local map = function(key, command)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', key, command, { noremap = true, silent = true })
+  local map = function(key, command, desc)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', key, command, {
+      noremap = true,
+      silent = true,
+      desc = desc,
+    })
   end
   map('gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
   map('gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   map('K', '<cmd>lua vim.lsp.buf.hover()<CR>')
   map('gI', '<cmd>lua vim.lsp.buf.implementation()<CR>')
   map('gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-  map('<leader>ld', '<cmd>lua vim.diagnostic.open_float()<CR>')
-  map('<leader>lf', '<cmd>lua vim.lsp.buf.format{ async = true }<cr>')
-  map('<leader>li', '<cmd>LspInfo<cr>')
-  map('<leader>lI', '<cmd>LspInstallInfo<cr>')
+  map('<leader>ld', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Diagnostics open')
+  map('<leader>lf', '<cmd>lua vim.lsp.buf.format{ async = true }<cr>', 'Format document')
+  map('<leader>li', '<cmd>LspInfo<cr>', 'LSP info')
+  map('<leader>lI', '<cmd>Mason<cr>', 'Install LSP servers')
   -- map('<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>')
   -- provided by 'weilbith/nvim-code-action-menu' plugin
   map('<leader>la', '<cmd>CodeActionMenu<cr>')
-  map('<leader>lj', '<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>')
+  map('<leader>lj', '<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>', 'Next Diagnostic')
   map('<leader>lk', '<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>')
   map('<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>')
   map('<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<CR>')

@@ -12,6 +12,7 @@ local unmap = function(sequence)
 end
 
 unmap('<Space>')
+unmap('g?')
 vim.g.mapleader = ' '
 
 -- Modes
@@ -24,6 +25,7 @@ vim.g.mapleader = ' '
 
 -- 'jk' instead of ESC
 map('i', 'jk', '<ESC>')
+map('t', '<ESC>', '<C-\\><C-n>')
 
 -- stop accidentally recording a macro every 5 seconds
 map('n', '<leader>q', 'q')
@@ -69,10 +71,10 @@ map('v', '<', '<gv')
 map('v', '>', '>gv')
 
 -- Telescope
-map('n', '<leader>ff', ':Telescope find_files<CR>')
-map('n', '<leader>ft', ':Telescope live_grep<CR>')
-map('n', '<leader>fp', ':Telescope projects<CR>')
-map('n', '<leader>fb', ':Telescope buffers<CR>')
+-- map('n', '<leader>ff', ':Telescope find_files<CR>')
+-- map('n', '<leader>ft', ':Telescope live_grep<CR>')
+-- map('n', '<leader>fp', ':Telescope projects<CR>')
+-- map('n', '<leader>fb', ':Telescope buffers<CR>')
 
 -- Git
 -- map('n', '<leader>gg', '<cmd>lua _LAZYGIT_TOGGLE()<CR>')
