@@ -1,4 +1,5 @@
 local which_key = require('which-key')
+local editor_utils = require('utils.editor')
 
 which_key.setup({
   plugins = {
@@ -15,18 +16,18 @@ which_key.register({
     t = { ':Telescope live_grep<CR>', 'Text' },
     -- p = { ':Telescope projects<CR>', 'Projects' },
     b = { ':Telescope buffers<CR>', 'Buffers' },
+    w = { editor_utils.search_tree_dir, 'Within tree dir' },
   },
   ['<leader>l'] = {
     name = 'LSP',
   },
+  ['<leader>w'] = {
+    name = 'Window',
+    h = { editor_utils.close_hidden_buffers, 'Close all hidden buffer' },
+  },
   ["<leader>'"] = {
     name = 'Tmp',
     s = { '<cmd>:source %<CR>', 'Source current file' },
-    x = {
-      function()
-        require('utils.editor').close_others()
-      end,
-      'test!',
-    },
+    x = { '<cmd>:LuaRun<CR>', 'Run current file' },
   },
 })

@@ -41,6 +41,7 @@ return {
   { 'chentoast/marks.nvim', commit = 'a69253e4b471a2421f9411bc5bba127eef878dc0' },
   { 'ellisonleao/glow.nvim', commit = '20d1cd087f8728f21a048a3b6259f6177237b39e' },
   { 'kosayoda/nvim-lightbulb', commit = '56b9ce31ec9d09d560fe8787c0920f76bc208297' },
+  { 'kazhala/close-buffers.nvim', commit = '3acbcad1211572342632a6c0151f839e7dead27f' },
   -- makes lsp actions a dialog
   {
     'weilbith/nvim-code-action-menu',

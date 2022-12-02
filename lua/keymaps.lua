@@ -61,7 +61,7 @@ end)
 -- Save and close current buffer
 unmap('<C-w>')
 -- map('nivx', '<C-w>', '<cmd>:w|bd<CR>')
-map('nivx', '<C-w>', '<cmd>:b#|w|bd#<CR>')
+map('nivx', '<C-w>', '<cmd>:BDelete this<CR>')
 
 -- Better paste
 map('v', 'p', '"_dP')
