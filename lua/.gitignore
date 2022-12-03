@@ -1,0 +1,3 @@
+tmp/
+*.log
+plugin/packer_compiled.lua
