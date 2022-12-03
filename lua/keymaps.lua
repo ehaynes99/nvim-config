@@ -25,7 +25,7 @@ vim.g.mapleader = ' '
 
 -- 'jk' instead of ESC
 map('i', 'jk', '<ESC>')
-map('t', '<ESC>', '<C-\\><C-n>')
+map('t', '<ESC><ESC>', '<C-\\><C-n>')
 
 -- stop accidentally recording a macro every 5 seconds
 map('n', '<leader>q', 'q')
