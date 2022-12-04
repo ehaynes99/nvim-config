@@ -19,5 +19,6 @@ require('plugins.config.nvim-lightbulb')
 require('plugins.config.marks')
 require('plugins.config.glow')
 require('plugins.config.which-key')
+require('plugins.config.fidget')
 -- this should be after ui plugins
 require('plugins.config.colorizer')

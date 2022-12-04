@@ -24,6 +24,7 @@ return {
   { 'williamboman/mason-lspconfig.nvim', commit = '0eb7cfefbd3a87308c1875c05c3f3abac22d367c' },
   { 'nvim-treesitter/nvim-treesitter', commit = '8fe4e3625a4bfda2924518981fb9a08c0609e0c8' },
   { 'mg979/vim-visual-multi', commit = '724bd53adfbaf32e129b001658b45d4c5c29ca1a' },
+  { 'j-hui/fidget.nvim', commit = '44585a0c0085765195e6961c15529ba6c5a2a13b' },
 
   -- debugger
   { 'mfussenegger/nvim-dap', commit = '6b12294a57001d994022df8acbe2ef7327d30587' },
