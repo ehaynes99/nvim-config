@@ -16,6 +16,7 @@ which_key.register({
     t = { ':Telescope live_grep<CR>', 'Text' },
     -- p = { ':Telescope projects<CR>', 'Projects' },
     b = { ':Telescope buffers<CR>', 'Buffers' },
+    s = { ':Telescope session-lens search_session<CR>', 'Sessions' },
     w = { editor_utils.search_tree_dir, 'Within tree dir' },
   },
   ['<leader>l'] = {

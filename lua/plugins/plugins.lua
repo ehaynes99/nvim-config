@@ -57,6 +57,7 @@ return {
 
   -- session
   { 'rmagatti/auto-session', commit = 'da03666a61af32eb0f57b37f18c020a3a33a44d4' },
+  { 'rmagatti/session-lens', commit = '103a45dfedc23fa6bac48dc8cdcd62fa9f98ac0c' },
 
   -- terminals, repls, etc.
   { 'akinsho/toggleterm.nvim', commit = '3ba683827c623affb4d9aa518e97b34db2623093' },
