@@ -1,4 +1,5 @@
 local autosession = require('auto-session')
+local session_lens = require('session-lens')
 
 autosession.setup({
   log_level = 'error',
@@ -8,5 +9,8 @@ autosession.setup({
     '~/workspace',
     '~/all-workspaces',
     '/',
+    '/tmp',
   },
 })
+
+session_lens.setup({})
