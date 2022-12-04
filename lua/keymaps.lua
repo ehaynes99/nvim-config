@@ -1,15 +1,18 @@
 local defopts = { silent = true }
 
 local map = function(modes, sequence, mapped, opts)
+  opts = opts or defopts
+  local mode_list = {}
   for mode in string.gmatch(modes, '.') do
-    opts = opts or defopts
-    vim.keymap.set(mode, sequence, mapped, opts)
+    table.insert(mode_list, mode)
   end
+  vim.keymap.set(mode_list, sequence, mapped, opts)
 end
 
 local unmap = function(sequence)
   vim.keymap.set('', sequence, '<Nop>', defopts)
 end
+local fmt = string.format
 
 unmap('<Space>')
 unmap('g?')
@@ -29,16 +32,20 @@ map('t', '<ESC><ESC>', '<C-\\><C-n>')
 
 -- stop accidentally recording a macro every 5 seconds
 map('n', '<leader>q', 'q')
+
 vim.keymap.set('n', 'q', '<Nop>', defopts)
--- Tree nav
--- map('n', '<leader>e', '<cmd>:Neotree toggle<CR>')
 map('n', '<leader>e', ':NvimTreeToggle<CR>')
 
 -- Better window navigation
-map('n', '<C-h>', '<C-w>h')
-map('n', '<C-j>', '<C-w>j')
-map('n', '<C-k>', '<C-w>k')
-map('n', '<C-l>', '<C-w>l')
+for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
+  local keystroke = fmt('<C-%s>', key)
+  map('n', keystroke, fmt('<C-w>%s', key))
+
+  map('ivxt', keystroke, function()
+    vim.cmd('stopinsert')
+    vim.cmd('wincmd ' .. key)
+  end)
+end
 
 -- Resize with arrows
 map('n', '<C-Up>', ':resize -2<CR>')

@@ -2,12 +2,6 @@ local toggleterm = require('toggleterm')
 local Terminal = require('toggleterm.terminal').Terminal
 local js_utils = require('utils.javascript')
 
-vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
-vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]])
-vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]])
-vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]])
-vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]])
-
 toggleterm.setup({
   size = 60,
   open_mapping = [[<c-\>]],
