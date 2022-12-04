@@ -6,6 +6,8 @@ return {
 
   -- colorschemes
   { 'navarasu/onedark.nvim', commit = 'df090f9d72d43aa51dec5760c44da288b58a79b6' },
+  { 'rebelot/kanagawa.nvim', commit = 'fb733c1043a462155b52cd97efd920f1dd72d33a' },
+  { 'EdenEast/nightfox.nvim', commit = 'e6a0d98dc1b4751b4d999d3dffd87b1af4f4873e' },
 
   -- LSP & completion
   { 'L3MON4D3/LuaSnip', commit = '8f8d493e7836f2697df878ef9c128337cbf2bb84' },
@@ -34,8 +36,8 @@ return {
   { 'nvim-tree/nvim-web-devicons', commit = '189ad3790d57c548896a78522fd8b0d0fc11be31' },
   { 'akinsho/bufferline.nvim', commit = '4ecfa81e470a589e74adcde3d5bb1727dd407363' },
   { 'Pocco81/auto-save.nvim', commit = '979b6c82f60cfa80f4cf437d77446d0ded0addf0' },
-  -- { 'kyazdani42/nvim-tree.lua', commit = '7282f7de8aedf861fe0162a559fc2b214383c51c' },
   { 'kyazdani42/nvim-tree.lua', commit = '829e9f68e10a998198e17bf5b348a6947f9d3c2e' },
+  { 'norcalli/nvim-colorizer.lua', commit = '36c610a9717cc9ec426a07c8e6bf3b3abcb139d6' },
 
   { 'folke/which-key.nvim', commit = '61553aeb3d5ca8c11eea8be6eadf478062982ac9' },
   { 'chentoast/marks.nvim', commit = 'a69253e4b471a2421f9411bc5bba127eef878dc0' },
