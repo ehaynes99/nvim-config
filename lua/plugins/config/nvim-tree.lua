@@ -17,12 +17,18 @@ nvim_tree.setup({
   diagnostics = {
     enable = true,
     show_on_dirs = true,
+    show_on_open_dirs = false,
     icons = {
       hint = '',
       info = '',
       warning = '',
       error = '',
     },
+  },
+  git = {
+    enable = true,
+    show_on_dirs = true,
+    show_on_open_dirs = false,
   },
   renderer = {
     icons = {

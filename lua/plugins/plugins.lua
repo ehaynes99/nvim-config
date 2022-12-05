@@ -37,9 +37,8 @@ return {
   { 'nvim-tree/nvim-web-devicons', commit = '189ad3790d57c548896a78522fd8b0d0fc11be31' },
   { 'akinsho/bufferline.nvim', commit = '4ecfa81e470a589e74adcde3d5bb1727dd407363' },
   { 'Pocco81/auto-save.nvim', commit = '979b6c82f60cfa80f4cf437d77446d0ded0addf0' },
-  { 'kyazdani42/nvim-tree.lua', commit = '829e9f68e10a998198e17bf5b348a6947f9d3c2e' },
+  { 'kyazdani42/nvim-tree.lua', commit = 'f8489c992998e1e1b45aec65bdb9615e5cd59a61' },
   { 'norcalli/nvim-colorizer.lua', commit = '36c610a9717cc9ec426a07c8e6bf3b3abcb139d6' },
-
   { 'folke/which-key.nvim', commit = '61553aeb3d5ca8c11eea8be6eadf478062982ac9' },
   { 'chentoast/marks.nvim', commit = 'a69253e4b471a2421f9411bc5bba127eef878dc0' },
   { 'ellisonleao/glow.nvim', commit = '20d1cd087f8728f21a048a3b6259f6177237b39e' },
