@@ -5,6 +5,7 @@ local mason_lsp = require('mason-lspconfig')
 local lspconfig = require('lspconfig')
 local null_ls = require('null-ls')
 local null_ls_sources = require('null-ls.sources')
+local fidget = require('fidget')
 
 local servers = {
   'cssls',
@@ -33,6 +34,9 @@ local server_options = {
         telemetry = {
           enable = false,
         },
+        completion = {
+          showWord = 'Disable',
+        },
       },
     },
   },
@@ -56,13 +60,18 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
-local lsp_keymaps = function(bufnr)
+local lsp_keymaps = function(buf)
   local map = function(key, command, desc)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', key, command, {
-      noremap = true,
+    vim.keymap.set('n', key, command, {
+      buffer = buf,
       silent = true,
       desc = desc,
     })
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', key, command, {
+    --   noremap = true,
+    --   silent = true,
+    --   desc = desc,
+    -- })
   end
   map('gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration')
   map('gd', '<cmd>lua vim.lsp.buf.definition()<CR>', 'Goto definition')
@@ -73,7 +82,7 @@ local lsp_keymaps = function(bufnr)
   map('<leader>li', '<cmd>LspInfo<cr>', 'LSP info')
   map('<leader>lI', '<cmd>Mason<cr>', 'Install LSP servers')
   map('<leader>lh', '<cmd>lua vim.lsp.buf.hover()<CR>', 'Hover tooltip')
-  -- map('<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+  map('<leader>lx', '<cmd>lua vim.lsp.buf.code_action()<cr>')
   -- provided by 'weilbith/nvim-code-action-menu' plugin
   map('<leader>la', '<cmd>CodeActionMenu<cr>', 'Code actions menu')
   map('<leader>lj', '<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>', 'Next diagnostic')
@@ -191,3 +200,5 @@ end
 mason_setup()
 lsp_setup()
 null_ls_setup()
+-- progress reporter
+fidget.setup({})
