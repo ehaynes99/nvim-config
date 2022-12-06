@@ -23,7 +23,6 @@ return {
   { 'williamboman/mason.nvim', commit = 'bfc5997e52fe9e20642704da050c415ea1d4775f' },
   { 'williamboman/mason-lspconfig.nvim', commit = '0eb7cfefbd3a87308c1875c05c3f3abac22d367c' },
   { 'nvim-treesitter/nvim-treesitter', commit = '8fe4e3625a4bfda2924518981fb9a08c0609e0c8' },
-  { 'mg979/vim-visual-multi', commit = '724bd53adfbaf32e129b001658b45d4c5c29ca1a' },
   { 'j-hui/fidget.nvim', commit = '44585a0c0085765195e6961c15529ba6c5a2a13b' },
 
   -- debugger
@@ -39,7 +38,7 @@ return {
   { 'Pocco81/auto-save.nvim', commit = '979b6c82f60cfa80f4cf437d77446d0ded0addf0' },
   { 'kyazdani42/nvim-tree.lua', commit = 'f8489c992998e1e1b45aec65bdb9615e5cd59a61' },
   { 'norcalli/nvim-colorizer.lua', commit = '36c610a9717cc9ec426a07c8e6bf3b3abcb139d6' },
-  { 'folke/which-key.nvim', commit = '61553aeb3d5ca8c11eea8be6eadf478062982ac9' },
+  { 'mrjones2014/legendary.nvim', commit = 'b0e02000b3227e9e07adfd41565e82d166fad75e' },
   { 'chentoast/marks.nvim', commit = 'a69253e4b471a2421f9411bc5bba127eef878dc0' },
   { 'ellisonleao/glow.nvim', commit = '20d1cd087f8728f21a048a3b6259f6177237b39e' },
   { 'kosayoda/nvim-lightbulb', commit = '56b9ce31ec9d09d560fe8787c0920f76bc208297' },
@@ -80,4 +79,5 @@ return {
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
   },
   { 'nvim-telescope/telescope.nvim', commit = '76ea9a898d3307244dce3573392dcf2cc38f340f' },
+  { 'stevearc/dressing.nvim', commit = '872cc4e5ea32295eb1102141a444d6d83b8f9c25' },
 }

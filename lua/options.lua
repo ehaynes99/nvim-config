@@ -5,7 +5,7 @@ vim.opt.completeopt = { 'menuone', 'noselect' } -- mostly just for cmp
 vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.fileencoding = 'utf-8' -- the encoding written to a file
 vim.opt.hlsearch = true -- highlight all matches on previous search pattern
-vim.opt.incsearch = false -- don't scroll while typing search term
+vim.opt.incsearch = true -- highlight during search
 vim.opt.ignorecase = true -- ignore case in search patterns
 vim.opt.mouse = 'a' -- allow the mouse to be used in neovim
 vim.opt.pumheight = 10 -- pop up menu height
@@ -41,6 +41,6 @@ vim.opt.whichwrap:append('<,>,[,],h,l') -- keys allowed to move to the previous/
 vim.opt.iskeyword:append('-') -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ 'c', 'r', 'o' }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
--- this will be overriden by plugins, but keeps the packer
--- sync window from burning my retinas
-vim.cmd('colorscheme habamax')
+
+vim.g.mapleader = ' '
+vim.cmd('colorscheme habamax') -- this will be overriden by plugins, but keeps the packer sync window from burning my retinas
