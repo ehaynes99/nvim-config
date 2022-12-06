@@ -46,6 +46,9 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
 -- leave insert mode when changing buffer or leaving nvim
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   callback = function()
-    vim.cmd('stopinsert')
+    local is_file = vim.api.nvim_buf_get_option(0, 'buftype') == ''
+    if is_file then
+      vim.cmd('stopinsert')
+    end
   end,
 })
