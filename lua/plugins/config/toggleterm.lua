@@ -52,7 +52,7 @@ vim.keymap.set('n', '<leader>t', function()
     print('could not find project root: ' .. test_file)
     return
   end
-  local cmd = 'npx -y --node-options=--inspect jest --no-coverage ' .. test_file
+  local cmd = 'npx -y --node-options=--inspect jest --watch --no-coverage ' .. test_file
   jest_term.cmd = string.format('pushd %s && %s && popd', project_root, cmd)
   jest_term:toggle()
 end)
