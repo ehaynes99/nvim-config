@@ -21,5 +21,6 @@ require('plugins.config.nvim-lightbulb')
 require('plugins.config.marks')
 require('plugins.config.glow')
 require('plugins.config.legendary')
+require('plugins.config.spectre')
 -- this should be after ui plugins
 require('plugins.config.colorizer')

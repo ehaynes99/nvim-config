@@ -1,5 +1,6 @@
 local legendary = require('legendary')
 local editor_utils = require('utils.editor')
+local spectre = require('spectre')
 
 -- Modes
 --   normal_mode = "n",
@@ -36,6 +37,10 @@ legendary.setup({
     { '<leader>fb', ':Telescope buffers<CR>', description = 'Find: buffers' },
     { '<leader>fs', ':Telescope session-lens search_session<CR>', description = 'Find: sessions' },
     { '<leader>fw', editor_utils.search_tree_dir, description = 'Find: text within tree dir' },
+    { '<leader>fr', spectre.open_file_search, description = 'Find: replace' },
+    { '<leader>fR', spectre.open, description = 'Find: global replace' },
+    { '<leader>fr', spectre.open_file_search, description = 'Find: replace', mode = modes('vx') },
+    { '<leader>fR', spectre.open, description = 'Find: global replace' },
 
     { '<leader>q', 'q', description = 'Start/stop recording macro' },
     { 'q', '<Nop>' },

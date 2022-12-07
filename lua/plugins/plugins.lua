@@ -44,6 +44,7 @@ return {
   { 'kosayoda/nvim-lightbulb', commit = '56b9ce31ec9d09d560fe8787c0920f76bc208297' },
   { 'kazhala/close-buffers.nvim', commit = '3acbcad1211572342632a6c0151f839e7dead27f' },
   { 'lukas-reineke/indent-blankline.nvim', commit = 'db7cbcb40cc00fc5d6074d7569fb37197705e7f6' },
+  { 'nvim-pack/nvim-spectre', commit = 'c332c9c0574a531392818baf4020b86ba5575942' },
   -- makes lsp actions a dialog
   {
     'weilbith/nvim-code-action-menu',
