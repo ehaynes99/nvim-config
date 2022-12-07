@@ -6,7 +6,10 @@ local lspconfig = require('lspconfig')
 local null_ls = require('null-ls')
 local null_ls_sources = require('null-ls.sources')
 local fidget = require('fidget')
+local legendary = require('legendary')
+local legendary_toolbox = require('legendary.toolbox')
 
+local lazy = legendary_toolbox.lazy
 local servers = {
   'cssls',
   'html',
@@ -61,35 +64,30 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 local lsp_keymaps = function(buf)
-  local map = function(key, command, desc)
-    vim.keymap.set('n', key, command, {
-      buffer = buf,
-      silent = true,
-      desc = desc,
-    })
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', key, command, {
-    --   noremap = true,
-    --   silent = true,
-    --   desc = desc,
-    -- })
+  local keymaps = {
+    { 'gD', vim.lsp.buf.declaration, description = 'LSP: Goto declaration' },
+    { 'gd', vim.lsp.buf.definition, description = 'LSP: Goto definition' },
+    { 'gI', vim.lsp.buf.implementation, description = 'LSP: Goto implementation' },
+    { 'gr', vim.lsp.buf.references, description = 'LSP: Find references' },
+    { '<leader>ld', vim.diagnostic.open_float, description = 'LSP: Open diagnostics' },
+    { '<leader>lf', lazy(vim.lsp.buf.format, { async = true }), description = 'LSP: Format document' },
+    { '<leader>li', ':LspInfo<CR>', description = 'LSP: LSP info for file' },
+    { '<leader>lI', ':Mason<CR>', description = 'LSP: Install servers' },
+    { '<leader>lh', vim.lsp.buf.hover, description = 'LSP: Hover tooltip' },
+    { '<leader>lx', vim.lsp.buf.code_action, description = 'LSP: Code actions native' },
+    -- provided by 'weilbith/nvim-code-action-menu' plugin
+    { '<leader>la', ':CodeActionMenu<CR>', description = 'LSP: Code actions menu' },
+    { '<leader>lj', lazy(vim.diagnostic.goto_next, { buffer = 0 }), description = 'LSP: Next diagnostic' },
+    { '<leader>lk', lazy(vim.diagnostic.goto_prev, { buffer = 0 }), description = 'LSP: Previous diagnostic' },
+    { '<leader>lr', vim.lsp.buf.rename, description = 'LSP: Rename' },
+    { '<leader>ls', vim.lsp.buf.signature_help, description = 'LSP: Signature help' },
+    { '<leader>lq', vim.diagnostic.setloclist, description = 'LSP: Set loclist' },
+  }
+  local opts = { buffer = buf }
+  for _, mapping in ipairs(keymaps) do
+    mapping.opts = opts
   end
-  map('gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration')
-  map('gd', '<cmd>lua vim.lsp.buf.definition()<CR>', 'Goto definition')
-  map('gI', '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto implementation')
-  map('gr', '<cmd>lua vim.lsp.buf.references()<CR>', 'Find references')
-  map('<leader>ld', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Diagnostics open')
-  map('<leader>lf', '<cmd>lua vim.lsp.buf.format{ async = true }<cr>', 'Format document')
-  map('<leader>li', '<cmd>LspInfo<cr>', 'LSP info')
-  map('<leader>lI', '<cmd>Mason<cr>', 'Install LSP servers')
-  map('<leader>lh', '<cmd>lua vim.lsp.buf.hover()<CR>', 'Hover tooltip')
-  map('<leader>lx', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-  -- provided by 'weilbith/nvim-code-action-menu' plugin
-  map('<leader>la', '<cmd>CodeActionMenu<cr>', 'Code actions menu')
-  map('<leader>lj', '<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>', 'Next diagnostic')
-  map('<leader>lk', '<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>', 'Previous diagnostic')
-  map('<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename')
-  map('<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help')
-  map('<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<CR>', 'Set loclist')
+  legendary.keymaps(keymaps)
 end
 
 local lsp_formatter = function(bufnr)
