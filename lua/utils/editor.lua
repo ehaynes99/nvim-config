@@ -1,4 +1,3 @@
-
 local M = {}
 
 -- close any non-visible buffers
