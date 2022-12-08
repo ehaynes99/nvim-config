@@ -56,7 +56,13 @@ M.nightfox = function()
       },
     },
   })
+  require('modes').setup({
+    colors = {
+      insert = '#ffd2bb',
+    },
+  })
   vim.cmd('colorscheme nordfox')
+
   -- vim.cmd('colorscheme duskfox')
   -- vim.cmd('colorscheme nightfox')
   -- vim.cmd('colorscheme nordfox')
