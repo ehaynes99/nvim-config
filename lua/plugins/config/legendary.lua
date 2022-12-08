@@ -59,6 +59,10 @@ legendary.setup({
     -- { '<C-Left>', ':vertical resize -2<CR>', description = 'Window: resize ' },
     -- { '<C-Right>', ':vertical resize +2<CR>', description = 'Window: 'resize ' },
 
+    -- LSP - most of these are set up in on_attach in lsp settings, but these aren't buffer specific
+    { '<leader>li', ':LspInfo<CR>', description = 'LSP: LSP info for file' },
+    { '<leader>lI', ':Mason<CR>', description = 'LSP: Install servers' },
+
     -- Debugger
     { '<leader>db', "<cmd>lua require('dap').toggle_breakpoint()<cr>", description = 'Debug: toggle breakpoint' },
     { '<leader>dc', "<cmd>lua require('dap').continue()<cr>", description = 'Debug: continue' },
@@ -77,7 +81,7 @@ legendary.setup({
     { '<leader>e', ':NvimTreeToggle<CR>', description = 'Open tree view' },
     { '<leader>n', ':set rnu!<CR>', description = 'Toggle relative line numbers' },
     { '<leader>h', '<cmd>nohlsearch<CR>', description = 'Window: cancel highlight' },
-    { 'p', '"_dP', description = 'TODO: black hole paste?', mode = 'v' },
+    { 'p', '"_dP', description = 'Paste without copying replaced', mode = 'v' },
     { '<', '<gv', description = 'Stay in visual mode after indent left', mode = 'v' },
     { '>', '>gv', description = 'Stay in visual mode after indent left', mode = 'v' },
 

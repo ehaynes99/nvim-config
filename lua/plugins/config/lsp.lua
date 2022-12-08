@@ -67,12 +67,11 @@ local lsp_keymaps = function(buf)
   local keymaps = {
     { 'gD', vim.lsp.buf.declaration, description = 'LSP: Goto declaration' },
     { 'gd', vim.lsp.buf.definition, description = 'LSP: Goto definition' },
+    { 'gt', vim.lsp.buf.type_definition, description = 'LSP: Goto type definition' },
     { 'gI', vim.lsp.buf.implementation, description = 'LSP: Goto implementation' },
     { 'gr', vim.lsp.buf.references, description = 'LSP: Find references' },
     { '<leader>ld', vim.diagnostic.open_float, description = 'LSP: Open diagnostics' },
     { '<leader>lf', lazy(vim.lsp.buf.format, { async = true }), description = 'LSP: Format document' },
-    { '<leader>li', ':LspInfo<CR>', description = 'LSP: LSP info for file' },
-    { '<leader>lI', ':Mason<CR>', description = 'LSP: Install servers' },
     { '<leader>lh', vim.lsp.buf.hover, description = 'LSP: Hover tooltip' },
     { '<leader>lx', vim.lsp.buf.code_action, description = 'LSP: Code actions native' },
     -- provided by 'weilbith/nvim-code-action-menu' plugin
