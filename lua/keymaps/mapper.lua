@@ -44,14 +44,12 @@ M.add = function(mappings_or_default_opts, mappings)
 
   local normalized = {}
   for _, mapping in ipairs(mappings) do
-    -- local opts = vim.tbl_extend(default_opts, mapping.opts or {})
     table.insert(normalized, {
       key = mapping[1],
       cmd = mapping.cmd or mapping[2],
       desc = mapping.desc,
       mode = parse_modes(mapping.mode),
-      -- opts = opts,
-      opts = default_opts,
+      opts = vim.tbl_extend('force', default_opts, mapping.opts or {}),
     })
   end
 
