@@ -4,4 +4,5 @@ vim.g.COMPILED_PACKER_FILE = vim.g.NVIM_CONFIG_DIR .. 'plugin/packer_compiled.lu
 
 require('options')
 require('plugins')
+require('keymaps')
 require('autocommands')

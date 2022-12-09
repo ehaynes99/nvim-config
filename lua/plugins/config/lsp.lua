@@ -3,13 +3,12 @@ local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local mason = require('mason')
 local mason_lsp = require('mason-lspconfig')
 local lspconfig = require('lspconfig')
+local keymaps = require('keymaps.mappings')
 local null_ls = require('null-ls')
 local null_ls_sources = require('null-ls.sources')
 local fidget = require('fidget')
 local legendary = require('legendary')
-local legendary_toolbox = require('legendary.toolbox')
 
-local lazy = legendary_toolbox.lazy
 local servers = {
   'cssls',
   'html',
@@ -18,6 +17,7 @@ local servers = {
   'bashls',
   'jsonls',
   'yamlls',
+  'rust_analyzer',
   'sumneko_lua',
 }
 
@@ -62,32 +62,6 @@ local server_options = {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-
-local lsp_keymaps = function(buf)
-  local keymaps = {
-    { 'gD', vim.lsp.buf.declaration, description = 'LSP: Goto declaration' },
-    { 'gd', vim.lsp.buf.definition, description = 'LSP: Goto definition' },
-    { 'gt', vim.lsp.buf.type_definition, description = 'LSP: Goto type definition' },
-    { 'gI', vim.lsp.buf.implementation, description = 'LSP: Goto implementation' },
-    { 'gr', vim.lsp.buf.references, description = 'LSP: Find references' },
-    { '<leader>ld', vim.diagnostic.open_float, description = 'LSP: Open diagnostics' },
-    { '<leader>lf', lazy(vim.lsp.buf.format, { async = true }), description = 'LSP: Format document' },
-    { '<leader>lh', vim.lsp.buf.hover, description = 'LSP: Hover tooltip' },
-    { '<leader>lx', vim.lsp.buf.code_action, description = 'LSP: Code actions native' },
-    -- provided by 'weilbith/nvim-code-action-menu' plugin
-    { '<leader>la', ':CodeActionMenu<CR>', description = 'LSP: Code actions menu' },
-    { '<leader>lj', lazy(vim.diagnostic.goto_next, { buffer = 0 }), description = 'LSP: Next diagnostic' },
-    { '<leader>lk', lazy(vim.diagnostic.goto_prev, { buffer = 0 }), description = 'LSP: Previous diagnostic' },
-    { '<leader>lr', vim.lsp.buf.rename, description = 'LSP: Rename' },
-    { '<leader>ls', vim.lsp.buf.signature_help, description = 'LSP: Signature help' },
-    { '<leader>lq', vim.diagnostic.setloclist, description = 'LSP: Set loclist' },
-  }
-  local opts = { buffer = buf }
-  for _, mapping in ipairs(keymaps) do
-    mapping.opts = opts
-  end
-  legendary.keymaps(keymaps)
-end
 
 local lsp_formatter = function(bufnr)
   local filetype = vim.bo.filetype
@@ -141,7 +115,7 @@ local lsp_setup = function()
   for _, server in pairs(servers) do
     local opts = {
       on_attach = function(client, bufnr)
-        lsp_keymaps(bufnr)
+        keymaps.lsp_keymaps(bufnr)
         lsp_formatter(bufnr)
         illuminate.on_attach(client)
       end,
