@@ -90,7 +90,6 @@ M.standard_keymaps = function()
 end
 
 M.lsp_keymaps = function(bufnr)
-  print('bufnr: ' .. bufnr)
   mapper.add({ buffer = bufnr }, {
     { 'gD', vim.lsp.buf.declaration, desc = 'LSP: Goto declaration' },
     { 'gd', vim.lsp.buf.definition, desc = 'LSP: Goto definition' },
