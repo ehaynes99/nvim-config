@@ -13,9 +13,6 @@ M.search_tree_dir = function()
 
   if utils.is_nvim_tree_buf(0) then
     local node = api.tree.get_node_under_cursor()
-    for k, _ in pairs(node) do
-      print(k)
-    end
     local path = node.absolute_path
     if vim.fn.isdirectory(path) == 1 then
       local telescope = require('telescope.builtin')
@@ -43,7 +40,9 @@ end
 -- adapted from: https://github.com/akinsho/bufferline.nvim/blob/4ecfa81e470a589e74adcde3d5bb1727dd407363/lua/bufferline/utils/init.lua#L132-L136
 -- The provided api nvim_is_buf_loaded filters out all hidden buffers
 function M.is_valid(buf_num)
-  if not buf_num or buf_num < 1 then return false end
+  if not buf_num or buf_num < 1 then
+    return false
+  end
   local exists = vim.api.nvim_buf_is_valid(buf_num)
   return vim.bo[buf_num].buflisted and exists
 end

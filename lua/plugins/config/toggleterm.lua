@@ -8,7 +8,7 @@ toggleterm.setup({
   open_mapping = [[<c-\>]],
   direction = 'float',
   float_opts = {
-    border = 'curved',
+    border = 'rounded',
     width = 240,
   },
 })
@@ -17,7 +17,7 @@ local gitui_term = Terminal:new({
   hidden = true,
   close_on_exit = false,
   float_opts = {
-    border = 'curved',
+    border = 'rounded',
     width = 240,
   },
   on_exit = function(term, _, exit_code)
