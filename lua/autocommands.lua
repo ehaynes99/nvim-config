@@ -52,3 +52,10 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
     end
   end,
 })
+
+-- vim.api.nvim_create_autocmd({ 'VimLeavePre ' }, {
+--   pattern = '*',
+--   callback = function()
+--     -- pre-close teardown
+--   end,
+-- })
