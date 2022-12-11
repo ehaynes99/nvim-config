@@ -1,38 +1,43 @@
 return {
-  ['cssls'] = nil,
-  ['html'] = nil,
-  ['pyright'] = nil,
-  ['bashls'] = nil,
-  ['jsonls'] = nil,
-  ['rust_analyzer'] = nil,
+  cssls = nil,
+  html = nil,
+  pyright = nil,
+  bashls = nil,
+  jsonls = nil,
+  rust_analyzer = function()
+    require('rust-tools').setup({})
+  end,
   sumneko_lua = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' },
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.stdpath('config') .. '/lua'] = true,
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { 'vim' },
         },
-      },
-      telemetry = {
-        enable = false,
-      },
-      completion = {
-        showWord = 'Disable',
+        workspace = {
+          library = {
+            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+            -- [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+            [vim.fn.stdpath('config') .. '/lua'] = true,
+          },
+          checkThirdParty = false,
+        },
+        completion = {
+          showWord = 'Disable',
+        },
       },
     },
   },
   tsserver = {
-    diagnostics = {
-      ignoredCodes = {
-        -- some typescript diagnostics are invalid and/or are better
-        -- handled by eslint. All message codes:
-        -- https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
-        6133, -- unused variable - eslint will handle
-        6138, -- unused property - eslint will handle
-        80001, -- convert to ES module suggestion
+    settings = {
+      diagnostics = {
+        ignoredCodes = {
+          -- some typescript diagnostics are invalid and/or are better
+          -- handled by eslint. All message codes:
+          -- https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
+          6133, -- unused variable - eslint will handle
+          6138, -- unused property - eslint will handle
+          80001, -- convert to ES module suggestion
+        },
       },
     },
   },

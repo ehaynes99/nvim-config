@@ -1,5 +1,4 @@
 local null_ls = require('null-ls')
-local null_ls_sources = require('null-ls.sources')
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
@@ -16,4 +15,5 @@ null_ls.setup({
     diagnostics.flake8,
     diagnostics.eslint,
   },
+  border = 'rounded',
 })
