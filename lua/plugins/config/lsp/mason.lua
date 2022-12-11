@@ -1,5 +1,4 @@
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
-local illuminate = require('illuminate')
 local keymaps = require('keymaps.mappings')
 local lspconfig = require('lspconfig')
 local mason = require('mason')
@@ -50,7 +49,6 @@ mason_lsp.setup_handlers({
       on_attach = function(client, bufnr)
         keymaps.lsp_keymaps(bufnr)
         lsp_formatter(bufnr)
-        illuminate.on_attach(client)
       end,
       capabilities = capabilities,
     }
