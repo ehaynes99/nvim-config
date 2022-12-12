@@ -46,6 +46,8 @@ return {
   { 'kazhala/close-buffers.nvim', commit = '3acbcad1211572342632a6c0151f839e7dead27f' },
   { 'lukas-reineke/indent-blankline.nvim', commit = 'db7cbcb40cc00fc5d6074d7569fb37197705e7f6' },
   { 'nvim-pack/nvim-spectre', commit = 'c332c9c0574a531392818baf4020b86ba5575942' },
+  { 'APZelos/blamer.nvim', commit = 'f4eb22a9013642c411725fdda945ae45f8d93181' },
+  { 'Almo7aya/openingh.nvim', commit = 'cf059896995ba0e1b987f5f3b742616824901d07' },
   -- { 'mvllow/modes.nvim', commit = '2cd194d1033ba391d87d386735e15963adbc5f51' },
   -- makes lsp actions a dialog
   {

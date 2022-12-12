@@ -49,7 +49,9 @@ M.standard_keymaps = function()
     -- git
     { '<leader>gc', telescope.git_commits, desc = 'Git: show commits' },
     { '<leader>gh', telescope.git_bcommits, desc = 'Git: file history' },
-    { '<leader>gb', telescope.git_branches, desc = 'Git: branches' },
+    { '<leader>gB', telescope.git_branches, desc = 'Git: branches' },
+    { '<leader>gb', ':BlamerToggle<CR>', desc = 'Git: show blame' },
+    { '<Leader>gf', ':OpenInGHFile <CR>', desc = 'Git: open file in github' },
 
     -- macros
     { '<leader>q', 'q', desc = 'Start/stop recording macro' },
@@ -105,6 +107,7 @@ M.standard_keymaps = function()
     { '<leader>tk', telescope.keymaps, desc = 'Telescope: keymaps' },
     { '<leader>tc', telescope.commands, desc = 'Telescope: commands' },
     { '<leader>td', telescope.diagnostics, desc = 'Telescope: commands' },
+    { '<leader>th', telescope.help_tags, desc = 'Telescope: help tags' },
 
     -- Testing
     { '<leader>xx', '<cmd>:LuaRun<CR>', desc = 'Run current file' },
