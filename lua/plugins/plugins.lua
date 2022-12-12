@@ -11,18 +11,20 @@ return {
 
   -- LSP & completion
   { 'L3MON4D3/LuaSnip', commit = '8f8d493e7836f2697df878ef9c128337cbf2bb84' },
-  { 'jose-elias-alvarez/null-ls.nvim', commit = 'c0c19f32b614b3921e17886c541c13a72748d450' },
+  { 'jose-elias-alvarez/null-ls.nvim', commit = 'a0acd495f5edce6d4d5d3c6bd63d2319ccded9ed' },
   { 'hrsh7th/nvim-cmp', commit = 'b0dff0ec4f2748626aae13f011d1a47071fe9abc' },
   { 'saadparwaiz1/cmp_luasnip', commit = 'a9de941bcbda508d0a45d28ae366bb3f08db2e36' },
   { 'hrsh7th/cmp-nvim-lua', commit = 'd276254e7198ab7d00f117e88e223b4bd8c02d21' },
   { 'hrsh7th/cmp-buffer', commit = '3022dbc9166796b644a841a02de8dd1cc1d311fa' },
   { 'hrsh7th/cmp-path', commit = '447c87cdd6e6d6a1d2488b1d43108bfa217f56e1' },
   { 'hrsh7th/cmp-nvim-lsp', commit = 'affe808a5c56b71630f17aa7c38e15c59fd648a8' },
-  { 'neovim/nvim-lspconfig', commit = 'f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda' },
+  { 'neovim/nvim-lspconfig', commit = '6eb24ef9175d1fa3c7a23e115854b1a2d923d386' },
   { 'williamboman/mason.nvim', commit = 'bfc5997e52fe9e20642704da050c415ea1d4775f' },
   { 'williamboman/mason-lspconfig.nvim', commit = '0eb7cfefbd3a87308c1875c05c3f3abac22d367c' },
   { 'nvim-treesitter/nvim-treesitter', commit = '8fe4e3625a4bfda2924518981fb9a08c0609e0c8' },
   { 'j-hui/fidget.nvim', commit = '44585a0c0085765195e6961c15529ba6c5a2a13b' },
+  { 'simrat39/rust-tools.nvim', commit = '99fd1238c6068d0637df30b6cee9a264334015e9' },
+  { 'folke/trouble.nvim', commit = '897542f90050c3230856bc6e45de58b94c700bbf' },
 
   -- debugger
   { 'mfussenegger/nvim-dap', commit = '6b12294a57001d994022df8acbe2ef7327d30587' },
@@ -80,5 +82,6 @@ return {
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
   },
   { 'nvim-telescope/telescope.nvim', commit = '76ea9a898d3307244dce3573392dcf2cc38f340f' },
+  { 'nvim-telescope/telescope-live-grep-args.nvim', commit = '7de3baef1ec4fb77f7a8195fe87bebd513244b6a' },
   { 'stevearc/dressing.nvim', commit = '872cc4e5ea32295eb1102141a444d6d83b8f9c25' },
 }

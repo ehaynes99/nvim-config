@@ -4,6 +4,7 @@ local mapper = require('keymaps.mapper')
 local spectre = require('spectre')
 local dap = require('dap')
 local dapui = require('dapui')
+local telescope = require('telescope.builtin')
 
 local curry = lua_utils.curry
 
@@ -32,13 +33,23 @@ M.standard_keymaps = function()
     { '<leader>fa', ':Legendary<CR>', desc = 'Find: keymaps/commands' },
     { '<leader>ff', ':Telescope find_files<CR>', desc = 'Find: files' },
     { '<leader>ft', ':Telescope live_grep<CR>', desc = 'Find: text' },
-    { '<leader>fb', ':Telescope buffers<CR>', desc = 'Find: buffers' },
+    {
+      '<leader>fb',
+      curry(telescope.buffers)({ ignore_current_buffer = true, sort_mru = true }),
+      desc = 'Find: buffers',
+    },
     { '<leader>fs', ':Telescope session-lens search_session<CR>', desc = 'Find: sessions' },
     { '<leader>fw', editor_utils.search_tree_dir, desc = 'Find: text within tree dir' },
     { '<leader>fr', spectre.open_file_search, desc = 'Find: replace' },
     { '<leader>fR', spectre.open, desc = 'Find: global replace' },
     { '<leader>fr', spectre.open_file_search, desc = 'Find: replace', mode = 'vx' },
     { '<leader>fR', spectre.open, desc = 'Find: global replace' },
+    { '<leader>fg', require('telescope').extensions.live_grep_args.live_grep_args, desc = 'Find: Ripgrep' },
+
+    -- git
+    { '<leader>gc', telescope.git_commits, desc = 'Git: show commits' },
+    { '<leader>gh', telescope.git_bcommits, desc = 'Git: file history' },
+    { '<leader>gb', telescope.git_branches, desc = 'Git: branches' },
 
     -- macros
     { '<leader>q', 'q', desc = 'Start/stop recording macro' },
@@ -61,6 +72,7 @@ M.standard_keymaps = function()
     -- LSP - most of these are set up in on_attach in lsp settings, but these aren't buffer specific
     { '<leader>li', ':LspInfo<CR>', desc = 'LSP: LSP info for file' },
     { '<leader>lI', ':Mason<CR>', desc = 'LSP: Install servers' },
+    { '<leader>ln', ':NullLsInfo<CR>', desc = 'LSP: Null-ls info for file' },
 
     -- Debugger
     { '<leader>db', dap.toggle_breakpoint, desc = 'Debug: toggle breakpoint' },
@@ -84,22 +96,33 @@ M.standard_keymaps = function()
     { '<', '<gv', desc = 'Stay in visual mode after indent left', mode = 'v' },
     { '>', '>gv', desc = 'Stay in visual mode after indent left', mode = 'v' },
 
+    -- Telescope
+    {
+      '<leader>tt',
+      curry(telescope.builtin)({ include_extends = true, use_default_opts = true }),
+      desc = 'Telescope: builtin',
+    },
+    { '<leader>tk', telescope.keymaps, desc = 'Telescope: keymaps' },
+    { '<leader>tc', telescope.commands, desc = 'Telescope: commands' },
+    { '<leader>td', telescope.diagnostics, desc = 'Telescope: commands' },
+
     -- Testing
     { '<leader>xx', '<cmd>:LuaRun<CR>', desc = 'Run current file' },
   })
 end
 
-M.lsp_keymaps = function(bufnr)
+M.lsp_keymaps = function(bufnr, lsp_format)
   mapper.add({ buffer = bufnr }, {
     { 'gD', vim.lsp.buf.declaration, desc = 'LSP: Goto declaration' },
-    { 'gd', vim.lsp.buf.definition, desc = 'LSP: Goto definition' },
-    { 'gt', vim.lsp.buf.type_definition, desc = 'LSP: Goto type definition' },
-    { 'gI', vim.lsp.buf.implementation, desc = 'LSP: Goto implementation' },
-    { 'gr', vim.lsp.buf.references, desc = 'LSP: Find references' },
+    { 'gd', telescope.lsp_definitions, desc = 'LSP: Goto definition' },
+    { 'gt', telescope.lsp_type_definitions, desc = 'LSP: Goto type definition' },
+    { 'gi', telescope.lsp_implementations, desc = 'LSP: Goto implementation' },
+    { 'gr', telescope.lsp_references, desc = 'LSP: Find references' },
     { '<leader>ld', vim.diagnostic.open_float, desc = 'LSP: Open diagnostics' },
-    { '<leader>lf', curry(vim.lsp.buf.format)({ async = true }), desc = 'LSP: Format document' },
+    { '<leader>lf', lsp_format, desc = 'LSP: Format document' },
     { '<leader>lh', vim.lsp.buf.hover, desc = 'LSP: Hover tooltip' },
     { '<leader>lx', vim.lsp.buf.code_action, desc = 'LSP: Code actions native' },
+    { '<leader>lp', ':TroubleToggle<CR>', desc = 'LSP: Trouble window' },
     -- provided by 'weilbith/nvim-code-action-menu' plugin
     { '<leader>la', ':CodeActionMenu<CR>', desc = 'LSP: Code actions menu' },
     { '<leader>lj', curry(vim.diagnostic.goto_next)({ buffer = 0 }), desc = 'LSP: Next diagnostic' },
