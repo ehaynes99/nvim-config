@@ -21,18 +21,6 @@ local compiled_packer_exists = function()
   end
 end
 
--- remove compiled plugins when any file in `lua/plugins` changes
-vim.api.nvim_create_autocmd({ 'BufWrite' }, {
-  pattern = vim.g.PLUGINS_DIR .. '**',
-  callback = function(args)
-    local dirty = vim.fn.getbufinfo(args.buf)[1].changed ~= 0
-    if dirty and compiled_packer_exists() then
-      os.remove(vim.g.COMPILED_PACKER_FILE)
-      print('Removed compiled plugins')
-    end
-  end,
-})
-
 packer.init({
   display = {
     open_fn = function()
