@@ -10,6 +10,11 @@ return {
   sumneko_lua = {
     settings = {
       Lua = {
+        runtime = {
+          version = 'LuaJIT',
+          path = vim.inspect(vim.api.nvim_list_runtime_paths()),
+        },
+
         diagnostics = {
           globals = { 'vim' },
         },
