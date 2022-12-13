@@ -3,6 +3,7 @@ return {
 
   --utilities
   { 'nvim-lua/plenary.nvim', commit = '4b7e52044bbb84242158d977a50c4cbcd85070c7' },
+  { 'rcarriga/nvim-notify', commit = 'b005821516f1f37801a73067afd1cef2dbc4dfe8' },
 
   -- colorschemes
   { 'navarasu/onedark.nvim', commit = 'df090f9d72d43aa51dec5760c44da288b58a79b6' },
@@ -47,6 +48,7 @@ return {
   { 'lukas-reineke/indent-blankline.nvim', commit = 'db7cbcb40cc00fc5d6074d7569fb37197705e7f6' },
   { 'nvim-pack/nvim-spectre', commit = 'c332c9c0574a531392818baf4020b86ba5575942' },
   { 'APZelos/blamer.nvim', commit = 'f4eb22a9013642c411725fdda945ae45f8d93181' },
+  { 'gelguy/wilder.nvim', commit = '679f348dc90d80ff9ba0e7c470c40a4d038dcecf' },
   { 'Almo7aya/openingh.nvim', commit = 'cf059896995ba0e1b987f5f3b742616824901d07' },
   -- { 'mvllow/modes.nvim', commit = '2cd194d1033ba391d87d386735e15963adbc5f51' },
   -- makes lsp actions a dialog

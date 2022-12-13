@@ -1,5 +1,5 @@
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
-local keymaps = require('keymaps.mappings')
+local keymaps = require('keymaps')
 local lspconfig = require('lspconfig')
 local mason = require('mason')
 local mason_lsp = require('mason-lspconfig')

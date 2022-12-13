@@ -44,7 +44,7 @@ local jest_term = Terminal:new({
   hidden = true,
 })
 
-vim.keymap.set('n', '<leader>t', function()
+vim.keymap.set('n', '<leader>T', function()
   local test_file = vim.api.nvim_buf_get_name(0)
   local project_root = js_utils.project_root(test_file)
 

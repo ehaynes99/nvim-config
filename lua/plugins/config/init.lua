@@ -22,5 +22,6 @@ require('plugins.config.marks')
 require('plugins.config.glow')
 require('plugins.config.legendary')
 require('plugins.config.spectre')
+require('plugins.config.wilder')
 -- this should be after ui plugins
 require('plugins.config.colorizer')
