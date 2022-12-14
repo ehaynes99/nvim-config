@@ -34,7 +34,7 @@ local all_buffer_opts = {
 
 M.all_buffers = function()
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    print(vim.inspect(M.buf_status(buf)))
+    print(vim.inspect(M.buf_get_options(buf)))
   end
 end
 

@@ -31,7 +31,15 @@ local gitui_term = Terminal:new({
 })
 
 vim.keymap.set('n', '<leader>G', function()
-  local git_root = project_utils.git_root()
+  local name = vim.api.nvim_buf_get_name(0)
+  print('name: ' .. name)
+  local has_root, git_root = pcall(vim.api.nvim_buf_get_var, 0, 'git_root')
+  
+  print('git_root: ' .. git_root)
+  if not has_root then
+    git_root = vim.g.INITIAL_DIR
+  end
+  
   gitui_term.cmd = 'gitui -d ' .. git_root
   gitui_term:toggle()
 end)
