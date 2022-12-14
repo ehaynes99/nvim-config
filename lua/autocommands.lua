@@ -69,11 +69,8 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
 
     local cwd = vim.fn.getcwd()
     print('root: ' .. (root or 'nil') .. ' cwd: ' .. cwd)
-    -- if root and root ~= vim.cmd('pwd') then
     if root and root ~= cwd then
       vim.cmd('lcd' .. root)
-
-      require('notify')('changed to: ' .. root)
     end
   end,
 })
