@@ -42,38 +42,47 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
 
 local cwd_cache = {}
 
-vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
-  callback = function(args)
-    local buf = args.buf
-    if cwd_cache[buf] == nil then
-      local entry = {
-        buf = buf,
-        file = args.file,
-        buftype = vim.api.nvim_buf_get_option(buf, 'buftype'),
-      }
-      cwd_cache[buf] = entry
-
-      if entry.file and entry.file ~= '' and entry.buftype == '' then
-        entry.root = project_utils.git_root(entry.file)
-      end
-    end
-
-    -- TODO - remove this is not seen
-    if cwd_cache[buf].file ~= args.file then
-      local message =
-        string.format('File mismatch! buf: %s previous: %s current: %s', buf, cwd_cache[buf].file, args.file)
-      require('notify')(message, 'error')
-    end
-
-    local root = cwd_cache[buf].root
-
-    local cwd = vim.fn.getcwd()
-    print('root: ' .. (root or 'nil') .. ' cwd: ' .. cwd)
-    if root and root ~= cwd then
-      vim.cmd('lcd' .. root)
-    end
-  end,
-})
+-- -- change directory for window when file buffer is opened
+-- vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+--   callback = function(args)
+--     if args.file == nil then
+--       require('notify')('file was nil for buf: ' .. args.buf, 'error')
+--     end
+--     local buf = args.buf
+--     local buftype = vim.api.nvim_buf_get_option(buf, 'buftype')
+--     if buftype ~= '' or args.file == '' then
+--       return
+--     end
+--
+--     if cwd_cache[buf] == nil then
+--       local entry = {
+--         buf = buf,
+--         file = args.file,
+--         buftype = buftype,
+--       }
+--       cwd_cache[buf] = entry
+--
+--       if entry.file and entry.file ~= '' and entry.buftype == '' then
+--         entry.root = project_utils.git_root(entry.file)
+--       end
+--     end
+--
+--     -- TODO - remove this is not seen
+--     if cwd_cache[buf].file ~= args.file then
+--       local message =
+--         string.format('File mismatch! buf: %s previous: %s current: %s', buf, cwd_cache[buf].file, args.file)
+--       require('notify')(message, 'error')
+--     end
+--
+--     local root = cwd_cache[buf].root
+--
+--     local cwd = vim.fn.getcwd()
+--     print('root: ' .. (root or 'nil') .. ' cwd: ' .. cwd)
+--     if root and root ~= cwd then
+--       vim.cmd('lcd' .. root)
+--     end
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd({ 'VimLeavePre ' }, {
   pattern = '*',
