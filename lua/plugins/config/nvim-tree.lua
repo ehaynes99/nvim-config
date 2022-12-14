@@ -1,5 +1,4 @@
 local nvim_tree = require('nvim-tree')
-
 -- if needed to implement custom keymappings
 -- local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
@@ -9,7 +8,7 @@ nvim_tree.setup({
   },
   update_focused_file = {
     enable = true,
-    update_cwd = true,
+    update_root = false,
   },
   open_on_setup = true,
   open_on_setup_file = true,

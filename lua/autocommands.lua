@@ -1,3 +1,5 @@
+local project_utils = require('utils.project')
+
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   pattern = { 'qf', 'help', 'man', 'lspinfo', 'spectre_panel' },
   callback = function()
@@ -38,9 +40,47 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   end,
 })
 
--- vim.api.nvim_create_autocmd({ 'VimLeavePre ' }, {
---   pattern = '*',
---   callback = function()
---     -- pre-close teardown
---   end,
--- })
+local cwd_cache = {}
+
+vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+  callback = function(args)
+    local buf = args.buf
+    if cwd_cache[buf] == nil then
+      local entry = {
+        buf = buf,
+        file = args.file,
+        buftype = vim.api.nvim_buf_get_option(buf, 'buftype'),
+      }
+      cwd_cache[buf] = entry
+
+      if entry.file and entry.file ~= '' and entry.buftype == '' then
+        entry.root = project_utils.git_root(entry.file)
+      end
+    end
+
+    -- TODO - remove this is not seen
+    if cwd_cache[buf].file ~= args.file then
+      local message =
+        string.format('File mismatch! buf: %s previous: %s current: %s', buf, cwd_cache[buf].file, args.file)
+      require('notify')(message, 'error')
+    end
+
+    local root = cwd_cache[buf].root
+
+    local cwd = vim.fn.getcwd()
+    print('root: ' .. (root or 'nil') .. ' cwd: ' .. cwd)
+    -- if root and root ~= vim.cmd('pwd') then
+    if root and root ~= cwd then
+      vim.cmd('lcd' .. root)
+
+      require('notify')('changed to: ' .. root)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ 'VimLeavePre ' }, {
+  pattern = '*',
+  callback = function()
+    -- pre-close teardown
+  end,
+})

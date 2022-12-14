@@ -17,7 +17,6 @@ M.current_dir = function()
   if is_file then
     local filename = vim.api.nvim_buf_get_name(0)
     return vim.fs.dirname(filename)
-  else
   end
 end
 
