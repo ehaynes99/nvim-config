@@ -26,6 +26,7 @@ return {
   { 'j-hui/fidget.nvim', commit = '44585a0c0085765195e6961c15529ba6c5a2a13b' },
   { 'simrat39/rust-tools.nvim', commit = '99fd1238c6068d0637df30b6cee9a264334015e9' },
   { 'folke/trouble.nvim', commit = '897542f90050c3230856bc6e45de58b94c700bbf' },
+  { 'weilbith/nvim-code-action-menu', commit = '58e12501ea028ff1171f8f06ea53891f7c6e1c3f' },
 
   -- debugger
   { 'mfussenegger/nvim-dap', commit = '6b12294a57001d994022df8acbe2ef7327d30587' },
@@ -50,13 +51,6 @@ return {
   { 'APZelos/blamer.nvim', commit = 'f4eb22a9013642c411725fdda945ae45f8d93181' },
   { 'gelguy/wilder.nvim', commit = '679f348dc90d80ff9ba0e7c470c40a4d038dcecf' },
   { 'Almo7aya/openingh.nvim', commit = 'cf059896995ba0e1b987f5f3b742616824901d07' },
-  -- { 'mvllow/modes.nvim', commit = '2cd194d1033ba391d87d386735e15963adbc5f51' },
-  -- makes lsp actions a dialog
-  {
-    'weilbith/nvim-code-action-menu',
-    commit = '58e12501ea028ff1171f8f06ea53891f7c6e1c3f',
-    cmd = 'CodeActionMenu',
-  },
 
   -- git
   { 'sindrets/diffview.nvim', commit = '6a82dfcb59f0af1e814f34bf8344d68afe8618ec' },
