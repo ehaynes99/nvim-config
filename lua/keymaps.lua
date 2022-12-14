@@ -77,7 +77,7 @@ M.add({
   { '<leader>fR', spectre.open, { desc = 'Find: global replace' } },
   { '<leader>fr', spectre.open_file_search, { desc = 'Find: replace' }, mode = modes('vx') },
   { '<leader>fR', spectre.open, { desc = 'Find: global replace' } },
-  { '<leader>fg', ':Telescope live_grep_args<CR>', { desc = 'Find: Ripgrep' } },
+  { '<leader>fg', require('telescope').extensions.live_grep_args.live_grep_args, { desc = 'Find: Ripgrep' } },
 
   -- git
   { '<leader>gc', tu.git_commits, { desc = 'Git: show commits' } },
