@@ -158,6 +158,7 @@ M.add({
   -- Testing
   { '<leader>xl', '<cmd>:Luapad<CR>', { desc = 'Luapad' } },
   { '<leader>xx', '<cmd>:LuaRun<CR>', { desc = 'Run current file' } },
+  { '<leader>xb', require('utils.editor').all_buffers, { desc = 'Print buffer info' } },
 })
 
 return M
