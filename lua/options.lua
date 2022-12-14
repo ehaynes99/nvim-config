@@ -34,13 +34,16 @@ vim.opt.signcolumn = 'yes' -- always show the sign column, otherwise it would sh
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor
 vim.opt.sidescrolloff = 8 -- minimal number of screen columns to keep to the left and right of the cursor if wrap is `false`
-vim.opt.guifont = 'monospace:h17' -- the font used in graphical neovim applications
+vim.opt.guifont = 'RobotoMono Nerd Font:h12,monospace:h13'
 vim.opt.fillchars.eob = ' ' -- show empty lines at the end of a buffer as ` ` {default `~`}
 vim.opt.shortmess:append('c') -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
 vim.opt.whichwrap:append('<,>,[,],h,l') -- keys allowed to move to the previous/next line when the beginning/end of line is reached
 vim.opt.iskeyword:append('-') -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ 'c', 'r', 'o' }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
+vim.opt.foldlevelstart = 99
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
 vim.g.mapleader = ' '
 vim.cmd('colorscheme habamax') -- this will be overriden by plugins, but keeps the packer sync window from burning my retinas
