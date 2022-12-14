@@ -149,6 +149,7 @@ M.add({
   -- { '<leader>tk', tu.keymaps, desc = 'Telescope: keymaps' },
   { '<leader>tk', ':Legendary keymaps<CR>', desc = 'Telescope: keymaps' },
   -- { '<leader>tc', telescope.commands, desc = 'Telescope: commands' },
+  { '<leader>tc', ':Legendary commands<CR>', desc = 'Telescope: commands' },
   { '<leader>tA', ':Legendary<CR>', desc = 'Telescope: keymaps' },
   { '<leader>tb', tu.buffers, { desc = 'Find: buffers' } },
   { '<leader>td', telescope.diagnostics, { desc = 'Telescope: commands' } },
