@@ -12,7 +12,6 @@ nvim_tree.setup({
   },
   open_on_setup = true,
   open_on_setup_file = true,
-  create_in_closed_folder = true,
   diagnostics = {
     enable = true,
     show_on_dirs = true,
