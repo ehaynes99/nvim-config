@@ -23,8 +23,8 @@ end
 local M = {}
 
 M.add = function(mappings)
-  if type(mappings) == 'function' then
-    mappings = mappings()
+  if type(mappings[1]) == 'string' then
+    mappings = { mappings }
   end
   for _, mapping in ipairs(mappings) do
     local mode = mapping.mode or 'n'
