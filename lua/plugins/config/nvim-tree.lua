@@ -42,4 +42,7 @@ nvim_tree.setup({
       restrict_above_cwd = true,
     },
   },
+  on_attach = function(bufnr)
+    -- buffer-specific keybinds
+  end,
 })

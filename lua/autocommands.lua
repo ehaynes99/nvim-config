@@ -40,6 +40,24 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufReadPre', {
+  callback = function(args)
+    local buf = args.buf
+    local name = vim.api.nvim_buf_get_name(buf)
+
+    local ok, stats = pcall(vim.loop.fs_stat, name)
+    if ok and stats and (stats.size > 512 * 1024) then
+      vim.bo[buf].large_buf = true
+      vim.cmd('syntax off')
+      vim.cmd('IndentBlanklineDisable')
+      vim.opt_local.foldmethod = 'manual'
+      vim.opt_local.spell = false
+    else
+      vim.b.large_buf = false
+    end
+  end,
+})
+
 -- also fires on rename, which we want
 vim.api.nvim_create_autocmd('BufNew', {
   callback = function(args)
@@ -49,7 +67,6 @@ vim.api.nvim_create_autocmd('BufNew', {
       return
     end
     local git_root = project_utils.git_root(args.file)
-    -- require('notify')('Set git root for ' .. args.file .. ' to: ' .. git_root)
     vim.api.nvim_buf_set_var(buf, 'git_root', git_root)
   end,
 })

@@ -27,4 +27,7 @@ treesitter.setup({
   endwise = {
     enable = true,
   },
+  disable = function(_, buf)
+    return vim.bo[buf].large_buf
+  end,
 })
