@@ -20,3 +20,7 @@ snippet lv4 'log 4 variables'
 snippet log 'log a message'
         print('*****' .. '$1')
 
+snippet iife 'immediate invoke function expression'
+        (function()
+          $0
+        end)()
