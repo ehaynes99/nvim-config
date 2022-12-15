@@ -146,11 +146,11 @@ M.add({
 
   -- Telescope/legendary
   { '<leader>tt', tu.builtin, desc = 'Telescope: builtin' },
-  -- { '<leader>tk', tu.keymaps, desc = 'Telescope: keymaps' },
-  { '<leader>tk', ':Legendary keymaps<CR>', desc = 'Telescope: keymaps' },
-  -- { '<leader>tc', telescope.commands, desc = 'Telescope: commands' },
-  { '<leader>tc', ':Legendary commands<CR>', desc = 'Telescope: commands' },
-  { '<leader>tA', ':Legendary<CR>', desc = 'Telescope: keymaps' },
+  { '<leader>tk', tu.keymaps, desc = 'Telescope: keymaps' },
+  { '<leader>tK', ':Legendary keymaps<CR>', desc = 'Legendary: keymaps' },
+  { '<leader>tc', telescope.commands, desc = 'Telescope: commands' },
+  { '<leader>tC', ':Legendary commands<CR>', desc = 'Legendary: commands' },
+  { '<leader>tA', ':Legendary<CR>', desc = 'Legendary: search all' },
   { '<leader>tb', tu.buffers, { desc = 'Find: buffers' } },
   { '<leader>td', telescope.diagnostics, { desc = 'Telescope: commands' } },
   { '<leader>th', telescope.help_tags, { desc = 'Telescope: help tags' } },
