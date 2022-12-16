@@ -38,7 +38,6 @@ return {
   { 'petertriho/nvim-scrollbar', commit = '2cb0a0b36a45118e075699bb3a884ab819a85256' },
   { 'nvim-lualine/lualine.nvim', commit = 'b6314ac556098d7abea9bb8cf896d2e3500eca41' },
   { 'nvim-tree/nvim-web-devicons', commit = '189ad3790d57c548896a78522fd8b0d0fc11be31' },
-  { 'akinsho/bufferline.nvim', commit = '4ecfa81e470a589e74adcde3d5bb1727dd407363' },
   { 'Pocco81/auto-save.nvim', commit = '979b6c82f60cfa80f4cf437d77446d0ded0addf0' },
   { 'kyazdani42/nvim-tree.lua', commit = '0cd8ac4751c39440a1c28c6be4704f3597807d29' },
   { 'norcalli/nvim-colorizer.lua', commit = '36c610a9717cc9ec426a07c8e6bf3b3abcb139d6' },
