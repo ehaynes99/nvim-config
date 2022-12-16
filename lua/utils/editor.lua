@@ -13,10 +13,12 @@ M.search_tree_dir = function()
 
   if utils.is_nvim_tree_buf(0) then
     local node = api.tree.get_node_under_cursor()
-    local path = node.absolute_path
-    if vim.fn.isdirectory(path) == 1 then
-      local telescope = require('telescope.builtin')
-      telescope.live_grep({ cwd = path })
+    if node then
+      local path = node.absolute_path
+      if vim.fn.isdirectory(path) == 1 then
+        local telescope = require('telescope.builtin')
+        telescope.live_grep({ cwd = path })
+      end
     end
   end
 end

@@ -42,6 +42,7 @@ nvim_tree.setup({
       restrict_above_cwd = true,
     },
   },
+---@diagnostic disable-next-line: unused-local
   on_attach = function(bufnr)
     -- buffer-specific keybinds
   end,

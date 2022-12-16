@@ -31,15 +31,12 @@ local gitui_term = Terminal:new({
 })
 
 vim.keymap.set('n', '<leader>G', function()
-  local name = vim.api.nvim_buf_get_name(0)
-  print('name: ' .. name)
   local has_root, git_root = pcall(vim.api.nvim_buf_get_var, 0, 'git_root')
-  
+
   if not has_root then
     git_root = constants.INITIAL_DIR
   end
-  
-  print('git_root: ' .. git_root)
+
   gitui_term.cmd = 'gitui -d ' .. git_root
   gitui_term:toggle()
 end)
@@ -60,6 +57,7 @@ vim.keymap.set('n', '<leader>T', function()
     print('could not find project root: ' .. test_file)
     return
   end
+
   local cmd = 'npx -y --node-options=--inspect jest --watch --no-coverage ' .. test_file
   jest_term.cmd = string.format('pushd %s && %s && popd', project_root, cmd)
   jest_term:toggle()
