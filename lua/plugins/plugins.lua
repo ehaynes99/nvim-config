@@ -27,6 +27,7 @@ return {
   { 'simrat39/rust-tools.nvim', commit = '99fd1238c6068d0637df30b6cee9a264334015e9' },
   { 'folke/trouble.nvim', commit = '897542f90050c3230856bc6e45de58b94c700bbf' },
   { 'weilbith/nvim-code-action-menu', commit = '58e12501ea028ff1171f8f06ea53891f7c6e1c3f' },
+  { 'jose-elias-alvarez/typescript.nvim', commit = 'ed117c35f3961785404f716a6590d99720621d34' },
 
   -- debugger
   { 'mfussenegger/nvim-dap', commit = '6b12294a57001d994022df8acbe2ef7327d30587' },
@@ -65,11 +66,7 @@ return {
   { 'rafcamlet/nvim-luapad', commit = '6efe3806c6e0d9ae684d756d4d7053cbdfb562eb' },
 
   -- closing brackets, html tags, and end statements
-  {
-    'windwp/nvim-ts-autotag',
-    commit = 'fdefe46c6807441460f11f11a167a2baf8e4534b',
-    requires = { 'nvim-treesitter' },
-  },
+  { 'windwp/nvim-ts-autotag', commit = 'fdefe46c6807441460f11f11a167a2baf8e4534b' },
   { 'windwp/nvim-autopairs', commit = '99f696339266c22e7313d6a85a95bd538c3fc226' },
   { 'RRethy/nvim-treesitter-endwise', commit = '0cf4601c330cf724769a2394df555a57d5fd3f34' },
   { 'kylechui/nvim-surround', commit = '6b45fbffdabb2d8cd80d310006c92e59cec8fd74' },

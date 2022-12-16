@@ -1,3 +1,5 @@
+local keymaps = require('keymaps')
+local lspconfig = require('lspconfig')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local null_ls = require('null-ls')
 local null_ls_sources = require('null-ls.sources')
@@ -29,5 +31,32 @@ M.default_capabilities = (function()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 end)()
+
+M.default_server_config = {
+  on_attach = function(_, bufnr)
+    keymaps.lsp_keymaps(bufnr, M.create_formatter(bufnr))
+  end,
+  capabilities = M.default_capabilities,
+}
+
+M.configure_server = function(server_name)
+  local default_config = {
+    on_attach = function(_, bufnr)
+      keymaps.lsp_keymaps(bufnr, M.create_formatter(bufnr))
+    end,
+    capabilities = M.default_capabilities,
+  }
+  local has_config, config = pcall(require, 'language_servers.' .. server_name)
+
+  if not has_config then
+    config = {}
+  end
+
+  if type(config) == 'function' then
+    config()
+  else
+    lspconfig[server_name].setup(vim.tbl_extend('force', default_config, config))
+  end
+end
 
 return M
