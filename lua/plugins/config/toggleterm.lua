@@ -1,7 +1,7 @@
 local toggleterm = require('toggleterm')
 local Terminal = require('toggleterm.terminal').Terminal
 local js_utils = require('utils.javascript')
-local project_utils = require('utils.project')
+local constants = require('constants')
 
 toggleterm.setup({
   size = 80, -- this affects the vertical buffers
@@ -35,11 +35,11 @@ vim.keymap.set('n', '<leader>G', function()
   print('name: ' .. name)
   local has_root, git_root = pcall(vim.api.nvim_buf_get_var, 0, 'git_root')
   
-  print('git_root: ' .. git_root)
   if not has_root then
-    git_root = vim.g.INITIAL_DIR
+    git_root = constants.INITIAL_DIR
   end
   
+  print('git_root: ' .. git_root)
   gitui_term.cmd = 'gitui -d ' .. git_root
   gitui_term:toggle()
 end)
