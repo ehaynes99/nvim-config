@@ -6,6 +6,9 @@ local null_ls_sources = require('null-ls.sources')
 
 local M = {}
 
+-- not sure where to put this. The plugin doesn't have its own config
+vim.g.code_action_menu_window_border = 'rounded'
+
 M.create_formatter = function(bufnr)
   return function()
     local filetype = vim.bo.filetype
