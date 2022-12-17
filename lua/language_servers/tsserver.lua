@@ -14,17 +14,17 @@ return function()
           { 'gd', typescript.goToSourceDefinition, { desc = 'LSP: Goto definition', buffer = bufnr } },
           {
             '<leader>li',
-            actions.addMissingImports,
+            ':TypescriptGoToSourceDefinition<CR>',
             { desc = 'LSP: TypescriptAddMissingImports', buffer = bufnr },
           },
           {
             '<leader>lo',
-            actions.organizeImports,
+            ':TypescriptOrganizeImports',
             { desc = 'LSP: TypescriptOrganizeImports', buffer = bufnr },
           },
-          { '<leader>lu', actions.removeUnused, { desc = 'LSP: TypescriptRemoveUnused', buffer = bufnr } },
-          { '<leader>lF', actions.fixAll, { desc = 'LSP: TypescriptFixAll', buffer = bufnr } },
-          { '<leader>lR', typescript.renameFile, { desc = 'LSP: TypescriptRenameFile', buffer = bufnr } },
+          { '<leader>lu', ':TypescriptRemoveUnused<CR>', { desc = 'LSP: TypescriptRemoveUnused', buffer = bufnr } },
+          { '<leader>lF', ':TypescriptFixAll<CR>', { desc = 'LSP: TypescriptFixAll', buffer = bufnr } },
+          { '<leader>lR', ':TypescriptRenameFile<CR>', { desc = 'LSP: TypescriptRenameFile', buffer = bufnr } },
         })
       end,
       capabilities = installer.default_capabilities,
