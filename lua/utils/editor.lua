@@ -32,6 +32,7 @@ local all_buffer_opts = {
   'modified',
   'readonly',
   'swapfile',
+  'undofile',
 }
 
 M.all_buffers = function()
