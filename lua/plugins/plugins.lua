@@ -28,6 +28,7 @@ return {
   { 'folke/trouble.nvim', commit = '897542f90050c3230856bc6e45de58b94c700bbf' },
   { 'weilbith/nvim-code-action-menu', commit = '58e12501ea028ff1171f8f06ea53891f7c6e1c3f' },
   { 'jose-elias-alvarez/typescript.nvim', commit = 'ed117c35f3961785404f716a6590d99720621d34' },
+  { 'Saecki/crates.nvim', commit = 'a70328ae638e20548bcfc64eb9561101104b3008' },
 
   -- debugger
   { 'mfussenegger/nvim-dap', commit = '6b12294a57001d994022df8acbe2ef7327d30587' },
