@@ -52,6 +52,7 @@ return {
   { 'gelguy/wilder.nvim', commit = '679f348dc90d80ff9ba0e7c470c40a4d038dcecf' },
   { 'Almo7aya/openingh.nvim', commit = 'cf059896995ba0e1b987f5f3b742616824901d07' },
   { 'kevinhwang91/nvim-bqf', commit = '3389264042e4590ed32ce26d7e47b17ec4e6e6d5' },
+  { 'smjonas/live-command.nvim', commit = 'ce4b104ce702c7bb9fdff863059af6d47107ca61' },
 
   -- git
   { 'sindrets/diffview.nvim', commit = '6a82dfcb59f0af1e814f34bf8344d68afe8618ec' },
