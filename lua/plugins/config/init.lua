@@ -24,3 +24,5 @@ require('plugins.config.legendary')
 require('plugins.config.spectre')
 require('plugins.config.wilder')
 require('plugins.config.colorizer')
+
+vim.g.blamer_date_format = '%m/%d/%y'
