@@ -14,8 +14,8 @@ null_ls.setup({
     formatting.black.with({ extra_args = { '--fast' } }),
     formatting.stylua,
     diagnostics.flake8,
-    diagnostics.eslint,
-    code_actions.eslint,
+    diagnostics.eslint_d,
+    code_actions.eslint_d,
   },
   border = 'rounded',
 })
