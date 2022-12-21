@@ -9,15 +9,15 @@ return function()
         keymaps.lsp_keymaps(bufnr, installer.create_formatter(bufnr))
 
         keymaps.add({
-          { 'gd', typescript.goToSourceDefinition, { desc = 'LSP: Goto definition', buffer = bufnr } },
+          { 'gd', ':TypescriptGoToSourceDefinition<CR>', { desc = 'LSP: Goto definition', buffer = bufnr } },
           {
             '<leader>li',
-            ':TypescriptGoToSourceDefinition<CR>',
+            ':TypescriptAddMissingImports<CR>',
             { desc = 'LSP: TypescriptAddMissingImports', buffer = bufnr },
           },
           {
             '<leader>lo',
-            ':TypescriptOrganizeImports',
+            ':TypescriptOrganizeImports<CR>',
             { desc = 'LSP: TypescriptOrganizeImports', buffer = bufnr },
           },
           { '<leader>lu', ':TypescriptRemoveUnused<CR>', { desc = 'LSP: TypescriptRemoveUnused', buffer = bufnr } },
