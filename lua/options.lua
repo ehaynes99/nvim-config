@@ -1,4 +1,4 @@
-vim.opt.shada = 'NONE'
+vim.opt.shadafile = 'NONE'
 vim.opt.backup = false -- creates a backup file
 vim.opt.clipboard = 'unnamedplus' -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 1 -- prevent
@@ -44,6 +44,7 @@ vim.opt.formatoptions:remove({ 'c', 'r', 'o' }) -- This is a sequence of letters
 vim.opt.linebreak = true
 -- will be merged soon: https://github.com/neovim/neovim/pull/19243
 -- vim.opt.splitkeep = 'screen'
+
 -- vim.opt.foldlevelstart = 99
 -- vim.opt.foldmethod = 'expr'
 -- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
