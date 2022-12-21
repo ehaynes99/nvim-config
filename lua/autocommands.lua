@@ -3,10 +3,8 @@ local project_utils = require('utils.project')
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'qf', 'help', 'man', 'lspinfo', 'spectre_panel' },
   callback = function()
-    vim.cmd([[
-      nnoremap <silent> <buffer> q :close<CR> 
-      set nobuflisted 
-    ]])
+    vim.keymap.set('n', 'q', vim.cmd.close)
+    vim.bo.buflisted = false
   end,
 })
 
@@ -15,6 +13,13 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'help' },
+  callback = function()
+    vim.opt_local.wrap = true
   end,
 })
 
