@@ -1,4 +1,13 @@
--- local M = {}
+local M = {}
+
+M.setup_language = function()
+
+  require('crates').setup()
+end
+
+M.on_attach = function(_, bufnr)
+  
+end
 --
 -- local rust_commands = {
 --   ':RustCodeAction',

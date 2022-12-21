@@ -1,6 +1,7 @@
-require('crates').setup()
+local customizations = require('languages.rust')
 
 return function()
+
   require('rust-tools').setup({
     server = {
       ---@diagnostic disable-next-line: unused-local

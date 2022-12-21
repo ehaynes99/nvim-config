@@ -2,8 +2,6 @@ local keymaps = require('keymaps')
 local typescript = require('typescript')
 local installer = require('language_servers.installer')
 
-local actions = typescript.actions
-
 return function()
   typescript.setup({
     server = {
