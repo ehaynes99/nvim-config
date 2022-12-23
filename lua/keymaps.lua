@@ -65,6 +65,27 @@ M.lsp_keymaps = function(bufnr, lsp_format)
   })
 end
 
+vim.keymap.set(
+  'n',
+  '<leader>s',
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = 'Global replace word under cursor' }
+)
+
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move lines down' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move lines up' })
+
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines' }) -- keep cursor where it started
+
+-- vim.keymap.set('v', '<C-p>', 'p', { desc = 'Paste & yank replaced' })
+vim.keymap.set('v', '<C-p>', '"_dP', { desc = 'Paste without copying replaced' })
+
+vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste from clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Yank to cliboard' })
+vim.keymap.set('n', '<leader>Y', '"+Y', { desc = 'Yank line to cliboard' })
+
+vim.keymap.set('n', 'Q', '<NOP>', { desc = 'Disable ex mode' })
+
 M.add({
   { 'jk', '<ESC>', mode = 'i', { desc = 'Leave insert' } },
 
