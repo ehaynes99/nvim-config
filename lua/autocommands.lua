@@ -52,13 +52,13 @@ vim.api.nvim_create_autocmd('BufReadPre', {
 
     local ok, stats = pcall(vim.loop.fs_stat, name)
     if ok and stats and (stats.size > 512 * 1024) then
-      vim.bo[buf].large_buf = true
+      vim.b[buf].large_buf = true
       vim.cmd('syntax off')
       vim.cmd('IndentBlanklineDisable')
       vim.opt_local.foldmethod = 'manual'
       vim.opt_local.spell = false
     else
-      vim.b.large_buf = false
+      vim.b[buf].large_buf = false
     end
   end,
 })
