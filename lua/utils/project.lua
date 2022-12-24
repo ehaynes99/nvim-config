@@ -1,23 +1,30 @@
 local M = {}
 
+local root_files = {
+  'package.json',
+  'Cargo.toml',
+  'Gemfile',
+  'pom.xml',
+  'build.gradle',
+  'build.gradle.kts',
+}
+
 M.git_root = function(path)
   path = path or vim.api.nvim_buf_get_name(0)
-  for dir in vim.fs.parents(path) do
-    local check_dir = dir .. '/.git'
-    if vim.fn.isdirectory(check_dir) == 1 then
-      return dir
-    end
-  end
-  return vim.fn.getcwd()
+  return vim.fs.find('.git', {
+    path = path,
+    upward = true,
+    type = 'directory',
+  })[1]
 end
 
-M.current_dir = function()
-  -- regular files have empty string for buftype
-  local is_file = vim.api.nvim_buf_get_option(0, 'buftype') == ''
-  if is_file then
-    local filename = vim.api.nvim_buf_get_name(0)
-    return vim.fs.dirname(filename)
-  end
+M.project_root = function(path)
+  path = path or vim.api.nvim_buf_get_name(0)
+  return vim.fs.find(root_files, {
+    path = path,
+    upward = true,
+    type = 'file',
+  })[1]
 end
 
 return M

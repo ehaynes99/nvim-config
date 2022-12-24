@@ -1,7 +1,6 @@
 local toggleterm = require('toggleterm')
 local Terminal = require('toggleterm.terminal').Terminal
-local js_utils = require('utils.javascript')
-local constants = require('constants')
+local project_utils = require('utils.project')
 
 toggleterm.setup({
   size = 80, -- this affects the vertical buffers
@@ -31,27 +30,24 @@ local gitui_term = Terminal:new({
 })
 
 vim.keymap.set('n', '<leader>G', function()
-  local has_root, git_root = pcall(vim.api.nvim_buf_get_var, 0, 'git_root')
-
-  if not has_root then
-    git_root = constants.INITIAL_DIR
-  end
+  local git_root = project_utils.git_root() or vim.fn.getcwd()
 
   gitui_term.cmd = 'gitui -d ' .. git_root
   gitui_term:toggle()
 end)
 
+
 local jest_term = Terminal:new({
   direction = 'vertical',
   size = 90,
-  id = 9,
   close_on_exit = true,
   hidden = true,
 })
 
 vim.keymap.set('n', '<leader>T', function()
   local test_file = vim.api.nvim_buf_get_name(0)
-  local project_root = js_utils.project_root(test_file)
+
+  local project_root = project_utils.project_root(test_file)
 
   if not project_root then
     print('could not find project root: ' .. test_file)

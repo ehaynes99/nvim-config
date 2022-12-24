@@ -1,12 +1,10 @@
-local constants = require('constants')
-
 local get_library_paths = function()
   local paths = {
     [vim.fn.expand('$VIMRUNTIME/lua')] = true,
   }
 
   -- get completion for installed plugins if opened in vim config dir
-  if constants.INITIAL_DIR == vim.fn.stdpath('config') then
+  if vim.fn.getcwd() == vim.fn.stdpath('config') then
     paths[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
     paths[vim.fn.stdpath('config') .. '/lua'] = true
     local pack_dir = vim.fn.stdpath('data') .. '/site/pack'
