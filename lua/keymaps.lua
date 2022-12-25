@@ -67,7 +67,7 @@ end
 
 vim.keymap.set(
   'n',
-  '<leader>s',
+  '<leader>r',
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = 'Global replace word under cursor' }
 )
