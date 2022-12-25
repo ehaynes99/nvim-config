@@ -81,6 +81,7 @@ vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines' }) -- keep cursor where 
 vim.keymap.set('v', '<C-p>', '"_dP', { desc = 'Paste without copying replaced' })
 
 vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste from clipboard' })
+vim.keymap.set('n', '<leader>P', '"+P', { desc = 'Paste from clipboard above' })
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Yank to cliboard' })
 vim.keymap.set('n', '<leader>Y', '"+Y', { desc = 'Yank line to cliboard' })
 
@@ -92,7 +93,8 @@ M.add({
   -- Find
   { '<leader>ff', ':Telescope find_files<CR>', { desc = 'Find: files' } },
   { '<leader>ft', ':Telescope live_grep<CR>', { desc = 'Find: text' } },
-  { '<leader>fs', ':Telescope session-lens search_session<CR>', { desc = 'Find: sessions' } },
+  -- { '<leader>fs', ':Telescope session-lens search_session<CR>', { desc = 'Find: sessions' } },
+  { '<leader>fs', ':Telescope grep_string<CR>', { desc = 'Find: word under cursor' } },
   { '<leader>fw', editor_utils.search_tree_dir, { desc = 'Find: text within tree dir' } },
   { '<leader>fr', spectre.open_file_search, { desc = 'Find: replace' } },
   { '<leader>fR', spectre.open, { desc = 'Find: global replace' } },
