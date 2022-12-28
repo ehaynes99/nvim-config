@@ -128,9 +128,9 @@ M.add({
   -- { '<C-Right>', ':vertical resize +2<CR>', { desc = 'Window: ' }resize ' },
 
   -- Various plugin info
-  { '<leader>pl', ':LspInfo<CR>', { desc = 'LSP: LSP info for file' } },
-  { '<leader>pm', ':Mason<CR>', { desc = 'LSP: Install servers' } },
-  { '<leader>pn', ':NullLsInfo<CR>', { desc = 'LSP: Null-ls info for file' } },
+  -- { '<leader>pl', ':LspInfo<CR>', { desc = 'LSP: LSP info for file' } },
+  -- { '<leader>pm', ':Mason<CR>', { desc = 'LSP: Install servers' } },
+  -- { '<leader>pn', ':NullLsInfo<CR>', { desc = 'LSP: Null-ls info for file' } },
 
   -- Debugger
   { '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: toggle breakpoint' } },
