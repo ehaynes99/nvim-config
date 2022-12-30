@@ -1,4 +1,5 @@
 local default_scheme = 'nightfox'
+-- local default_scheme = 'onedark'
 local colorscheme = os.getenv('NVIM_COLORSCHEME') or default_scheme
 
 local M = {}
@@ -7,13 +8,24 @@ M.onedark = function()
   local onedark = require('onedark')
 
   onedark.setup({
-    style = 'warm',
+    style = 'warmer',
   })
 
   vim.cmd('colorscheme onedark')
 end
 
 M.kanagawa = function()
+  -- require('kanagawa').setup({
+  --   colors = {
+  --     sumiInk1 = '#323241',
+  --     sumiInk2 = '#62627f',
+  --     sumiInk3 = '#47475c',
+  --
+  --     -- sumiInk1 = '#454559',
+  --     -- sumiInk2 = '#646481',
+  --     -- sumiInk3 = '#585872',
+  --   },
+  -- })
   vim.cmd('colorscheme kanagawa')
 end
 

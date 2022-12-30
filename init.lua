@@ -1,6 +1,6 @@
 require('constants')
 require('options')
-require('plugins')
+require('config.packer')
 require('keymaps')
 require('commands')
 require('autocommands')

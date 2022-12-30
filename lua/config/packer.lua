@@ -1,4 +1,59 @@
-return {
+vim.g.COMPILED_PACKER_FILE = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua'
+
+local ensure_packer = function()
+  local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
+local packer = require('packer')
+
+local compiled_packer_exists = function()
+  local f = io.open(vim.g.COMPILED_PACKER_FILE, 'r')
+  if f ~= nil then
+    io.close(f)
+    return true
+  end
+end
+
+packer.init({
+  display = {
+    open_fn = function()
+      return require('packer.util').float({ border = 'rounded' })
+    end,
+  },
+  git = {
+    default_url_format = 'git@github.com:%s',
+  },
+})
+
+local start = function(plugins)
+  return packer.startup(function(use)
+    for _, plugin in pairs(plugins) do
+      use(plugin)
+    end
+    if packer_bootstrap or not compiled_packer_exists() then
+      vim.api.nvim_create_autocmd({ 'User' }, {
+        pattern = { 'PackerComplete' },
+        callback = function()
+          require('config.plugins')
+          return true
+        end,
+      })
+      require('packer').sync()
+    else
+      require('config.plugins')
+    end
+  end)
+end
+
+return start({
   { 'wbthomason/packer.nvim', commit = '6afb67460283f0e990d35d229fd38fdc04063e0a' },
 
   --utilities
@@ -9,6 +64,7 @@ return {
   { 'navarasu/onedark.nvim', commit = 'df090f9d72d43aa51dec5760c44da288b58a79b6' },
   { 'rebelot/kanagawa.nvim', commit = 'fb733c1043a462155b52cd97efd920f1dd72d33a' },
   { 'EdenEast/nightfox.nvim', commit = 'e6a0d98dc1b4751b4d999d3dffd87b1af4f4873e' },
+  { 'olimorris/onedarkpro.nvim' },
 
   -- LSP & completion
   { 'L3MON4D3/LuaSnip', commit = '8f8d493e7836f2697df878ef9c128337cbf2bb84' },
@@ -80,4 +136,4 @@ return {
   { 'nvim-telescope/telescope.nvim', commit = '76ea9a898d3307244dce3573392dcf2cc38f340f' },
   { 'nvim-telescope/telescope-live-grep-args.nvim', commit = '7de3baef1ec4fb77f7a8195fe87bebd513244b6a' },
   { 'stevearc/dressing.nvim', commit = '872cc4e5ea32295eb1102141a444d6d83b8f9c25' },
-}
+})

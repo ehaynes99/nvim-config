@@ -9,7 +9,7 @@ nvim_tree.setup({
     update_root = false,
   },
   open_on_setup = true,
-  open_on_setup_file = true,
+  -- open_on_setup_file = true,
   diagnostics = {
     enable = true,
     show_on_dirs = true,
