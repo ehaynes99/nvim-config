@@ -3,8 +3,10 @@ local get_library_paths = function()
     [vim.fn.expand('$VIMRUNTIME/lua')] = true,
   }
 
+  local cwd = vim.fn.getcwd()
+
   -- get completion for installed plugins if opened in vim config dir
-  if vim.fn.getcwd() == vim.fn.stdpath('config') then
+  if cwd == vim.fn.stdpath('config') then
     paths[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
     paths[vim.fn.stdpath('config') .. '/lua'] = true
     local pack_dir = vim.fn.stdpath('data') .. '/site/pack'
@@ -18,6 +20,9 @@ local get_library_paths = function()
     end
     add_glob(pack_dir .. '/*/start/*/lua')
     add_glob(pack_dir .. '/*/opt/*/lua')
+  elseif cwd == '/home/erich/.config/awesome' then
+    print('adding awesome!')
+    paths['/usr/share/awesome/lib'] = true
   end
 
   return paths
@@ -32,7 +37,7 @@ return {
       },
 
       diagnostics = {
-        globals = { 'vim' },
+        globals = { 'vim', 'awesome', 'client', 'screen', 'root' },
       },
       workspace = {
         library = get_library_paths(),
