@@ -1,35 +1,32 @@
-local default_scheme = 'nightfox'
--- local default_scheme = 'onedark'
+local default_scheme = 'kanagawa'
 local colorscheme = os.getenv('NVIM_COLORSCHEME') or default_scheme
 
-local M = {}
+local schemes = {}
 
-M.onedark = function()
+schemes.onedark = function()
   local onedark = require('onedark')
 
   onedark.setup({
     style = 'warmer',
   })
-
-  vim.cmd('colorscheme onedark')
 end
 
-M.kanagawa = function()
-  -- require('kanagawa').setup({
-  --   colors = {
-  --     sumiInk1 = '#323241',
-  --     sumiInk2 = '#62627f',
-  --     sumiInk3 = '#47475c',
-  --
-  --     -- sumiInk1 = '#454559',
-  --     -- sumiInk2 = '#646481',
-  --     -- sumiInk3 = '#585872',
-  --   },
-  -- })
-  vim.cmd('colorscheme kanagawa')
+schemes.kanagawa = function()
+  -- https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
+  require('kanagawa').setup({
+    dimInactive = true,
+    colors = {
+      sumiInk0 = '#16161D',
+      sumiInk1 = '#272730',
+      sumiInk1b = '#24242d',
+      sumiInk2 = '#2f2f3c',
+      sumiInk3 = '#3b3b4b',
+    },
+  })
 end
 
-M.nightfox = function()
+schemes.nightfox = function()
+  -- https://github.com/EdenEast/nightfox.nvim/blob/main/lua/nightfox/palette/nordfox.lua
   -- local nordfox_default_pallete = {
   --   black = Shade.new('#3b4252', '#465780', '#353a45'),
   --   red = Shade.new('#bf616a', '#d06f79', '#a54e56'),
@@ -68,8 +65,6 @@ M.nightfox = function()
       },
     },
   })
-  vim.cmd('colorscheme nordfox')
-
   -- vim.cmd('colorscheme duskfox')
   -- vim.cmd('colorscheme nightfox')
   -- vim.cmd('colorscheme nordfox')
@@ -77,4 +72,8 @@ M.nightfox = function()
   -- vim.cmd('colorscheme carbonfox')
 end
 
-M[colorscheme]()
+for _, setup in pairs(schemes) do
+  setup()
+end
+
+vim.cmd('colorscheme ' .. colorscheme)
