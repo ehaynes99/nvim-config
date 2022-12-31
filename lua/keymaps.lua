@@ -77,13 +77,11 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move lines up' })
 
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines' }) -- keep cursor where it started
 
--- vim.keymap.set('v', '<C-p>', 'p', { desc = 'Paste & yank replaced' })
-vim.keymap.set('v', '<C-p>', '"_dP', { desc = 'Paste without copying replaced' })
-
-vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste from clipboard' })
-vim.keymap.set('n', '<leader>P', '"+P', { desc = 'Paste from clipboard above' })
-vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Yank to cliboard' })
-vim.keymap.set('n', '<leader>Y', '"+Y', { desc = 'Yank line to cliboard' })
+vim.keymap.set('n', '<leader>cp', '"+p', { desc = 'Paste from clipboard' })
+vim.keymap.set('n', '<leader>cP', '"+P', { desc = 'Paste from clipboard above' })
+vim.keymap.set({ 'n', 'v' }, '<leader>cy', '"+y', { desc = 'Yank to cliboard' })
+vim.keymap.set({ 'n', 'v' }, '<leader>cd', '"+d', { desc = 'Delete to cliboard' })
+vim.keymap.set('n', '<leader>cY', '"+Y', { desc = 'Yank line to cliboard' })
 
 vim.keymap.set('n', 'Q', '<NOP>', { desc = 'Disable ex mode' })
 
@@ -152,6 +150,7 @@ M.add({
   { '<leader>n', ':set rnu!<CR>', { desc = 'Toggle relative line numbers' } },
   { '<leader>h', ':nohlsearch<CR>', { desc = 'Window: cancel highlight' } },
   { 'p', '"_dP', { desc = 'Paste without copying replaced' }, mode = 'v' },
+  { '<C-P>', '"_dP', { desc = 'Paste without copying replaced' }, mode = 'v' },
   { '<', '<gv', { desc = 'Stay in visual mode after indent left' }, mode = 'v' },
   { '>', '>gv', { desc = 'Stay in visual mode after indent left' }, mode = 'v' },
   -- '<C-_>' is magic syntax for <C-/> because you can't map the slash character
