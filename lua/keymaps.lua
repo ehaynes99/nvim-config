@@ -71,6 +71,12 @@ vim.keymap.set(
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = 'Global replace word under cursor' }
 )
+vim.keymap.set(
+  'v',
+  '<leader>r',
+  [["hy:%s/<C-r>h//gI<left><left><left>]],
+  { desc = 'Global replace word under cursor' }
+)
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move lines down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move lines up' })
