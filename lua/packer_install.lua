@@ -42,13 +42,13 @@ local start = function(plugins)
       vim.api.nvim_create_autocmd({ 'User' }, {
         pattern = { 'PackerComplete' },
         callback = function()
-          require('config.plugins')
+          require('plugins')
           return true
         end,
       })
       require('packer').sync()
     else
-      require('config.plugins')
+      require('plugins')
     end
   end)
 end
