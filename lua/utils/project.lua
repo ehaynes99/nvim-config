@@ -20,11 +20,14 @@ end
 
 M.project_root = function(path)
   path = path or vim.api.nvim_buf_get_name(0)
-  return vim.fs.find(root_files, {
+  local root_file = vim.fs.find(root_files, {
     path = path,
     upward = true,
     type = 'file',
   })[1]
+  if root_file then
+    return vim.fs.dirname(root_file)
+  end
 end
 
 return M
