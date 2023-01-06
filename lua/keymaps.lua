@@ -90,6 +90,8 @@ vim.keymap.set({ 'n', 'v' }, '<leader>cd', '"+d', { desc = 'Delete to cliboard' 
 vim.keymap.set('n', '<leader>cY', '"+Y', { desc = 'Yank line to cliboard' })
 
 vim.keymap.set('n', 'Q', '<NOP>', { desc = 'Disable ex mode' })
+vim.keymap.set(modes('nivxt'), '<A-h>', ':tabprevious<CR>', { desc = 'Go to previous tab' })
+vim.keymap.set(modes('nivxt'), '<A-l>', ':tabnext<CR>', { desc = 'Go to next tab' })
 
 M.add({
   { 'jk', '<ESC>', mode = 'i', { desc = 'Leave insert' } },
