@@ -23,6 +23,13 @@ snippet trycatch 'Try-Catch'
           console.error(error)
         }
 
+snippet tryfinally 'Try-Finally'
+        try {
+          $0
+        } finally {
+          console.error(error)
+        }
+
 snippet iife 'Immediately invoked function expression'
         (() => {
           $1
