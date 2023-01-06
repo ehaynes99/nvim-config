@@ -9,6 +9,7 @@ nvim_tree.setup({
     update_root = false,
   },
   open_on_setup = true,
+  sync_root_with_cwd = true,
   -- open_on_setup_file = true,
   diagnostics = {
     enable = true,
