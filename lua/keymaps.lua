@@ -157,7 +157,6 @@ M.add({
   { '<leader>E', ':NvimTreeToggle<CR>', { desc = 'Open tree view' } },
   { '<leader>n', ':set rnu!<CR>', { desc = 'Toggle relative line numbers' } },
   { '<leader>h', ':nohlsearch<CR>', { desc = 'Window: cancel highlight' } },
-  { 'p', '"_dP', { desc = 'Paste without copying replaced' }, mode = 'v' },
   { '<C-P>', '"_dP', { desc = 'Paste without copying replaced' }, mode = 'v' },
   { '<', '<gv', { desc = 'Stay in visual mode after indent left' }, mode = 'v' },
   { '>', '>gv', { desc = 'Stay in visual mode after indent left' }, mode = 'v' },
