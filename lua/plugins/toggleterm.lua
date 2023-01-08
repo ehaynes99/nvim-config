@@ -12,6 +12,15 @@ toggleterm.setup({
   },
 })
 
+local close_if_successful = function(term, _, exit_code)
+  if exit_code == 0 then
+    term:close()
+    if vim.api.nvim_buf_is_loaded(term.bufnr) then
+      vim.api.nvim_buf_delete(term.bufnr, { force = true })
+    end
+  end
+end
+
 local gitui_term = Terminal:new({
   hidden = true,
   close_on_exit = false,
@@ -19,14 +28,7 @@ local gitui_term = Terminal:new({
     border = 'rounded',
     width = 240,
   },
-  on_exit = function(term, _, exit_code)
-    if exit_code == 0 then
-      term:close()
-      if vim.api.nvim_buf_is_loaded(term.bufnr) then
-        vim.api.nvim_buf_delete(term.bufnr, { force = true })
-      end
-    end
-  end,
+  on_exit = close_if_successful,
 })
 
 vim.keymap.set('n', '<leader>G', function()
@@ -36,12 +38,11 @@ vim.keymap.set('n', '<leader>G', function()
   gitui_term:toggle()
 end)
 
-
 local jest_term = Terminal:new({
   direction = 'vertical',
-  size = 90,
-  close_on_exit = true,
+  close_on_exit = false,
   hidden = true,
+  on_exit = close_if_successful,
 })
 
 vim.keymap.set('n', '<leader>T', function()
@@ -54,7 +55,14 @@ vim.keymap.set('n', '<leader>T', function()
     return
   end
 
+  print('project_root: ' .. project_root)
   local cmd = 'npx -y --node-options=--inspect jest --watch --no-coverage ' .. test_file
-  jest_term.cmd = string.format('pushd %s && %s && popd', project_root, cmd)
-  jest_term:toggle()
+ 
+  if jest_term:is_open() then
+    jest_term:change_dir(project_root)
+  else
+    jest_term.dir = project_root
+  end
+  jest_term.cmd = cmd
+  jest_term:toggle(120)
 end)
