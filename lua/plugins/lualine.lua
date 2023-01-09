@@ -6,7 +6,7 @@ lualine.setup({
     lualine_b = { 'branch', 'diff', 'diagnostics' },
     lualine_c = {
       function()
-        return vim.fn.getcwd()
+        return (vim.fn.getcwd():gsub(vim.fn.expand('$HOME'), '~'))
       end,
       { 'filename', newfile_status = true, path = 1 },
     },
