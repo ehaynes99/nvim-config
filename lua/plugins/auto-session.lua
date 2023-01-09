@@ -5,11 +5,11 @@ autosession.setup({
   log_level = 'error',
   auto_session_suppress_dirs = {
     '~/',
-    '~/tmp',
+    '~/tmp/*',
     '~/workspace',
     '~/all-workspaces',
     '/',
-    '/tmp',
+    '/tmp/*',
   },
 })
 
