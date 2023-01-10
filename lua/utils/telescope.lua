@@ -5,7 +5,6 @@ local M = {}
 
 M.buffers = function()
   telescope.buffers({
-    ignore_current_buffer = true,
     sort_mru = true,
   })
 end
