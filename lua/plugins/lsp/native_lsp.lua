@@ -1,4 +1,10 @@
-require('fidget').setup({})
+require('fidget').setup({
+  sources = {
+    ['null-ls'] = {
+      ignore = true,
+    },
+  },
+})
 
 local signs = {
   { name = 'DiagnosticSignError', text = '' },
