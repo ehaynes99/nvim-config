@@ -8,8 +8,9 @@ return function()
       on_attach = function(_, bufnr)
         keymaps.lsp_keymaps(bufnr, installer.create_formatter(bufnr))
 
+
         keymaps.add({
-          { 'gd', ':TypescriptGoToSourceDefinition<CR>', { desc = 'LSP: Goto definition', buffer = bufnr } },
+          -- { 'gd', ':TypescriptGoToSourceDefinition<CR>', { desc = 'LSP: Goto definition', buffer = bufnr } },
           {
             '<leader>li',
             ':TypescriptAddMissingImports<CR>',
