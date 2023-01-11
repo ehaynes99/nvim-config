@@ -41,7 +41,7 @@ vim.opt.whichwrap:append('<,>,[,],h,l') -- keys allowed to move to the previous/
 vim.opt.iskeyword:append('-') -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ 'c', 'r', 'o' }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
-vim.opt.sessionoptions = 'buffers,curdir,folds,tabpages,winsize'
+vim.opt.sessionoptions = 'blank,buffers,curdir,folds,tabpages,winsize'
 -- will be merged soon: https://github.com/neovim/neovim/pull/19243
 -- vim.opt.splitkeep = 'screen'
 
