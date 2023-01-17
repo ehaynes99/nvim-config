@@ -6,9 +6,6 @@ local null_ls_sources = require('null-ls.sources')
 
 local M = {}
 
--- not sure where to put this. The plugin doesn't have its own config
-vim.g.code_action_menu_window_border = 'rounded'
-
 M.create_formatter = function(bufnr)
   return function()
     local filetype = vim.bo.filetype
@@ -30,9 +27,10 @@ M.create_formatter = function(bufnr)
 end
 
 M.default_capabilities = (function()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+  -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+  -- above was deprecated, but how do we add to it now?
+  return cmp_nvim_lsp.default_capabilities()
 end)()
 
 M.default_server_config = {
