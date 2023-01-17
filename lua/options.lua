@@ -50,4 +50,4 @@ vim.opt.sessionoptions = 'blank,buffers,curdir,folds,tabpages,winsize'
 -- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
 vim.g.mapleader = ' '
-vim.cmd('colorscheme habamax') -- this will be overriden by plugins, but keeps the packer sync window from burning my retinas
+vim.cmd('colorscheme habamax') -- this will be overriden by plugins, but a better default
