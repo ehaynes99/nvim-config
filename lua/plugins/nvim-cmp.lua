@@ -1,6 +1,6 @@
 local cmp = require('cmp')
 ---@diagnostic disable-next-line: different-requires
-local luasnip = require('luasnip')
+-- local luasnip = require('luasnip')
 
 local has_words_before = function()
   ---@diagnostic disable-next-line: deprecated
@@ -10,11 +10,11 @@ local has_words_before = function()
 end
 
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
+  -- snippet = {
+  --   expand = function(args)
+  --     luasnip.lsp_expand(args.body)
+  --   end,
+  -- },
 
   mapping = cmp.mapping.preset.insert({
     ['<C-k>'] = cmp.mapping.select_prev_item(),
@@ -31,8 +31,8 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
+      -- elseif luasnip.expand_or_locally_jumpable() then
+      --   luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.complete(nil)
       else
@@ -43,8 +43,8 @@ cmp.setup({
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      -- elseif luasnip.jumpable(-1) then
+      --   luasnip.jump(-1)
       else
         fallback()
       end
