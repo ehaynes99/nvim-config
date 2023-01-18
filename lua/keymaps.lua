@@ -98,7 +98,7 @@ M.add({
 
   -- Find
   { '<leader>ff', ':Telescope find_files<CR>', { desc = 'Find: files' } },
-  { '<leader>ft', ':Telescope live_grep<CR>', { desc = 'Find: text' } },
+  { '<leader>/', ':Telescope live_grep<CR>', { desc = 'Find: text' } },
   -- { '<leader>fs', ':Telescope session-lens search_session<CR>', { desc = 'Find: sessions' } },
   { '<leader>fs', ':Telescope grep_string<CR>', { desc = 'Find: word under cursor' } },
   { '<leader>fw', editor_utils.search_tree_dir, { desc = 'Find: text within tree dir' } },
