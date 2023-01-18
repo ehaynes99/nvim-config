@@ -104,6 +104,9 @@ M.add({
   { 'Y', 'yg$', { desc = 'Yank to end of line' } },
   { 'J', ":m '>+1<CR>gv=gv", mode = 'v', { desc = 'Move lines down' } },
   { 'K', ":m '<-2<CR>gv=gv", mode = 'v', { desc = 'Move lines up' } },
+  { 'j', "v:count ? 'j' : 'gj'", mode = { 'n', 'v' }, { desc = 'Move cursor up', expr = true } },
+  { 'k', "v:count ? 'k' : 'gk'", mode = { 'n', 'v' }, { desc = 'Move cursor down', expr = true } },
+  { '<leader>ww', ':setl wrap!<CR>', { desc = 'Toggle soft wrap' } },
   {
     '<leader>r',
     [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
