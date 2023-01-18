@@ -65,36 +65,11 @@ M.lsp_keymaps = function(bufnr, lsp_format)
   })
 end
 
-vim.keymap.set(
-  'n',
-  '<leader>r',
-  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = 'Global replace word under cursor' }
-)
-vim.keymap.set(
-  'v',
-  '<leader>r',
-  [["hy:%s/<C-r>h//gI<left><left><left>]],
-  { desc = 'Global replace word under cursor' }
-)
-
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move lines down' })
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move lines up' })
-
-vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines' }) -- keep cursor where it started
-
-vim.keymap.set('n', '<leader>cp', '"+p', { desc = 'Paste from clipboard' })
-vim.keymap.set('n', '<leader>cP', '"+P', { desc = 'Paste from clipboard above' })
-vim.keymap.set({ 'n', 'v' }, '<leader>cy', '"+y', { desc = 'Yank to cliboard' })
-vim.keymap.set({ 'n', 'v' }, '<leader>cd', '"+d', { desc = 'Delete to cliboard' })
-vim.keymap.set('n', '<leader>cY', '"+Y', { desc = 'Yank line to cliboard' })
-
-vim.keymap.set('n', 'Q', '<NOP>', { desc = 'Disable ex mode' })
-vim.keymap.set(modes('nivxt'), '<A-h>', ':tabprevious<CR>', { desc = 'Go to previous tab' })
-vim.keymap.set(modes('nivxt'), '<A-l>', ':tabnext<CR>', { desc = 'Go to next tab' })
-
 M.add({
   { 'jk', '<ESC>', mode = 'i', { desc = 'Leave insert' } },
+  { 'Q', '<NOP>', { desc = 'Disable ex mode' } },
+  { '<A-h>', ':tabprevious<CR>', mode = modes('nivxt'), { desc = 'Go to previous tab' } },
+  { '<A-l>', ':tabnext<CR>', mode = modes('nivxt'), { desc = 'Go to next tab' } },
 
   -- Find
   { '<leader>ff', ':Telescope find_files<CR>', { desc = 'Find: files' } },
@@ -104,7 +79,7 @@ M.add({
   { '<leader>fw', editor_utils.search_tree_dir, { desc = 'Find: text within tree dir' } },
   { '<leader>fr', spectre.open_file_search, { desc = 'Find: replace' } },
   { '<leader>fR', spectre.open, { desc = 'Find: global replace' } },
-  { '<leader>fr', spectre.open_file_search, { desc = 'Find: replace' }, mode = modes('vx') },
+  { '<leader>fr', spectre.open_file_search, mode = modes('vx'), { desc = 'Find: replace' } },
   { '<leader>fR', spectre.open, { desc = 'Find: global replace' } },
   { '<leader>fg', require('telescope').extensions.live_grep_args.live_grep_args, { desc = 'Find: Ripgrep' } },
 
@@ -119,15 +94,36 @@ M.add({
   { '<leader>q', 'q', { desc = 'Start/stop recording macro' } },
   { 'q', '<Nop>' },
 
+  -- text
+  { 'J', 'mzJ`z', { desc = 'Join lines' } }, -- keep cursor where it started
+  { '<leader>cp', '"+p', { desc = 'Paste from clipboard' } },
+  { '<leader>cP', '"+P', { desc = 'Paste from clipboard above' } },
+  { '<leader>cy', '"+y', mode = { 'n', 'v' }, { desc = 'Yank to cliboard' } },
+  { '<leader>cd', '"+d', mode = { 'n', 'v' }, { desc = 'Delete to cliboard' } },
+  { '<leader>cY', '"+Y', { desc = 'Yank line to cliboard' } },
+  { 'J', ":m '>+1<CR>gv=gv", mode = 'v', { desc = 'Move lines down' } },
+  { 'K', ":m '<-2<CR>gv=gv", mode = 'v', { desc = 'Move lines up' } },
+  {
+    '<leader>r',
+    [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = 'Global replace word under cursor' },
+  },
+  {
+    '<leader>r',
+    [["hy:%s/<C-r>h//gI<left><left><left>]],
+    mode = 'v',
+    { desc = 'Global replace word under cursor' },
+  },
+
   -- Window
   { '<leader>wc', '<cmd>:BDelete this<CR>', { desc = 'Window: close current buffer' } },
   { '<leader>wh', editor_utils.close_hidden_buffers, { desc = 'Window: close all hidden buffers' } },
   { '<S-l>', ':bnext<CR>', { desc = 'Window: next buffer' } },
   { '<S-h>', ':bprevious<CR>', { desc = 'Window: previous buffer' } },
-  { '<C-h>', wincmd('h'), { desc = 'Window: focus left' }, mode = modes('nivxt') },
-  { '<C-j>', wincmd('j'), { desc = 'Window: focus down' }, mode = modes('nivxt') },
-  { '<C-k>', wincmd('k'), { desc = 'Window: focus up' }, mode = modes('nivxt') },
-  { '<C-l>', wincmd('l'), { desc = 'Window: focus right' }, mode = modes('nivxt') },
+  { '<C-h>', wincmd('h'), mode = modes('nivxt'), { desc = 'Window: focus left' } },
+  { '<C-j>', wincmd('j'), mode = modes('nivxt'), { desc = 'Window: focus down' } },
+  { '<C-k>', wincmd('k'), mode = modes('nivxt'), { desc = 'Window: focus up' } },
+  { '<C-l>', wincmd('l'), mode = modes('nivxt'), { desc = 'Window: focus right' } },
   -- { '<C-Up>', ':resize -2<CR>', { desc = 'Window: resize ' } },
   -- { '<C-Down>', ':resize +2<CR>', { desc = 'Window: resize ' } },
   -- { '<C-Left>', ':vertical resize -2<CR>', { desc = 'Window: resize ' } },
@@ -150,18 +146,18 @@ M.add({
   { '<leader>dt', dap.terminate, { desc = 'Debug: terminate' } },
 
   -- Terminal
-  { '<ESC><ESC>', '<C-\\><C-n>', { desc = 'Leave insert' }, mode = 't' },
+  { '<ESC><ESC>', '<C-\\><C-n>', mode = 't', { desc = 'Leave insert' } },
 
   -- Editor
   { '<leader>e', ':NvimTreeFocus<CR>', { desc = 'Focus tree view' } },
   { '<leader>E', ':NvimTreeToggle<CR>', { desc = 'Open tree view' } },
   { '<leader>n', ':set rnu!<CR>', { desc = 'Toggle relative line numbers' } },
   { '<leader>h', ':nohlsearch<CR>', { desc = 'Window: cancel highlight' } },
-  { '<C-P>', '"_dP', { desc = 'Paste without copying replaced' }, mode = 'v' },
-  { '<', '<gv', { desc = 'Stay in visual mode after indent left' }, mode = 'v' },
-  { '>', '>gv', { desc = 'Stay in visual mode after indent left' }, mode = 'v' },
+  { '<C-P>', '"_dP', mode = 'v', { desc = 'Paste without copying replaced' } },
+  { '<', '<gv', mode = 'v', { desc = 'Stay in visual mode after indent left' } },
+  { '>', '>gv', mode = 'v', { desc = 'Stay in visual mode after indent left' } },
   -- '<C-_>' is magic syntax for <C-/> because you can't map the slash character
-  { '<C-_>', require('Comment.api').toggle.linewise.current, { desc = 'Comment toggle' } },
+  { '<C-_>', require('Comment.api').toggle.linewise.current, mode = { 'n', 'i' }, { desc = 'Comment toggle' } },
   {
     '<C-_>',
     function()
@@ -169,8 +165,8 @@ M.add({
       vim.api.nvim_feedkeys(esc, 'nx', false)
       require('Comment.api').toggle.linewise(vim.fn.visualmode())
     end,
-    { desc = 'Comment toggle' },
     mode = { 'x', 'v' },
+    { desc = 'Comment toggle' },
   },
 
   -- Telescope/legendary
