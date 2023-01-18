@@ -29,7 +29,6 @@ return {
       close_on_exit = false,
       float_opts = {
         border = 'rounded',
-        width = 240,
       },
       on_exit = close_if_successful,
     })
@@ -67,7 +66,7 @@ return {
         jest_term.dir = project_root
       end
       jest_term.cmd = cmd
-      jest_term:toggle(120)
+      jest_term:toggle(90)
     end)
   end,
 }
