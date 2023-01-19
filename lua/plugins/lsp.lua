@@ -67,15 +67,26 @@ local native_lsp_config = function()
   })
 end
 
+local fidget = {
+  'j-hui/fidget.nvim',
+  opts = {
+    sources = {
+      ['null-ls'] = {
+        ignore = true,
+      },
+    },
+  },
+}
+
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
     'saadparwaiz1/cmp_luasnip',
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
-    { 'j-hui/fidget.nvim', config = true },
     'simrat39/rust-tools.nvim',
     'folke/trouble.nvim',
+    fidget,
     {
       'weilbith/nvim-code-action-menu',
       config = function()
