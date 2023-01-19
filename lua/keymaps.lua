@@ -185,6 +185,7 @@ M.add({
   { '<leader>th', telescope.help_tags, { desc = 'Telescope: help tags' } },
   { '<leader>tr', telescope.resume, { desc = 'Telescope: resume' } },
   { '<leader>ta', telescope.autocommands, { desc = 'Telescope: autocommands' } },
+  { '<leader>ts', ':Telescope session-lens search_session<CR>', { desc = 'Telescope: autocommands' } },
 
   -- Testing
   { '<leader>xl', '<cmd>:Luapad<CR>', { desc = 'Luapad' } },
