@@ -8,9 +8,7 @@ return {
       'css',
       'html',
       'typescriptreact',
-      -- lua = { names = false },
-      'lua',
+      lua = { names = false },
     },
-    red = 'blue',
   },
 }
