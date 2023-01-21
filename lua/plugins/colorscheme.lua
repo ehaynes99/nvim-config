@@ -34,15 +34,7 @@ return {
           },
         },
       })
-    end,
-  },
-  {
-    'navarasu/onedark.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('onedark').setup({
-        style = 'warmer',
-      })
+      -- vim.cmd('colorscheme nordfox')
     end,
   },
 }
