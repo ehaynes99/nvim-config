@@ -8,7 +8,6 @@ return function()
       on_attach = function(_, bufnr)
         keymaps.lsp_keymaps(bufnr, installer.create_formatter(bufnr))
 
-
         keymaps.add({
           -- { 'gd', ':TypescriptGoToSourceDefinition<CR>', { desc = 'LSP: Goto definition', buffer = bufnr } },
           {
@@ -30,18 +29,22 @@ return function()
       settings = {
         diagnostics = {
           ignoredCodes = {
-            -- some typescript djagnostics are invalid and/or are better
-            -- handled by eslint. All message codes:
+            -- Disable annoying diagnostics. All message codes:
             -- https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
             6133, -- unused variable - eslint will handle
             6138, -- unused property - eslint will handle
             80001, -- convert to ES module suggestion
           },
         },
+        completions = {
+          completeFunctionCalls = true,
+        },
       },
       init_options = {
         preferences = {
           importModuleSpecifierPreference = 'project-relative',
+          includeCompletionsWithSnippetText = true,
+          includeCompletionsForImportStatements = true,
         },
       },
     },
