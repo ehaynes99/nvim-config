@@ -91,7 +91,7 @@ return {
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
         { name = 'luasnip' },
-        { name = 'buffer' },
+        { name = 'buffer', keyword_length = 3 },
         { name = 'path' },
         { name = 'crates' },
       },
