@@ -20,6 +20,7 @@ return {
   { 'kazhala/close-buffers.nvim' },
   { 'lukas-reineke/indent-blankline.nvim' },
   { 'nvim-pack/nvim-spectre', config = true },
+  { 'simrat39/symbols-outline.nvim', config = true },
   {
     'APZelos/blamer.nvim',
     config = function()

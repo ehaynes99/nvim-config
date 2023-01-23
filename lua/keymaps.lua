@@ -122,6 +122,8 @@ M.add({
   -- Window
   { '<leader>wc', '<cmd>:BDelete this<CR>', { desc = 'Window: close current buffer' } },
   { '<leader>wh', editor_utils.close_hidden_buffers, { desc = 'Window: close all hidden buffers' } },
+  { '<leader>wo', ':SymbolsOutline<CR>', { desc = 'Toggle symbols outline' } },
+
   { '<S-l>', ':bnext<CR>', { desc = 'Window: next buffer' } },
   { '<S-h>', ':bprevious<CR>', { desc = 'Window: previous buffer' } },
   { '<C-h>', wincmd('h'), mode = modes('nivxt'), { desc = 'Window: focus left' } },
