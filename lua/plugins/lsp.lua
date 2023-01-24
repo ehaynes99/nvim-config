@@ -1,4 +1,5 @@
 local mason_config = function()
+  require('neodev').setup()
   local mason = require('mason')
   local mason_lsp = require('mason-lspconfig')
   local installer = require('language_servers.installer')
@@ -83,6 +84,7 @@ return {
   dependencies = {
     'saadparwaiz1/cmp_luasnip',
     'williamboman/mason.nvim',
+    'folke/neodev.nvim',
     'williamboman/mason-lspconfig.nvim',
     'simrat39/rust-tools.nvim',
     'folke/trouble.nvim',
