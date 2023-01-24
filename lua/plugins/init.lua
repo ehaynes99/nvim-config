@@ -9,9 +9,6 @@ return {
   -- misc editor improvements
   { 'numToStr/Comment.nvim', config = true },
   { 'petertriho/nvim-scrollbar', config = true },
-  { 'Pocco81/auto-save.nvim', opts = {
-    trigger_events = { 'InsertLeave', 'TextChanged', 'BufLeave' },
-  } },
   { 'mrjones2014/legendary.nvim', config = true },
   { 'chentoast/marks.nvim', config = true },
   { 'kosayoda/nvim-lightbulb', opts = {
