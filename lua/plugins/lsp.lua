@@ -68,17 +68,6 @@ local native_lsp_config = function()
   })
 end
 
-local fidget = {
-  'j-hui/fidget.nvim',
-  opts = {
-    sources = {
-      ['null-ls'] = {
-        ignore = true,
-      },
-    },
-  },
-}
-
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
@@ -88,13 +77,7 @@ return {
     'williamboman/mason-lspconfig.nvim',
     'simrat39/rust-tools.nvim',
     'folke/trouble.nvim',
-    fidget,
-    {
-      'weilbith/nvim-code-action-menu',
-      config = function()
-        vim.g.code_action_menu_window_border = 'rounded'
-      end,
-    },
+    'b0o/schemastore.nvim',
     'jose-elias-alvarez/typescript.nvim',
     'Saecki/crates.nvim',
   },
