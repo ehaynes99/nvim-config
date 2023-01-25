@@ -7,13 +7,13 @@ return {
   } },
 
   -- misc editor improvements
-  { 'numToStr/Comment.nvim', config = true },
-  { 'petertriho/nvim-scrollbar', config = true },
-  { 'mrjones2014/legendary.nvim', config = true },
-  { 'chentoast/marks.nvim', config = true },
+  { 'numToStr/Comment.nvim', config = true, event = 'VeryLazy' },
+  -- { 'petertriho/nvim-scrollbar', config = true },
+  { 'mrjones2014/legendary.nvim', config = true, event = 'VeryLazy' },
+  { 'chentoast/marks.nvim', config = true, event = 'VeryLazy' },
   { 'kosayoda/nvim-lightbulb', opts = {
     autocmd = { enabled = true },
-  } },
+  }, event = 'VeryLazy' },
   { 'kazhala/close-buffers.nvim' },
   { 'lukas-reineke/indent-blankline.nvim' },
   { 'nvim-pack/nvim-spectre', config = true },
