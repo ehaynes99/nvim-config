@@ -9,6 +9,7 @@ local tu = require('utils.telescope')
 local curry = lua_utils.curry
 
 local modes = function(modes)
+---@diagnostic disable-next-line: missing-parameter
   return vim.split(modes, '')
 end
 
@@ -45,10 +46,8 @@ M.lsp_keymaps = function(bufnr, lsp_format)
     { '<leader>ld', vim.diagnostic.open_float, { desc = 'LSP: Open diagnostics', buffer = bufnr } },
     { '<leader>lf', lsp_format, { desc = 'LSP: Format document', buffer = bufnr } },
     { '<leader>lh', vim.lsp.buf.hover, { desc = 'LSP: Hover tooltip', buffer = bufnr } },
-    { '<leader>lx', vim.lsp.buf.code_action, { desc = 'LSP: Code actions native', buffer = bufnr } },
+    { '<leader>la', vim.lsp.buf.code_action, { desc = 'LSP: Code actions native', buffer = bufnr } },
     { '<leader>lp', ':TroubleToggle<CR>', { desc = 'LSP: Trouble window', buffer = bufnr } },
-    -- provided by 'weilbith/nvim-code-action-menu' p, buffer = bufnrlugin
-    { '<leader>la', ':CodeActionMenu<CR>', { desc = 'LSP: Code actions menu', buffer = bufnr } },
     {
       '<leader>lj',
       curry(vim.diagnostic.goto_next)({ buffer = 0 }),
