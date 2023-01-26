@@ -84,7 +84,7 @@ M.add({
 
   -- git
   { '<leader>gc', tu.git_commits, { desc = 'Git: show commits' } },
-  { '<leader>gh', tu.git_bcommits, { desc = 'Git: file history' } },
+  { '<leader>gh', tu.git_bcommits, { desc = 'Git: show commits for file' } },
   { '<leader>gB', tu.git_branches, { desc = 'Git: branches' } },
   { '<leader>gb', ':BlamerToggle<CR>', { desc = 'Git: show blame' } },
   { '<Leader>gf', ':OpenInGHFile <CR>', { desc = 'Git: open file in github' } },
