@@ -1,8 +1,8 @@
 return {
-
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'RRethy/nvim-treesitter-endwise',
+    'nvim-treesitter/playground',
   },
   config = function()
     local treesitter = require('nvim-treesitter.configs')
@@ -34,8 +34,12 @@ return {
         enable = true,
       },
       disable = function(_, buf)
-        return vim.bo[buf].large_buf
+        local has_prop, value = pcall(vim.api.nvim_buf_get_var(buf, 'large_buf'))
+        return has_prop and value
       end,
+      playground = {
+        enable = true,
+      },
     })
   end,
 }
