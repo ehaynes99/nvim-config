@@ -16,6 +16,13 @@ snippet lvj 'Log a variable as pretty json'
 snippet log 'Log a message'
         console.log('***** $1')
 
+snippet protoprops 'Log all properties including prototype'
+        const logAllProperties = (obj: any) => {
+          if (obj == null) return // recursive approach
+          console.log(Object.getOwnPropertyNames(obj))
+          logAllProperties(Object.getPrototypeOf(obj))
+        }
+
 snippet trycatch 'Try-Catch'
         try {
           $0
