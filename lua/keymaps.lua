@@ -9,7 +9,7 @@ local tu = require('utils.telescope')
 local curry = lua_utils.curry
 
 local modes = function(modes)
----@diagnostic disable-next-line: missing-parameter
+  ---@diagnostic disable-next-line: missing-parameter
   return vim.split(modes, '')
 end
 
@@ -71,15 +71,14 @@ M.add({
   { '<A-l>', ':tabnext<CR>', mode = modes('nivxt'), { desc = 'Go to next tab' } },
 
   -- Find
-  { '<leader>ff', ':Telescope find_files<CR>', { desc = 'Find: files' } },
+  { '<leader>ff', tu.find_files, { desc = 'Find: files' } },
   { '<leader>/', ':Telescope live_grep<CR>', { desc = 'Find: text' } },
   -- { '<leader>fs', ':Telescope session-lens search_session<CR>', { desc = 'Find: sessions' } },
   { '<leader>fs', ':Telescope grep_string<CR>', { desc = 'Find: word under cursor' } },
   { '<leader>fw', editor_utils.search_tree_dir, { desc = 'Find: text within tree dir' } },
-  { '<leader>fr', spectre.open_file_search, { desc = 'Find: replace' } },
-  { '<leader>fR', spectre.open, { desc = 'Find: global replace' } },
-  { '<leader>fr', spectre.open_file_search, mode = modes('vx'), { desc = 'Find: replace' } },
-  { '<leader>fR', spectre.open, { desc = 'Find: global replace' } },
+  { '<leader>fr', spectre.open_file_search, { desc = 'Spectre: Find replace' } },
+  { '<leader>fR', spectre.open, { desc = 'Spectre: Global find replace' } },
+  { '<leader>fr', spectre.open_file_search, mode = modes('vx'), { desc = 'Spectre: Find replace' } },
   { '<leader>fg', require('telescope').extensions.live_grep_args.live_grep_args, { desc = 'Find: Ripgrep' } },
 
   -- git

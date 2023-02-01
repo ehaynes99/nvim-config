@@ -17,6 +17,10 @@ M.keymaps = function()
   telescope.keymaps({ modes = { 'n', 'i', 'v', 'x', 't' } })
 end
 
+M.find_files = function()
+  telescope.find_files({ hidden = true })
+end
+
 M.git_bcommits = function()
   telescope.git_bcommits({ cwd = git_root() })
 end
