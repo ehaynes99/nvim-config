@@ -11,6 +11,7 @@ local cmp_mapping = function()
   return cmp.mapping.preset.insert({
     ['<C-k>'] = cmp.mapping.select_prev_item(),
     ['<C-j>'] = cmp.mapping.select_next_item(),
+    ---@diagnostic disable-next-line: missing-parameter
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     -- Prevent autocomplete unless explicitly tabbing into the list
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
