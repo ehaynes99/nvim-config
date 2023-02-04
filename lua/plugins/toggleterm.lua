@@ -69,5 +69,16 @@ return {
       jest_term.cmd = cmd
       jest_term:toggle(90)
     end)
+
+    local side_term = Terminal:new({
+      direction = 'vertical',
+      close_on_exit = true,
+      hidden = true,
+      -- on_exit = close_if_successful,
+    })
+
+    vim.keymap.set('n', '<leader><BS>', function()
+      side_term:toggle()
+    end)
   end,
 }
