@@ -17,12 +17,6 @@ return {
   { 'kazhala/close-buffers.nvim' },
   { 'lukas-reineke/indent-blankline.nvim' },
   { 'nvim-pack/nvim-spectre', config = true },
-  {
-    'APZelos/blamer.nvim',
-    config = function()
-      vim.g.blamer_date_format = '%m/%d/%y'
-    end,
-  },
   { 'Almo7aya/openingh.nvim' },
   { 'kevinhwang91/nvim-bqf' },
   { 'smjonas/live-command.nvim', opts = {
