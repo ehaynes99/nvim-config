@@ -153,8 +153,6 @@ M.add({
   { '<ESC><ESC>', '<C-\\><C-n>', mode = 't', { desc = 'Leave insert' } },
 
   -- Editor
-  { '<leader>e', ':NvimTreeFocus<CR>', { desc = 'Focus tree view' } },
-  { '<leader>E', ':NvimTreeToggle<CR>', { desc = 'Open tree view' } },
   { '<leader>n', ':set rnu!<CR>', { desc = 'Toggle relative line numbers' } },
   { '<leader>h', ':nohlsearch<CR>', { desc = 'Window: cancel highlight' } },
   { '<C-P>', '"_dP', mode = 'v', { desc = 'Paste without copying replaced' } },
