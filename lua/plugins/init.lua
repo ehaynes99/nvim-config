@@ -8,7 +8,7 @@ return {
 
   -- misc editor improvements
   { 'numToStr/Comment.nvim', config = true, event = 'VeryLazy' },
-  -- { 'petertriho/nvim-scrollbar', config = true },
+  { 'petertriho/nvim-scrollbar', config = true },
   { 'mrjones2014/legendary.nvim', config = true, event = 'VeryLazy' },
   { 'chentoast/marks.nvim', config = true, event = 'VeryLazy' },
   { 'kosayoda/nvim-lightbulb', opts = {
@@ -20,6 +20,7 @@ return {
   { 'Almo7aya/openingh.nvim' },
   { 'kevinhwang91/nvim-bqf' },
   { 'smjonas/live-command.nvim', opts = {
+    enabled = false,
     commands = {
       Norm = { cmd = 'norm' },
     },
