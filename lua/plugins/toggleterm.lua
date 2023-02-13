@@ -39,7 +39,7 @@ return {
 
       gitui_term.cmd = 'gitui -d ' .. git_root
       gitui_term:toggle()
-    end)
+    end, { desc = 'Toggle gitui' })
 
     local jest_term = Terminal:new({
       direction = 'vertical',
