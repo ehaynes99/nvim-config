@@ -21,6 +21,10 @@ M.find_files = function()
   telescope.find_files({ hidden = true })
 end
 
+M.live_grep_in_project = function()
+  telescope.live_grep({ cwd = git_root(), hidden = true })
+end
+
 M.git_bcommits = function()
   telescope.git_bcommits({ cwd = git_root() })
 end

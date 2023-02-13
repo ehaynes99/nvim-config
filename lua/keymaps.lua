@@ -75,6 +75,8 @@ M.add({
   { '<leader>/', ':Telescope live_grep<CR>', { desc = 'Find: text' } },
   -- { '<leader>fs', ':Telescope session-lens search_session<CR>', { desc = 'Find: sessions' } },
   { '<leader>fs', ':Telescope grep_string<CR>', { desc = 'Find: word under cursor' } },
+  { '<leader>fp', tu.live_grep_in_project, { desc = 'Find: text in project' } },
+
   { '<leader>fw', editor_utils.search_tree_dir, { desc = 'Find: text within tree dir' } },
   { '<leader>fr', spectre.open_file_search, { desc = 'Spectre: Find replace' } },
   { '<leader>fR', spectre.open, { desc = 'Spectre: Global find replace' } },
@@ -183,7 +185,7 @@ M.add({
   { '<leader>th', telescope.help_tags, { desc = 'Telescope: help tags' } },
   { '<leader>tr', telescope.resume, { desc = 'Telescope: resume' } },
   { '<leader>ta', telescope.autocommands, { desc = 'Telescope: autocommands' } },
-  { '<leader>ts', ':Telescope session-lens search_session<CR>', { desc = 'Telescope: autocommands' } },
+  { '<leader>tS', ':Telescope session-lens search_session<CR>', { desc = 'Telescope: autocommands' } },
 
   -- Testing
   { '<leader>xl', '<cmd>:Luapad<CR>', { desc = 'Luapad' } },

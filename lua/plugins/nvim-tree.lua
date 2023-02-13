@@ -1,9 +1,12 @@
+local editor_utils = require('utils.editor')
+
 return {
   'nvim-tree/nvim-tree.lua',
   lazy = false,
   keys = {
     { '<leader>e', ':NvimTreeFocus<CR>', desc = 'Focus tree view' },
     { '<leader>E', ':NvimTreeToggle<CR>', desc = 'Open tree view' },
+    { '<leader>fw', editor_utils.search_tree_dir, { desc = 'Find: text within tree dir' } },
   },
   config = function()
     require('nvim-tree').setup({
