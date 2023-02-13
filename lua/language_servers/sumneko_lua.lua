@@ -21,6 +21,7 @@ local get_workspace = function()
 end
 
 return {
+  before_init = require('neodev.lsp').before_init,
   settings = {
     Lua = {
       runtime = {
