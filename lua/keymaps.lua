@@ -101,7 +101,7 @@ M.add({
   { '<leader>cy', '"+y', mode = { 'n', 'v' }, { desc = 'Yank to cliboard' } },
   { '<leader>cd', '"+d', mode = { 'n', 'v' }, { desc = 'Delete to cliboard' } },
   { '<leader>cY', '"+Y', { desc = 'Yank line to cliboard' } },
-  { 'Y', 'yg$', { desc = 'Yank to end of line' } },
+  { 'Y', 'y$', { desc = 'Yank to end of line' } },
   { 'J', ":m '>+1<CR>gv=gv", mode = 'v', { desc = 'Move lines down' } },
   { 'K', ":m '<-2<CR>gv=gv", mode = 'v', { desc = 'Move lines up' } },
   { 'j', "v:count ? 'j' : 'gj'", mode = { 'n', 'v' }, { desc = 'Move cursor up', expr = true } },
