@@ -6,10 +6,7 @@ return {
     'mxsdev/nvim-dap-vscode-js',
     {
       'microsoft/vscode-js-debug',
-      build = {
-        'npm install --legacy-peer-deps',
-        'npm run compile',
-      },
+      build = 'npm install --legacy-peer-deps && npm run compile',
     },
   },
   config = function()
