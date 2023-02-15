@@ -1,14 +1,14 @@
 return {
   'NvChad/nvim-colorizer.lua',
   opts = {
-    default_user_settings = {
+    user_default_options = {
       names = false,
     },
     filetypes = {
       'css',
       'html',
       'typescriptreact',
-      lua = { names = false },
+      'lua',
     },
   },
 }
