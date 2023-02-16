@@ -13,14 +13,23 @@ return {
     null_ls.setup({
       debug = false,
       sources = {
-        formatting.prettier,
-        formatting.black.with({ extra_args = { '--fast' } }),
+        -- lua
         formatting.stylua,
+
+        -- python
+        formatting.black,
         diagnostics.flake8,
-        -- diagnostics.eslint,
-        -- code_actions.eslint,
+
+        -- TypeScript/JavaScript
+        formatting.prettier,
         diagnostics.eslint_d,
         code_actions.eslint_d,
+
+        -- shell scripts
+        diagnostics.shellcheck.with({ extra_args = { '-s', 'bash' } }),
+        code_actions.shellcheck.with({ extra_args = { '-s', 'bash' } }),
+        formatting.shfmt,
+        formatting.shellharden,
       },
       border = 'rounded',
     })
