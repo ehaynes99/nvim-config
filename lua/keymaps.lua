@@ -100,7 +100,7 @@ M.add({
   { '<leader>cP', '"+P', { desc = 'Paste from clipboard above' } },
   { '<leader>cy', '"+y', mode = { 'n', 'v' }, { desc = 'Yank to cliboard' } },
   { '<leader>cd', '"+d', mode = { 'n', 'v' }, { desc = 'Delete to cliboard' } },
-  { '<leader>cY', '"+Y', { desc = 'Yank line to cliboard' } },
+  { '<leader>vw', 'ggVG', { desc = 'Select all' } },
   { 'Y', 'y$', { desc = 'Yank to end of line' } },
   { 'J', ":m '>+1<CR>gv=gv", mode = 'v', { desc = 'Move lines down' } },
   { 'K', ":m '<-2<CR>gv=gv", mode = 'v', { desc = 'Move lines up' } },
@@ -109,14 +109,19 @@ M.add({
   { '<leader>ww', ':setl wrap!<CR>', { desc = 'Toggle soft wrap' } },
   {
     '<leader>r',
+    ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>',
+    { desc = 'Global replace word under cursor', silent = false },
+  },
+  {
+    '<leader>r',
     [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = 'Global replace word under cursor' },
+    { desc = 'Replace word under cursor', silent = false },
   },
   {
     '<leader>r',
     [["hy:%s/<C-r>h//gI<left><left><left>]],
     mode = 'v',
-    { desc = 'Global replace word under cursor' },
+    { desc = 'Replace selected text', silent = false },
   },
 
   -- Window
