@@ -1,5 +1,6 @@
 require('constants')
 require('options')
+require('autocommands')
 require('lazy_install')
 
 vim.api.nvim_create_autocmd('User', {
@@ -7,6 +8,5 @@ vim.api.nvim_create_autocmd('User', {
   callback = function()
     require('keymaps')
     require('commands')
-    require('autocommands')
   end,
 })

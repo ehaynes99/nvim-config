@@ -42,8 +42,7 @@ vim.api.nvim_create_autocmd('BufReadPre', {
     local buf = args.buf
     local name = vim.api.nvim_buf_get_name(buf)
 
-    local ok, stats = pcall(vim.loop.fs_stat, name)
-    if ok and stats and (stats.size > 512 * 1024) then
+    if vim.fn.getfsize(name) > (1024 * 1024) then
       vim.b[buf].large_buf = true
       vim.cmd('syntax off')
       vim.cmd('IndentBlanklineDisable')

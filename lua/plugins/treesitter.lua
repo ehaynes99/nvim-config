@@ -18,10 +18,16 @@ return {
         'bash',
         'python',
       },
+      indent = {
+        enabled = true,
+      },
       auto_install = true,
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
+        disable = function(_, bufnr)
+          return vim.b[bufnr].large_buf or false
+        end,
       },
 
       -- from 'windwp/nvim-ts-autotag' plugin
@@ -33,10 +39,6 @@ return {
       endwise = {
         enable = true,
       },
-      disable = function(_, buf)
-        local has_prop, value = pcall(vim.api.nvim_buf_get_var(buf, 'large_buf'))
-        return has_prop and value
-      end,
       playground = {
         enable = true,
       },
