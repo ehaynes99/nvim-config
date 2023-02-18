@@ -74,11 +74,14 @@ return {
       direction = 'vertical',
       close_on_exit = true,
       hidden = true,
-      -- on_exit = close_if_successful,
     })
 
     vim.keymap.set('n', '<leader><BS>', function()
-      side_term:toggle()
+      if side_term:is_open() and not side_term:is_focused() then
+        side_term:focus()
+      else
+        side_term:toggle()
+      end
     end)
   end,
 }
