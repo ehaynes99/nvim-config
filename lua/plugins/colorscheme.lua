@@ -1,5 +1,12 @@
--- local default_scheme = 'kanagawa'
--- local colorscheme = os.getenv('NVIM_COLORSCHEME') or default_scheme
+local colorscheme = (function()
+  local env_scheme = os.getenv('NVIM_COLORSCHEME')
+  if env_scheme then
+    return env_scheme
+  elseif os.getenv('SSH_TTY') then
+    return 'nordfox'
+  end
+  return 'kanagawa'
+end)()
 
 return {
   {
@@ -17,12 +24,14 @@ return {
         },
       })
 
-      vim.cmd('colorscheme kanagawa')
+      if colorscheme == 'kanagawa' then
+        vim.cmd('colorscheme kanagawa')
+      end
     end,
   },
   {
     'EdenEast/nightfox.nvim',
-    event = 'VeryLazy',
+    priority = 1000,
     config = function()
       require('nightfox').setup({
         options = {
@@ -34,7 +43,10 @@ return {
           },
         },
       })
-      -- vim.cmd('colorscheme nordfox')
+      print('colorscheme: ' .. colorscheme)
+      if colorscheme == 'nordfox' then
+        vim.cmd('colorscheme nordfox')
+      end
     end,
   },
 }
