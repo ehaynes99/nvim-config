@@ -4,6 +4,7 @@ return {
     'RRethy/nvim-treesitter-endwise',
     'nvim-treesitter/playground',
   },
+  build = ':TSUpdate',
   config = function()
     local treesitter = require('nvim-treesitter.configs')
 
@@ -17,6 +18,15 @@ return {
         'markdown_inline',
         'bash',
         'python',
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = '<CR>',
+          scope_incremental = '<CR>',
+          node_incremental = '<TAB>',
+          node_decremental = '<S-TAB>',
+        },
       },
       indent = {
         enabled = true,
