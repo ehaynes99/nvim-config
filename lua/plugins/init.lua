@@ -19,12 +19,16 @@ return {
   { 'nvim-pack/nvim-spectre', config = true },
   { 'Almo7aya/openingh.nvim' },
   { 'kevinhwang91/nvim-bqf' },
-  { 'smjonas/live-command.nvim', opts = {
-    enabled = false,
-    commands = {
-      Norm = { cmd = 'norm' },
+  { 'mbbill/undotree' },
+  {
+    'smjonas/live-command.nvim',
+    opts = {
+      enabled = false,
+      commands = {
+        Norm = { cmd = 'norm' },
+      },
     },
-  } },
+  },
 
   { 'sindrets/diffview.nvim' },
   { 'rmagatti/session-lens', config = true },
