@@ -43,7 +43,6 @@ return {
           },
         },
       })
-      print('colorscheme: ' .. colorscheme)
       if colorscheme == 'nordfox' then
         vim.cmd('colorscheme nordfox')
       end
