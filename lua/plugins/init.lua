@@ -31,7 +31,6 @@ return {
   },
 
   { 'sindrets/diffview.nvim' },
-  { 'rmagatti/session-lens', config = true },
   { 'rafcamlet/nvim-luapad' },
 
   { 'windwp/nvim-ts-autotag' },
