@@ -28,7 +28,7 @@ return {
         -- shell scripts
         diagnostics.shellcheck.with({ extra_args = { '-s', 'bash' } }),
         code_actions.shellcheck.with({ extra_args = { '-s', 'bash' } }),
-        formatting.shfmt,
+        formatting.shfmt.with({ extra_args = { '--case-indent' } }),
         formatting.shellharden,
       },
       border = 'rounded',
