@@ -17,7 +17,7 @@ local mason_config = function()
       'bashls',
       'jsonls',
       'rust_analyzer',
-      'sumneko_lua',
+      'lua_ls',
       'tsserver',
     },
     automatic_installation = true,

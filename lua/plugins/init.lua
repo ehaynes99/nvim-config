@@ -20,16 +20,6 @@ return {
   { 'Almo7aya/openingh.nvim' },
   { 'kevinhwang91/nvim-bqf' },
   { 'mbbill/undotree' },
-  {
-    'smjonas/live-command.nvim',
-    opts = {
-      enabled = false,
-      commands = {
-        Norm = { cmd = 'norm' },
-      },
-    },
-  },
-
   { 'sindrets/diffview.nvim' },
   { 'rafcamlet/nvim-luapad' },
 
