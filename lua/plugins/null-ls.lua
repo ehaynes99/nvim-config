@@ -32,6 +32,16 @@ return {
         formatting.shellharden,
       },
       border = 'rounded',
+      should_attach = function()
+        local name = vim.api.nvim_buf_get_name(0)
+        local dir = vim.fs.dirname(name)
+        local filename = vim.fs.basename(name)
+
+        local command = string.format('git -C %s check-ignore %s', dir, filename)
+        local output = vim.fn.trim(vim.fn.system(command))
+
+        return not (output == filename)
+      end,
     })
   end,
 }
