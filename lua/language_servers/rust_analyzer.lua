@@ -1,10 +1,18 @@
 return function()
-  require('rust-tools').setup({
+  local rt = require('rust-tools')
+  local keymaps = require('keymaps')
+  rt.setup({
+    tools = {
+      inlay_hints = {
+        auto = true,
+        only_current_line = false,
+        show_parameter_hints = true,
+      },
+    },
     server = {
-      ---@diagnostic disable-next-line: unused-local
       on_attach = function(_, bufnr)
-        -- local filetype = vim.bo[bufnr].filetype
-        -- print('filetype: ' .. filetype)
+        local formatter =  require('language_servers.installer').create_formatter(bufnr)
+        keymaps.lsp_keymaps(bufnr, formatter)
       end,
     },
   })
