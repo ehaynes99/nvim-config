@@ -1,9 +1,25 @@
 local editor_utils = require('utils.editor')
 local keymaps = require('keymaps')
 
+local create_autoclose = function()
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'NvimTree' },
+    callback = function(args)
+      vim.api.nvim_create_autocmd('VimLeavePre', {
+        callback = function()
+          vim.api.nvim_buf_delete(args.buf, { force = true })
+          return true
+        end,
+      })
+    end,
+  })
+end
+
 return {
   'nvim-tree/nvim-tree.lua',
   config = function()
+    create_autoclose()
+
     require('nvim-tree').setup({
       view = {
         width = 40,
