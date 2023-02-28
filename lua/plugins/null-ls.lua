@@ -21,6 +21,7 @@ return {
         diagnostics.flake8,
 
         -- TypeScript/JavaScript
+        formatting.eslint_d,
         formatting.prettier,
         diagnostics.eslint_d,
         code_actions.eslint_d,
