@@ -74,7 +74,7 @@ snippet beforee 'Jest beforeEach'
         })
 
 snippet script 'basic CLI script'
-        export const run = async () => {
+        export const run = async (): Promise<void> => {
           $0
         }
 
