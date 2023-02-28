@@ -1,3 +1,5 @@
+require('autocommands.auto_save')
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'qf', 'help', 'man', 'lspinfo', 'spectre_panel', 'tsplayground' },
   callback = function(args)
