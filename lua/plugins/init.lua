@@ -2,9 +2,6 @@ return {
   --utilities
   { 'nvim-lua/plenary.nvim', priority = 999 },
   { 'nvim-tree/nvim-web-devicons', priority = 999 },
-  { 'rcarriga/nvim-notify', opts = {
-    top_down = false,
-  } },
 
   -- misc editor improvements
   { 'numToStr/Comment.nvim', config = true, event = 'VeryLazy' },
