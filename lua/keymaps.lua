@@ -165,7 +165,8 @@ M.init = function()
     -- Editor
     { '<leader>n', ':set rnu!<CR>', { desc = 'Toggle relative line numbers' } },
     { '<leader>h', ':nohlsearch<CR>', { desc = 'Window: cancel highlight' } },
-    { '<C-p>', '"_dP', mode = 'v', { desc = 'Paste without copying replaced' } },
+    { 'p', '"_dP', mode = 'v', { desc = 'Paste without copying replaced' } },
+    { '<C-p>', 'p', mode = 'v', { desc = 'Paste and yank' } },
     { '<', '<gv', mode = 'v', { desc = 'Stay in visual mode after indent left' } },
     { '>', '>gv', mode = 'v', { desc = 'Stay in visual mode after indent left' } },
     -- '<C-_>' is magic syntax for <C-/> because you can't map the slash character
