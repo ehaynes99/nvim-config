@@ -61,6 +61,7 @@ return {
     'hrsh7th/cmp-cmdline',
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
+    'Saecki/crates.nvim',
   },
   config = function()
     local cmp = require('cmp')

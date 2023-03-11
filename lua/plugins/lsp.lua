@@ -77,7 +77,6 @@ return {
     'folke/trouble.nvim',
     'b0o/schemastore.nvim',
     'jose-elias-alvarez/typescript.nvim',
-    'Saecki/crates.nvim',
   },
   config = function()
     native_lsp_config()
