@@ -59,6 +59,5 @@
   "typescript.nvim": { "branch": "main", "commit": "f66d4472606cb24615dfb7dbc6557e779d177624" },
   "undotree": { "branch": "master", "commit": "b6fdb95db53b7ceb23ddfe8a8211a3135d98eef0" },
   "vim-illuminate": { "branch": "master", "commit": "49062ab1dd8fec91833a69f0a1344223dd59d643" },
-  "vscode-js-debug": { "branch": "main", "commit": "4d2a78523b82ba434506469918732b0df622da53" },
-  "which-key.nvim": { "branch": "main", "commit": "5224c261825263f46f6771f1b644cae33cd06995" }
+  "vscode-js-debug": { "branch": "main", "commit": "4d2a78523b82ba434506469918732b0df622da53" }
 }
