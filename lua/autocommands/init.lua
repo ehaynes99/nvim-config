@@ -25,7 +25,13 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('VimResized', {
   callback = function()
+    -- make resize windows to be equal
     vim.cmd('tabdo wincmd =')
+
+    -- prefer left side of cursor visible to right side
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    vim.cmd([[ normal 999zh ]])
+    vim.api.nvim_win_set_cursor(0, cursor)
   end,
 })
 
