@@ -2,6 +2,7 @@ return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'RRethy/nvim-treesitter-endwise',
+    'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/playground',
   },
   build = ':TSUpdate',
@@ -26,6 +27,20 @@ return {
           scope_incremental = '<CR>',
           node_incremental = '<TAB>',
           node_decremental = '<S-TAB>',
+        },
+      },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ['aa'] = '@parameter.outer',
+            ['ia'] = '@parameter.inner',
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
+          },
         },
       },
       indent = {
