@@ -1,4 +1,4 @@
-vim.opt.shadafile = 'NONE'
+-- vim.opt.shadafile = 'NONE'
 vim.opt.backup = false -- creates a backup file
 vim.opt.cmdheight = 1 -- prevent
 vim.opt.completeopt = { 'menuone', 'noselect' } -- mostly just for cmp
