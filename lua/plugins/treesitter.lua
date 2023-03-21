@@ -13,18 +13,21 @@ return {
       ensure_installed = {
         'javascript',
         'typescript',
+        'tsx',
         'rust',
         'lua',
         'markdown',
         'markdown_inline',
         'bash',
         'python',
+        'vim',
+        'help',
       },
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = '<CR>',
-          scope_incremental = '<CR>',
+          init_selection = '<C-space>',
+          scope_incremental = '<C-space>',
           node_incremental = '<TAB>',
           node_decremental = '<S-TAB>',
         },
@@ -44,7 +47,7 @@ return {
         },
       },
       indent = {
-        enabled = true,
+        enable = true,
       },
       auto_install = true,
       highlight = {
