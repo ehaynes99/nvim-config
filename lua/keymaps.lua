@@ -98,10 +98,10 @@ M.init = function()
 
     -- text
     { 'J', 'mzJ`z', { desc = 'Join lines' } }, -- keep cursor where it started
-    { '<leader>cp', '"+p', mode = { 'n', 'x' }, { desc = 'Paste from clipboard' } },
-    { '<leader>cP', '"+P', { desc = 'Paste from clipboard above' } },
-    { '<leader>cy', '"+y', mode = { 'n', 'x' }, { desc = 'Yank to cliboard' } },
-    { '<leader>cd', '"+d', mode = { 'n', 'x' }, { desc = 'Delete to cliboard' } },
+    -- { '<leader>cp', '"+p', mode = { 'n', 'x' }, { desc = 'Paste from clipboard' } },
+    -- { '<leader>cP', '"+P', { desc = 'Paste from clipboard above' } },
+    -- { '<leader>cy', '"+y', mode = { 'n', 'x' }, { desc = 'Yank to cliboard' } },
+    -- { '<leader>cd', '"+d', mode = { 'n', 'x' }, { desc = 'Delete to cliboard' } },
     { '<leader>vw', 'ggVG', { desc = 'Select all' } },
     { 'Y', 'y$', { desc = 'Yank to end of line' } },
     { 'J', ":m '>+1<CR>gv=gv", mode = 'x', { desc = 'Move lines down' } },
