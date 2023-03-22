@@ -20,6 +20,7 @@ return {
         'markdown_inline',
         'bash',
         'python',
+        'sql',
         'vim',
         'help',
       },
