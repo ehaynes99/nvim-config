@@ -98,16 +98,16 @@ M.init = function()
 
     -- text
     { 'J', 'mzJ`z', { desc = 'Join lines' } }, -- keep cursor where it started
-    { '<leader>cp', '"+p', mode = { 'n', 'v' }, { desc = 'Paste from clipboard' } },
+    { '<leader>cp', '"+p', mode = { 'n', 'x' }, { desc = 'Paste from clipboard' } },
     { '<leader>cP', '"+P', { desc = 'Paste from clipboard above' } },
-    { '<leader>cy', '"+y', mode = { 'n', 'v' }, { desc = 'Yank to cliboard' } },
-    { '<leader>cd', '"+d', mode = { 'n', 'v' }, { desc = 'Delete to cliboard' } },
+    { '<leader>cy', '"+y', mode = { 'n', 'x' }, { desc = 'Yank to cliboard' } },
+    { '<leader>cd', '"+d', mode = { 'n', 'x' }, { desc = 'Delete to cliboard' } },
     { '<leader>vw', 'ggVG', { desc = 'Select all' } },
     { 'Y', 'y$', { desc = 'Yank to end of line' } },
-    { 'J', ":m '>+1<CR>gv=gv", mode = 'v', { desc = 'Move lines down' } },
-    { 'K', ":m '<-2<CR>gv=gv", mode = 'v', { desc = 'Move lines up' } },
-    { 'j', "v:count ? 'j' : 'gj'", mode = { 'n', 'v' }, { desc = 'Move cursor up', expr = true } },
-    { 'k', "v:count ? 'k' : 'gk'", mode = { 'n', 'v' }, { desc = 'Move cursor down', expr = true } },
+    { 'J', ":m '>+1<CR>gv=gv", mode = 'x', { desc = 'Move lines down' } },
+    { 'K', ":m '<-2<CR>gv=gv", mode = 'x', { desc = 'Move lines up' } },
+    { 'j', "v:count ? 'j' : 'gj'", mode = { 'n', 'x' }, { desc = 'Move cursor up', expr = true } },
+    { 'k', "v:count ? 'k' : 'gk'", mode = { 'n', 'x' }, { desc = 'Move cursor down', expr = true } },
     { '<leader>ww', ':setl wrap!<CR>', { desc = 'Toggle soft wrap' } },
     { '<leader>wu', ':UndotreeToggle<CR>', { desc = 'Toggle soft wrap' } },
     {
@@ -123,7 +123,7 @@ M.init = function()
     {
       '<leader>r',
       [["hy:%s/<C-r>h//gI<left><left><left>]],
-      mode = 'v',
+      mode = 'x',
       { desc = 'Replace selected text', silent = false },
     },
 
@@ -166,10 +166,10 @@ M.init = function()
     -- Editor
     { '<leader>n', ':set rnu!<CR>', { desc = 'Toggle relative line numbers' } },
     { '<leader>h', ':nohlsearch<CR>', { desc = 'Window: cancel highlight' } },
-    { 'p', '"_dP', mode = 'v', { desc = 'Paste without copying replaced' } },
-    { '<C-p>', 'p', mode = 'v', { desc = 'Paste and yank' } },
-    { '<', '<gv', mode = 'v', { desc = 'Stay in visual mode after indent left' } },
-    { '>', '>gv', mode = 'v', { desc = 'Stay in visual mode after indent left' } },
+    { 'p', '"_dP', mode = 'x', { desc = 'Paste without copying replaced' } },
+    { '<C-p>', 'p', mode = 'x', { desc = 'Paste and yank' } },
+    { '<', '<gv', mode = 'x', { desc = 'Stay in visual mode after indent left' } },
+    { '>', '>gv', mode = 'x', { desc = 'Stay in visual mode after indent left' } },
     -- '<C-_>' is magic syntax for <C-/> because you can't map the slash character
     { '<C-_>', require('Comment.api').toggle.linewise.current, mode = { 'n', 'i' }, { desc = 'Comment toggle' } },
     {
@@ -179,7 +179,7 @@ M.init = function()
         vim.api.nvim_feedkeys(esc, 'nx', false)
         require('Comment.api').toggle.linewise(vim.fn.visualmode())
       end,
-      mode = { 'x', 'v' },
+      mode = { 'x', 'x' },
       { desc = 'Comment toggle' },
     },
 
