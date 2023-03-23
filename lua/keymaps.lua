@@ -108,6 +108,8 @@ M.init = function()
     { 'K', ":m '<-2<CR>gv=gv", mode = 'x', { desc = 'Move lines up' } },
     { 'j', "v:count ? 'j' : 'gj'", mode = { 'n', 'x' }, { desc = 'Move cursor up', expr = true } },
     { 'k', "v:count ? 'k' : 'gk'", mode = { 'n', 'x' }, { desc = 'Move cursor down', expr = true } },
+    { '<Down>', "v:count ? 'j' : 'gj'", mode = { 'n', 'x' }, { desc = 'Move cursor up', expr = true } },
+    { '<Up>', "v:count ? 'k' : 'gk'", mode = { 'n', 'x' }, { desc = 'Move cursor down', expr = true } },
     { '<leader>ww', ':setl wrap!<CR>', { desc = 'Toggle soft wrap' } },
     { '<leader>wu', ':UndotreeToggle<CR>', { desc = 'Toggle soft wrap' } },
     {
