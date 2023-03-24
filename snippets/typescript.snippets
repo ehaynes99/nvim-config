@@ -78,5 +78,5 @@ snippet script 'basic CLI script'
           $0
         }
 
-        void run().catch((error) => console.error(error))
+        void run().catch((error: unknown) => console.error(error))
 
