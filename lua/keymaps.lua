@@ -140,6 +140,10 @@ M.init = function()
     { '<leader>wo', ':SymbolsOutline<CR>', { desc = 'Toggle symbols outline' } },
     { '<leader>wx', '<cmd>!chmod +x %<CR>', { desc = 'Toggle file executable' } },
 
+    { '<LeftDrag>', '', { desc = 'Disable left drag' } },
+    { '<LeftRelease>', '', { desc = 'Disable left drag' } },
+    { '<RightDrag>', '', { desc = 'Disable right drag' } },
+    { '<RightRelease>', '', { desc = 'Disable right drag' } },
     { '<S-l>', ':bnext<CR>', { desc = 'Window: next buffer' } },
     { '<S-h>', ':bprevious<CR>', { desc = 'Window: previous buffer' } },
     { '<C-h>', wincmd('h'), mode = 'nixt', { desc = 'Window: focus left' } },
