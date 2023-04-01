@@ -3,11 +3,6 @@ local lua_utils = require('utils.lua')
 
 local curry = lua_utils.curry
 
-local modes = function(modes)
-  ---@diagnostic disable-next-line: missing-parameter
-  return vim.split(modes, '')
-end
-
 -- For some reason, mapping to '<ESC> :wincmd h<CR>' doesn't work if a file is empty
 local wincmd = function(key)
   return function()
@@ -23,7 +18,16 @@ M.add = function(mappings)
     mappings = { mappings }
   end
   for _, mapping in ipairs(mappings) do
-    local mode = mapping.mode or 'n'
+    local mode
+    if mapping.mode == nil then
+      mode = { 'n' }
+    elseif type(mapping.mode) == 'string' then
+      ---@diagnostic disable-next-line: missing-parameter
+      mode = vim.split(mapping.mode, '')
+    else
+      mode = mapping.mode
+    end
+
     local key = mapping[1]
     local cmd = mapping[2]
     local opts = vim.tbl_extend('force', { silent = true }, mapping[3] or {})
@@ -39,6 +43,7 @@ M.lsp_keymaps = function(bufnr, lsp_format)
     { 'gt', telescope.lsp_type_definitions, { desc = 'LSP: Goto type definition', buffer = bufnr } },
     { 'gi', telescope.lsp_implementations, { desc = 'LSP: Goto implementation', buffer = bufnr } },
     { 'gr', telescope.lsp_references, { desc = 'LSP: Find references', buffer = bufnr } },
+    { 'gR', vim.lsp.buf.references, { desc = 'LSP: Find references', buffer = bufnr } },
     { '<leader>ld', vim.diagnostic.open_float, { desc = 'LSP: Open diagnostics', buffer = bufnr } },
     { '<leader>lf', lsp_format, { desc = 'LSP: Format document', buffer = bufnr } },
     { '<leader>lh', vim.lsp.buf.hover, { desc = 'LSP: Hover tooltip', buffer = bufnr } },
@@ -69,8 +74,8 @@ M.init = function()
   M.add({
     { 'jk', '<ESC>', mode = 'i', { desc = 'Leave insert' } },
     { 'Q', '<NOP>', { desc = 'Disable ex mode' } },
-    { '<A-h>', ':tabprevious<CR>', mode = modes('nivxt'), { desc = 'Go to previous tab' } },
-    { '<A-l>', ':tabnext<CR>', mode = modes('nivxt'), { desc = 'Go to next tab' } },
+    { '<A-h>', ':tabprevious<CR>', mode = 'nixt', { desc = 'Go to previous tab' } },
+    { '<A-l>', ':tabnext<CR>', mode = 'nixt', { desc = 'Go to next tab' } },
 
     -- Find
     { '<leader>ff', tu.find_files, { desc = 'Find: files' } },
@@ -82,7 +87,7 @@ M.init = function()
     { '<leader>fw', editor_utils.search_tree_dir, { desc = 'Find: text within tree dir' } },
     { '<leader>fr', spectre.open_file_search, { desc = 'Spectre: Find replace' } },
     { '<leader>fR', spectre.open, { desc = 'Spectre: Global find replace' } },
-    { '<leader>fr', spectre.open_file_search, mode = modes('vx'), { desc = 'Spectre: Find replace' } },
+    { '<leader>fr', spectre.open_file_search, mode = 'vx', { desc = 'Spectre: Find replace' } },
     { '<leader>fg', require('telescope').extensions.live_grep_args.live_grep_args, { desc = 'Find: Ripgrep' } },
 
     -- git
@@ -98,18 +103,18 @@ M.init = function()
 
     -- text
     { 'J', 'mzJ`z', { desc = 'Join lines' } }, -- keep cursor where it started
-    -- { '<leader>cp', '"+p', mode = { 'n', 'x' }, { desc = 'Paste from clipboard' } },
+    -- { '<leader>cp', '"+p', mode = 'nx', { desc = 'Paste from clipboard' } },
     -- { '<leader>cP', '"+P', { desc = 'Paste from clipboard above' } },
-    -- { '<leader>cy', '"+y', mode = { 'n', 'x' }, { desc = 'Yank to cliboard' } },
-    -- { '<leader>cd', '"+d', mode = { 'n', 'x' }, { desc = 'Delete to cliboard' } },
+    -- { '<leader>cy', '"+y', mode = 'nx', { desc = 'Yank to cliboard' } },
+    -- { '<leader>cd', '"+d', mode = 'nx', { desc = 'Delete to cliboard' } },
     { '<leader>vw', 'ggVG', { desc = 'Select all' } },
     { 'Y', 'y$', { desc = 'Yank to end of line' } },
     { 'J', ":m '>+1<CR>gv=gv", mode = 'x', { desc = 'Move lines down' } },
     { 'K', ":m '<-2<CR>gv=gv", mode = 'x', { desc = 'Move lines up' } },
-    { 'j', "v:count ? 'j' : 'gj'", mode = { 'n', 'x' }, { desc = 'Move cursor up', expr = true } },
-    { 'k', "v:count ? 'k' : 'gk'", mode = { 'n', 'x' }, { desc = 'Move cursor down', expr = true } },
-    { '<Down>', "v:count ? 'j' : 'gj'", mode = { 'n', 'x' }, { desc = 'Move cursor up', expr = true } },
-    { '<Up>', "v:count ? 'k' : 'gk'", mode = { 'n', 'x' }, { desc = 'Move cursor down', expr = true } },
+    { 'j', "v:count ? 'j' : 'gj'", mode = 'nx', { desc = 'Move cursor up', expr = true } },
+    { 'k', "v:count ? 'k' : 'gk'", mode = 'nx', { desc = 'Move cursor down', expr = true } },
+    { '<Down>', "v:count ? 'j' : 'gj'", mode = 'nx', { desc = 'Move cursor up', expr = true } },
+    { '<Up>', "v:count ? 'k' : 'gk'", mode = 'nx', { desc = 'Move cursor down', expr = true } },
     { '<leader>ww', ':setl wrap!<CR>', { desc = 'Toggle soft wrap' } },
     { '<leader>wu', ':UndotreeToggle<CR>', { desc = 'Toggle soft wrap' } },
     {
@@ -133,14 +138,14 @@ M.init = function()
     { '<leader>wc', '<cmd>:BDelete this<CR>', { desc = 'Window: close current buffer' } },
     { '<leader>wh', editor_utils.close_hidden_buffers, { desc = 'Window: close all hidden buffers' } },
     { '<leader>wo', ':SymbolsOutline<CR>', { desc = 'Toggle symbols outline' } },
-    -- { '<leader>wx', '<cmd>!chmod +x %<CR>', { desc = 'Toggle file executable' } },
+    { '<leader>wx', '<cmd>!chmod +x %<CR>', { desc = 'Toggle file executable' } },
 
     { '<S-l>', ':bnext<CR>', { desc = 'Window: next buffer' } },
     { '<S-h>', ':bprevious<CR>', { desc = 'Window: previous buffer' } },
-    { '<C-h>', wincmd('h'), mode = modes('nivxt'), { desc = 'Window: focus left' } },
-    { '<C-j>', wincmd('j'), mode = modes('nivxt'), { desc = 'Window: focus down' } },
-    { '<C-k>', wincmd('k'), mode = modes('nivxt'), { desc = 'Window: focus up' } },
-    { '<C-l>', wincmd('l'), mode = modes('nivxt'), { desc = 'Window: focus right' } },
+    { '<C-h>', wincmd('h'), mode = 'nixt', { desc = 'Window: focus left' } },
+    { '<C-j>', wincmd('j'), mode = 'nixt', { desc = 'Window: focus down' } },
+    { '<C-k>', wincmd('k'), mode = 'nixt', { desc = 'Window: focus up' } },
+    { '<C-l>', wincmd('l'), mode = 'nixt', { desc = 'Window: focus right' } },
     -- { '<C-Up>', ':resize -2<CR>', { desc = 'Window: resize ' } },
     -- { '<C-Down>', ':resize +2<CR>', { desc = 'Window: resize ' } },
     -- { '<C-Left>', ':vertical resize -2<CR>', { desc = 'Window: resize ' } },
@@ -173,7 +178,7 @@ M.init = function()
     { '<', '<gv', mode = 'x', { desc = 'Stay in visual mode after indent left' } },
     { '>', '>gv', mode = 'x', { desc = 'Stay in visual mode after indent left' } },
     -- '<C-_>' is magic syntax for <C-/> because you can't map the slash character
-    { '<C-_>', require('Comment.api').toggle.linewise.current, mode = { 'n', 'i' }, { desc = 'Comment toggle' } },
+    { '<C-_>', require('Comment.api').toggle.linewise.current, mode = 'ni', { desc = 'Comment toggle' } },
     {
       '<C-_>',
       function()
@@ -181,7 +186,7 @@ M.init = function()
         vim.api.nvim_feedkeys(esc, 'nx', false)
         require('Comment.api').toggle.linewise(vim.fn.visualmode())
       end,
-      mode = { 'x', 'x' },
+      mode = 'x',
       { desc = 'Comment toggle' },
     },
 
