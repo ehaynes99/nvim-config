@@ -50,6 +50,7 @@
   "openingh.nvim": { "branch": "main", "commit": "602cae773bafd61243f7ffe951bebf5721bdca56" },
   "playground": { "branch": "master", "commit": "4044b53c4d4fcd7a78eae20b8627f78ce7dc6f56" },
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
+  "refactoring.nvim": { "branch": "master", "commit": "57c32c6b7a211e5a3a5e4ddc4ad2033daff5cf9a" },
   "rust-tools.nvim": { "branch": "master", "commit": "71d2cf67b5ed120a0e31b2c8adb210dd2834242f" },
   "schemastore.nvim": { "branch": "main", "commit": "9c3593f5400d84586ccf89cc436f1ab22d13c3df" },
   "session-lens": { "branch": "main", "commit": "b15e36782d01abacf6cd44e12f3292632064ab91" },
