@@ -17,7 +17,7 @@ return {
           next = '<A-j>',
           prev = '<A-k>',
           dismiss = 'kk',
-          accept_word = '<leader>kj',
+          accept_word = '<Nop>',
         },
       },
     })
