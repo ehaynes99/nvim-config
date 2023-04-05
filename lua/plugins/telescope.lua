@@ -40,6 +40,7 @@ return {
           '--column',
           '--smart-case',
           '--hidden',
+          '--glob=!package-lock.json',
         },
       },
       extensions = {
