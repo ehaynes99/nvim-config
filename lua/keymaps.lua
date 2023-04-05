@@ -37,6 +37,11 @@ end
 
 M.lsp_keymaps = function(bufnr, lsp_format)
   local telescope = require('telescope.builtin')
+  if lsp_format then
+    M.add({
+      { '<leader>lf', lsp_format, { desc = 'LSP: Format document', buffer = bufnr } },
+    })
+  end
   M.add({
     { 'gD', vim.lsp.buf.declaration, { desc = 'LSP: Goto declaration', buffer = bufnr } },
     { 'gd', telescope.lsp_definitions, { desc = 'LSP: Goto definition', buffer = bufnr } },
@@ -45,7 +50,6 @@ M.lsp_keymaps = function(bufnr, lsp_format)
     { 'gr', telescope.lsp_references, { desc = 'LSP: Find references', buffer = bufnr } },
     { 'gR', vim.lsp.buf.references, { desc = 'LSP: Find references', buffer = bufnr } },
     { '<leader>ld', vim.diagnostic.open_float, { desc = 'LSP: Open diagnostics', buffer = bufnr } },
-    { '<leader>lf', lsp_format, { desc = 'LSP: Format document', buffer = bufnr } },
     { '<leader>lh', vim.lsp.buf.hover, { desc = 'LSP: Hover tooltip', buffer = bufnr } },
     { '<leader>la', vim.lsp.buf.code_action, { desc = 'LSP: Code actions native', buffer = bufnr } },
     { '<leader>lp', ':TroubleToggle<CR>', { desc = 'LSP: Trouble window', buffer = bufnr } },

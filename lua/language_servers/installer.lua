@@ -16,10 +16,16 @@ M.create_formatter = function(bufnr)
       async = true,
       bufnr = bufnr,
       filter = function(client)
+        local supports_formatting = client.supports_method('textDocument/formatting')
+        -- if client.name == 'eslint' then
+        --   return true
+        -- elseif client.name == 'tsserver' then
+        --   return false
+        -- else
         if has_null_ls then
           return client.name == 'null-ls'
         else
-          return client.supports_method('textDocument/formatting')
+          return supports_formatting
         end
       end,
     })
@@ -33,20 +39,7 @@ M.default_capabilities = (function()
   return cmp_nvim_lsp.default_capabilities()
 end)()
 
-M.default_server_config = {
-  on_attach = function(_, bufnr)
-    keymaps.lsp_keymaps(bufnr, M.create_formatter(bufnr))
-  end,
-  capabilities = M.default_capabilities,
-}
-
 M.configure_server = function(server_name)
-  local default_config = {
-    on_attach = function(_, bufnr)
-      keymaps.lsp_keymaps(bufnr, M.create_formatter(bufnr))
-    end,
-    capabilities = M.default_capabilities,
-  }
   local has_config, config = pcall(require, 'language_servers.' .. server_name)
 
   if not has_config then
@@ -56,6 +49,12 @@ M.configure_server = function(server_name)
   if type(config) == 'function' then
     config()
   else
+    local default_config = {
+      on_attach = function(_, bufnr)
+        keymaps.lsp_keymaps(bufnr, M.create_formatter(bufnr))
+      end,
+      capabilities = M.default_capabilities,
+    }
     lspconfig[server_name].setup(vim.tbl_extend('force', default_config, config))
   end
 end

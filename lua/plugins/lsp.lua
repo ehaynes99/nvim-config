@@ -19,6 +19,7 @@ local mason_config = function()
       'rust_analyzer',
       'lua_ls',
       'tsserver',
+      'eslint',
     },
     automatic_installation = true,
   })

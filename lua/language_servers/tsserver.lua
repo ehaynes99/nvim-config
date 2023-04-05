@@ -6,7 +6,7 @@ return function()
   typescript.setup({
     server = {
       on_attach = function(_, bufnr)
-        keymaps.lsp_keymaps(bufnr, installer.create_formatter(bufnr))
+        keymaps.lsp_keymaps(bufnr) -- no formatter, uses eslint instead
 
         keymaps.add({
           -- { 'gd', ':TypescriptGoToSourceDefinition<CR>', { desc = 'LSP: Goto definition', buffer = bufnr } },

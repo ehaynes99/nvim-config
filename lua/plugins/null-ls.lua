@@ -20,12 +20,6 @@ return {
         formatting.black,
         diagnostics.flake8,
 
-        -- TypeScript/JavaScript
-        formatting.eslint_d,
-        formatting.prettier,
-        diagnostics.eslint_d,
-        code_actions.eslint_d,
-
         -- shell scripts
         diagnostics.shellcheck.with({ extra_args = { '-s', 'bash' } }),
         code_actions.shellcheck.with({ extra_args = { '-s', 'bash' } }),
