@@ -16,16 +16,25 @@ return {
       require('kanagawa').setup({
         dimInactive = true,
         colors = {
-          sumiInk0 = '#16161D',
-          sumiInk1 = '#292932',
-          sumiInk1b = '#24242d',
-          sumiInk2 = '#2f2f3c',
-          sumiInk3 = '#3b3b4b',
+          palette = {
+            sumiInk0 = '#16161D',
+            sumiInk1 = '#24242d',
+            sumiInk3 = '#292932',
+            sumiInk4 = '#2f2f3c',
+            sumiInk5 = '#3b3b4b',
+          },
+          theme = {
+            wave = {
+              ui = {
+                bg_gutter = 'none',
+              },
+            },
+          },
         },
       })
 
       if colorscheme == 'kanagawa' then
-        vim.cmd('colorscheme kanagawa')
+        vim.cmd('colorscheme kanagawa-wave')
       end
     end,
   },

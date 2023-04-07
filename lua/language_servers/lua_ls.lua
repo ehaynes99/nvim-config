@@ -31,7 +31,11 @@ return {
       diagnostics = {
         globals = { 'vim', 'awesome', 'client', 'screen', 'root' },
       },
-      workspace = get_workspace(),
+      -- workspace = get_workspace(),
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
+        checkThirdParty = false,
+      },
       completion = {
         showWord = 'Disable',
       },
