@@ -7,7 +7,9 @@ local create_autoclose = function()
     callback = function(args)
       vim.api.nvim_create_autocmd('VimLeavePre', {
         callback = function()
-          vim.api.nvim_buf_delete(args.buf, { force = true })
+          if vim.api.nvim_buf_is_valid(args.buf) then
+            vim.api.nvim_buf_delete(args.buf, { force = true })
+          end
           return true
         end,
       })
@@ -15,15 +17,46 @@ local create_autoclose = function()
   })
 end
 
+local HEIGHT_RATIO = 0.8
+local WIDTH_RATIO = 0.5
+
 return {
   'nvim-tree/nvim-tree.lua',
+  keys = {
+    { '<leader>e', ':NvimTreeFocus<CR>', desc = 'Focus tree view' },
+  },
   config = function()
     create_autoclose()
 
     require('nvim-tree').setup({
       view = {
-        width = 40,
-        hide_root_folder = true,
+        float = {
+          enable = true,
+          quit_on_focus_loss = true,
+          open_win_config = function()
+            local screen_w = vim.opt.columns:get()
+            local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+            local window_w = screen_w * WIDTH_RATIO
+            local window_h = screen_h * HEIGHT_RATIO
+            local window_w_int = math.floor(window_w)
+            local window_h_int = math.floor(window_h)
+            local center_x = (screen_w - window_w) / 2
+            local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
+            return {
+              style = 'minimal',
+              -- border = 'none',
+              border = 'rounded',
+              relative = 'editor',
+              row = center_y,
+              col = center_x,
+              width = window_w_int,
+              height = window_h_int,
+            }
+          end,
+        },
+        width = function()
+          return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
+        end,
       },
       update_focused_file = {
         enable = true,
@@ -53,6 +86,14 @@ return {
           glyphs = {
             git = {
               untracked = 'U',
+
+              -- unstaged = '',
+              -- staged = 'S',
+              -- unmerged = '',
+              -- renamed = '➜',
+              -- untracked = 'U',
+              -- deleted = '',
+              -- ignored = '◌',
             },
           },
         },
@@ -62,12 +103,15 @@ return {
         change_dir = {
           restrict_above_cwd = true,
         },
+        open_file = {
+          window_picker = {
+            enable = false,
+          },
+        },
       },
     })
 
     keymaps.add({
-      { '<leader>e', ':NvimTreeFocus<CR>', { desc = 'Focus tree view' } },
-      { '<leader>E', ':NvimTreeToggle<CR>', { desc = 'Open tree view' } },
       { '<leader>fw', editor_utils.search_tree_dir, { desc = 'Find: text within tree dir' } },
     })
   end,
