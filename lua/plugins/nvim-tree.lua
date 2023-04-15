@@ -44,7 +44,6 @@ return {
             local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
             return {
               style = 'minimal',
-              -- border = 'none',
               border = 'rounded',
               relative = 'editor',
               row = center_y,
@@ -62,7 +61,6 @@ return {
         enable = true,
         update_root = false,
       },
-      -- open_on_setup = true,
       sync_root_with_cwd = true,
       diagnostics = {
         enable = true,
@@ -85,8 +83,15 @@ return {
         icons = {
           glyphs = {
             git = {
-              untracked = 'U',
+              untracked = '+',
+              staged = 'M',
+              unstaged = 'M',
+              renamed = '➜',
+              deleted = '',
+              ignored = '',
+              unmerged = '',
 
+              -- untracked = 'U',
               -- unstaged = '',
               -- staged = 'S',
               -- unmerged = '',
