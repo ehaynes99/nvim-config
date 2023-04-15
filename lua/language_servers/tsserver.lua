@@ -34,6 +34,7 @@ return function()
             6133, -- unused variable - eslint will handle
             6138, -- unused property - eslint will handle
             80001, -- convert to ES module suggestion
+            80006, -- may be converted to an async function -- auto-"fix" BREAKS CODE with multiple returns
           },
         },
         completions = {
