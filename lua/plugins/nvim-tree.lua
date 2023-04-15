@@ -13,6 +13,9 @@ local create_autoclose = function()
           return true
         end,
       })
+      keymaps.add({
+        { '<Esc>', ':NvimTreeClose<CR>', { desc = 'Close tree view' } },
+      })
     end,
   })
 end
