@@ -106,7 +106,7 @@ M.init = function()
     { 'q', '<Nop>' },
 
     -- text
-    { 'J', 'mzJ`z', { desc = 'Join lines' } }, -- keep cursor where it started
+    { '<C-J>', 'mzJ`z', { desc = 'Join lines & preserve cursor' } },
     -- { '<leader>cp', '"+p', mode = 'nx', { desc = 'Paste from clipboard' } },
     -- { '<leader>cP', '"+P', { desc = 'Paste from clipboard above' } },
     -- { '<leader>cy', '"+y', mode = 'nx', { desc = 'Yank to cliboard' } },
