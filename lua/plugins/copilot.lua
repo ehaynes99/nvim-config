@@ -21,5 +21,11 @@ return {
         },
       },
     })
+    vim.keymap.set(
+      'n',
+      '<leader>wk',
+      require('copilot.suggestion').toggle_auto_trigger,
+      { desc = 'Copilot: toggle auto trigger' }
+    )
   end,
 }
