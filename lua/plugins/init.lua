@@ -8,9 +8,6 @@ return {
   { 'petertriho/nvim-scrollbar', config = true },
   { 'mrjones2014/legendary.nvim', config = true, event = 'VeryLazy' },
   { 'chentoast/marks.nvim', config = true, event = 'VeryLazy' },
-  { 'kosayoda/nvim-lightbulb', opts = {
-    autocmd = { enabled = true },
-  }, event = 'VeryLazy' },
   { 'kazhala/close-buffers.nvim' },
   { 'lukas-reineke/indent-blankline.nvim' },
   { 'nvim-pack/nvim-spectre', config = true },
