@@ -9,20 +9,22 @@ return function()
         keymaps.lsp_keymaps(bufnr) -- no formatter, uses eslint instead
 
         keymaps.add({
-          -- { 'gd', ':TypescriptGoToSourceDefinition<CR>', { desc = 'LSP: Goto definition', buffer = bufnr } },
+          -- { 'gd', ':TypescriptGoToSourceDefinition<CR>', desc = 'LSP: Goto definition', buffer = bufnr },
           {
             '<leader>li',
             ':TypescriptAddMissingImports<CR>',
-            { desc = 'LSP: TypescriptAddMissingImports', buffer = bufnr },
+            desc = 'LSP: TypescriptAddMissingImports',
+            buffer = bufnr,
           },
           {
             '<leader>lo',
             ':TypescriptOrganizeImports<CR>',
-            { desc = 'LSP: TypescriptOrganizeImports', buffer = bufnr },
+            desc = 'LSP: TypescriptOrganizeImports',
+            buffer = bufnr,
           },
-          { '<leader>lu', ':TypescriptRemoveUnused<CR>', { desc = 'LSP: TypescriptRemoveUnused', buffer = bufnr } },
-          { '<leader>lF', ':TypescriptFixAll<CR>', { desc = 'LSP: TypescriptFixAll', buffer = bufnr } },
-          { '<leader>lR', ':TypescriptRenameFile<CR>', { desc = 'LSP: TypescriptRenameFile', buffer = bufnr } },
+          { '<leader>lu', ':TypescriptRemoveUnused<CR>', desc = 'LSP: TypescriptRemoveUnused', buffer = bufnr },
+          { '<leader>lF', ':TypescriptFixAll<CR>', desc = 'LSP: TypescriptFixAll', buffer = bufnr },
+          { '<leader>lR', ':TypescriptRenameFile<CR>', desc = 'LSP: TypescriptRenameFile', buffer = bufnr },
         })
       end,
       capabilities = installer.default_capabilities,

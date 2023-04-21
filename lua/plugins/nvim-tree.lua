@@ -14,7 +14,7 @@ local create_autoclose = function()
         end,
       })
       keymaps.add({
-        { '<Esc>', ':NvimTreeClose<CR>', { desc = 'Close tree view' } },
+        { '<Esc>', ':NvimTreeClose<CR>', desc = 'Close tree view', buffer = args.buf },
       })
     end,
   })
@@ -120,7 +120,7 @@ return {
     })
 
     keymaps.add({
-      { '<leader>fw', editor_utils.search_tree_dir, { desc = 'Find: text within tree dir' } },
+      { '<leader>fw', editor_utils.search_tree_dir, desc = 'Find: text within tree dir' },
     })
   end,
 }

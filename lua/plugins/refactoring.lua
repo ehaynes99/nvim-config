@@ -12,12 +12,12 @@ return {
     refactoring.setup({})
 
     keymaps.add({
-      { '<leader>wr', refactoring.select_refactor, mode = 'x', { desc = 'Refactor: Select' } },
+      { '<leader>wr', refactoring.select_refactor, mode = 'x', desc = 'Refactor: Select' },
       {
         '<leader>we',
         curry(refactoring.refactor)('Extract Variable'),
         mode = 'v',
-        { desc = 'Refactor: Extract variable' },
+        desc = 'Refactor: Extract variable',
       },
       {
         '<leader>wi',
@@ -28,7 +28,7 @@ return {
           vim.api.nvim_feedkeys(esc, 'x', false)
         end,
         mode = 'v',
-        { desc = 'Refactor: Inline variable' },
+        desc = 'Refactor: Inline variable',
       },
     })
   end,
