@@ -9,7 +9,7 @@ return {
   { 'mrjones2014/legendary.nvim', config = true, event = 'VeryLazy' },
   { 'chentoast/marks.nvim', config = true, event = 'VeryLazy' },
   { 'kazhala/close-buffers.nvim' },
-  { 'lukas-reineke/indent-blankline.nvim' },
+  { 'lukas-reineke/indent-blankline.nvim', enabled = true },
   { 'nvim-pack/nvim-spectre', config = true },
   { 'Almo7aya/openingh.nvim' },
   { 'kevinhwang91/nvim-bqf' },

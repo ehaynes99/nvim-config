@@ -1,7 +1,7 @@
 return {
   'RRethy/vim-illuminate',
   config = function()
+    -- kanagawa "winterRed"
     vim.cmd('hi IlluminatedWordRead guibg=#43242B')
-    -- vim.cmd('hi IlluminatedWordRead guibg=#2D4F67')
   end,
 }
