@@ -1,6 +1,7 @@
 require('autocommands.auto_save')
 
 vim.api.nvim_create_autocmd('FileType', {
+  desc = 'bind "q" to close for certain filetypes',
   pattern = { 'qf', 'help', 'man', 'lspinfo', 'spectre_panel', 'tsplayground' },
   callback = function(args)
     vim.keymap.set('n', 'q', vim.cmd.close, { buffer = args.buf })
@@ -9,6 +10,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
+  desc = 'enable spellcheck and wrap for certain filetypes',
   pattern = { 'gitcommit', 'markdown' },
   callback = function()
     vim.opt_local.wrap = true
@@ -17,6 +19,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
+  desc = 'enable wrap for certain filetypes',
   pattern = { 'help' },
   callback = function()
     vim.opt_local.wrap = true
@@ -24,8 +27,8 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('VimResized', {
+  desc = 'resize windows when vim is resized',
   callback = function()
-    -- make resize windows to be equal
     vim.cmd('tabdo wincmd =')
 
     -- prefer left side of cursor visible to right side
@@ -35,8 +38,8 @@ vim.api.nvim_create_autocmd('VimResized', {
   end,
 })
 
--- leave insert mode when changing buffer or leaving nvim
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
+  desc = 'leave insert mode when changing buffer or leaving nvim',
   callback = function()
     local is_file = vim.api.nvim_buf_get_option(0, 'buftype') == ''
     if is_file then
@@ -45,7 +48,15 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   end,
 })
 
+-- vim.api.nvim_create_autocmd({ 'BufReadPost', 'FileReadPost' }, {
+--   desc = 'open all folds when opening a file',
+--   callback = function()
+--     vim.cmd('normal zR')
+--   end,
+-- })
+
 vim.api.nvim_create_autocmd('BufReadPre', {
+  desc = 'Disable some slow operations on large files',
   callback = function(args)
     local buf = args.buf
     local name = vim.api.nvim_buf_get_name(buf)
