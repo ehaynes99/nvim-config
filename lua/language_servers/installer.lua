@@ -36,7 +36,13 @@ M.default_capabilities = (function()
   -- local capabilities = vim.lsp.protocol.make_client_capabilities()
   -- capabilities.textDocument.completion.completionItem.snippetSupport = true
   -- above was deprecated, but how do we add to it now?
-  return cmp_nvim_lsp.default_capabilities()
+  local capabilities = cmp_nvim_lsp.default_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+  return capabilities
 end)()
 
 M.configure_server = function(server_name)

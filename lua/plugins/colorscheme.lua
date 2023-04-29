@@ -31,6 +31,18 @@ return {
             },
           },
         },
+
+        overrides = function(colors)
+          return {
+            -- FoldColumn = { fg = colors.theme.syn.special3, bold = true },
+            -- Folded = { bg = colors.theme.syn.special3, bold = true },
+            -- Folded = { bg = colors.palette.sumiInk6 },
+            Folded = { bg = '#000000' },
+
+            -- UfoFoldedFg = { fg = colors.theme.syn.special3, bold = true },
+            UfoFoldedFg = { fg = colors.palette.winterRed, bold = true },
+          }
+        end,
       })
 
       if colorscheme == 'kanagawa' then
