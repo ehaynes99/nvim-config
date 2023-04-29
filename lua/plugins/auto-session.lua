@@ -1,7 +1,7 @@
 return {
   'rmagatti/auto-session',
   dependencies = {
-    { 'rmagatti/session-lens', config = true },
+    -- { 'rmagatti/session-lens', config = true },
   },
   config = function()
     require('auto-session').setup({
@@ -15,7 +15,7 @@ return {
         '/tmp',
       },
     })
-    require('session-lens').setup({})
+    -- require('session-lens').setup({})
 
     vim.keymap.set(
       'n',
