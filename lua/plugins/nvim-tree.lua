@@ -1,35 +1,5 @@
 local editor_utils = require('utils.editor')
 
-local create_autoclose = function()
-  vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'NvimTree' },
-    callback = function(args)
-      vim.api.nvim_create_autocmd('VimLeavePre', {
-        callback = function()
-          if vim.api.nvim_buf_is_valid(args.buf) then
-            vim.api.nvim_buf_delete(args.buf, { force = true })
-          end
-          return true
-        end,
-      })
-    end,
-  })
-  
-  vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'NvimTree' },
-    callback = function(args)
-      vim.api.nvim_create_autocmd('VimLeavePre', {
-        callback = function()
-          if vim.api.nvim_buf_is_valid(args.buf) then
-            vim.api.nvim_buf_delete(args.buf, { force = true })
-          end
-          return true
-        end,
-      })
-    end,
-  })
-end
-
 -- local HEIGHT_RATIO = 0.8
 -- local WIDTH_RATIO = 0.5
 
@@ -54,8 +24,6 @@ return {
     { '<leader>fw', editor_utils.search_tree_dir, desc = 'Find: text within tree dir' },
   },
   config = function()
-    create_autoclose()
-
     require('nvim-tree').setup({
       actions = {
         change_dir = {

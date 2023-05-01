@@ -85,3 +85,18 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Close buffers that will break with sessions',
+  pattern = { 'NvimTree', 'Trouble' },
+  callback = function(args)
+    vim.api.nvim_create_autocmd('VimLeavePre', {
+      callback = function()
+        if vim.api.nvim_buf_is_valid(args.buf) then
+          vim.api.nvim_buf_delete(args.buf, { force = true })
+        end
+        return true
+      end,
+    })
+  end,
+})
