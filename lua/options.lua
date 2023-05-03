@@ -1,4 +1,5 @@
--- vim.opt.shadafile = 'NONE' vim.opt.backup = false -- creates a backup file
+vim.opt.shadafile = 'NONE'
+vim.opt.backup = false -- creates a backup file
 vim.opt.cmdheight = 1 -- prevent
 vim.opt.completeopt = { 'menuone', 'noselect' } -- mostly just for cmp
 vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
