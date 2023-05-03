@@ -1,9 +1,10 @@
 return {
   'rmagatti/auto-session',
   dependencies = {
-    -- { 'rmagatti/session-lens', config = true },
+    'nvim-telescope/telescope.nvim',
   },
   config = function()
+    local keymaps = require('keymaps')
     require('auto-session').setup({
       log_level = 'error',
       auto_session_suppress_dirs = {
@@ -14,14 +15,20 @@ return {
         '/',
         '/tmp',
       },
+      session_lens = {},
     })
-    -- require('session-lens').setup({})
 
-    vim.keymap.set(
-      'n',
-      '<leader>tS',
-      ':Telescope session-lens search_session<CR>',
-      { desc = 'Telescope: autocommands' }
-    )
+    keymaps.add({
+      { '<leader>tS', require('auto-session.session-lens').search_session, desc = 'Telescope: autocommands' },
+      { '<leader>wd', ':SessionDelete<CR>', desc = 'auto-session: delete session' },
+      {
+        '<leader>wD',
+        function()
+          vim.cmd('SessionDelete')
+          vim.cmd('wq')
+        end,
+        desc = 'auto-session: delete session',
+      },
+    })
   end,
 }
