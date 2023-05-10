@@ -10,7 +10,6 @@ return {
       '<leader>e',
       function()
         local api = require('nvim-tree.api')
-        print('api.tree.is_tree_buf(0): ' .. tostring(api.tree.is_tree_buf(0)))
         if api.tree.is_tree_buf(0) then
           api.tree.close()
         elseif api.tree.is_visible() then
@@ -36,9 +35,47 @@ return {
           },
         },
       },
+      update_focused_file = {
+        enable = true,
+        update_root = false,
+      },
+      sync_root_with_cwd = true,
+      diagnostics = {
+        enable = true,
+        show_on_dirs = true,
+        show_on_open_dirs = false,
+        icons = {
+          hint = '',
+          info = '',
+          warning = '',
+          error = '',
+        },
+      },
+      git = {
+        enable = true,
+        ignore = false,
+        show_on_dirs = true,
+        show_on_open_dirs = false,
+      },
+      renderer = {
+        root_folder_label = false,
+        icons = {
+          glyphs = {
+            git = {
+              untracked = '+',
+              staged = 'M',
+              unstaged = 'M',
+              renamed = '➜',
+              deleted = '',
+              ignored = '',
+              unmerged = '',
+            },
+          },
+        },
+        highlight_git = true,
+      },
       view = {
         width = 40,
-        hide_root_folder = true,
         -- float = {
         --   enable = true,
         --   quit_on_focus_loss = true,
@@ -65,44 +102,6 @@ return {
         -- width = function()
         --   return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
         -- end,
-      },
-      update_focused_file = {
-        enable = true,
-        update_root = false,
-      },
-      sync_root_with_cwd = true,
-      diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-        show_on_open_dirs = false,
-        icons = {
-          hint = '',
-          info = '',
-          warning = '',
-          error = '',
-        },
-      },
-      git = {
-        enable = true,
-        ignore = false,
-        show_on_dirs = true,
-        show_on_open_dirs = false,
-      },
-      renderer = {
-        icons = {
-          glyphs = {
-            git = {
-              untracked = '+',
-              staged = 'M',
-              unstaged = 'M',
-              renamed = '➜',
-              deleted = '',
-              ignored = '',
-              unmerged = '',
-            },
-          },
-        },
-        highlight_git = true,
       },
     })
   end,
