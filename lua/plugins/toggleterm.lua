@@ -7,7 +7,7 @@ return {
     local project_utils = require('utils.project')
 
     toggleterm.setup({
-      size = 80, -- this affects the vertical buffers
+      size = 100, -- this affects the vertical buffers
       open_mapping = [[<c-\>]],
       direction = 'float',
       float_opts = {
