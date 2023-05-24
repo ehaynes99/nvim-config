@@ -67,7 +67,7 @@ return {
         jest_term.dir = project_root
       end
       jest_term.cmd = cmd
-      jest_term:toggle(90)
+      jest_term:toggle()
     end)
 
     local side_term = Terminal:new({
