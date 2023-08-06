@@ -34,7 +34,16 @@ snippet tryfinally 'Try-Finally'
         try {
           $0
         } finally {
+          
+        }
+
+snippet trycatfin 'Try-Catch-finally'
+        try {
+          $0
+        } catch (error) {
           console.error(error)
+        } finally {
+
         }
 
 snippet iife 'Immediately invoked function expression'
