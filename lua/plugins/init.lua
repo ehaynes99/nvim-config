@@ -5,7 +5,6 @@ return {
 
   -- misc editor improvements
   { 'numToStr/Comment.nvim', config = true, event = 'VeryLazy' },
-  { 'petertriho/nvim-scrollbar', config = true },
   { 'mrjones2014/legendary.nvim', config = true, event = 'VeryLazy' },
   { 'chentoast/marks.nvim', config = true, event = 'VeryLazy' },
   { 'kazhala/close-buffers.nvim' },
