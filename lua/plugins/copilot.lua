@@ -14,8 +14,8 @@ return {
         auto_trigger = true,
         keymap = {
           accept = 'kj',
-          next = '<A-j>',
-          prev = '<A-k>',
+          next = '<C-i>',
+          prev = '<C-u>',
           dismiss = 'kk',
           accept_word = '<Nop>',
         },
