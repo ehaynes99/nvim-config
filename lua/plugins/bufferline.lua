@@ -9,7 +9,7 @@ return {
           {
             filetype = 'NvimTree',
             text = function()
-              return (vim.fn.getcwd():gsub(vim.fn.expand('$HOME'), '~'))
+              return (vim.fn.getcwd():gsub(vim.fn.expand('$HOME'), '~'):gsub('workspace/openphone/projects', 'W/O/P'))
             end,
             -- highlight = 'Directory',
             -- highlight = '@exception',
