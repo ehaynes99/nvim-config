@@ -85,6 +85,8 @@ M.init = function()
   M.add({
     { 'jk', '<ESC>', mode = 'i', desc = 'Leave insert' },
     { 'Q', '<NOP>', desc = 'Disable ex mode' },
+    { '<A-j>', '<PageDown><CR>', mode = 'nixt', desc = 'Page Down' },
+    { '<A-k>', '<PageUp><CR>', mode = 'nixt', desc = 'Go to next tab' },
     { '<A-h>', ':tabprevious<CR>', mode = 'nixt', desc = 'Go to previous tab' },
     { '<A-l>', ':tabnext<CR>', mode = 'nixt', desc = 'Go to next tab' },
 
