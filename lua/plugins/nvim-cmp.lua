@@ -90,9 +90,9 @@ return {
         end,
       },
       sources = {
+        { name = 'luasnip' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
-        { name = 'luasnip' },
         { name = 'buffer', keyword_length = 3 },
         { name = 'path' },
         { name = 'crates' },
