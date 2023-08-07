@@ -20,6 +20,7 @@ local mason_config = function()
       'lua_ls',
       'tsserver',
       'eslint',
+      'sqlls',
     },
     automatic_installation = true,
   })

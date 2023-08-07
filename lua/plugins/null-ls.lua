@@ -25,6 +25,10 @@ return {
         code_actions.shellcheck.with({ extra_args = { '-s', 'bash' } }),
         formatting.shfmt.with({ extra_args = { '--case-indent' } }),
         formatting.shellharden,
+
+        -- sql
+        formatting.sqlfluff,
+        --
       },
       border = 'rounded',
       should_attach = function()
