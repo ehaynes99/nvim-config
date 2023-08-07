@@ -25,7 +25,7 @@ return {
         '<leader>wD',
         function()
           vim.cmd('SessionDelete')
-          vim.cmd('wq')
+          vim.cmd(':qa')
         end,
         desc = 'auto-session: delete session',
       },
