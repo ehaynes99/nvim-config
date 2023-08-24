@@ -32,6 +32,9 @@ return {
         border = 'rounded',
       },
       on_exit = close_if_successful,
+      on_open = function(term)
+        vim.keymap.set('t', '<ESC>', '<ESC>', { buffer = term.bufnr, nowait = true })
+      end,
     })
 
     vim.keymap.set('n', '<leader>G', function()
