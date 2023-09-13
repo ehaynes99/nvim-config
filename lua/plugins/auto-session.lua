@@ -20,9 +20,8 @@ return {
 
     keymaps.add({
       { '<leader>tS', require('auto-session.session-lens').search_session, desc = 'Telescope: autocommands' },
-      { '<leader>wd', ':SessionDelete<CR>', desc = 'auto-session: delete session' },
       {
-        '<leader>wD',
+        '<leader>xD',
         function()
           vim.cmd('SessionDelete')
           vim.cmd(':qa')

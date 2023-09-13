@@ -63,12 +63,14 @@ M.lsp_keymaps = function(bufnr, lsp_format)
     {
       '<leader>lj',
       curry(vim.diagnostic.goto_next)({ buffer = 0 }),
-      desc = 'LSP: Next diagnostic', buffer = bufnr,
+      desc = 'LSP: Next diagnostic',
+      buffer = bufnr,
     },
     {
       '<leader>lk',
       curry(vim.diagnostic.goto_prev)({ buffer = 0 }),
-      desc = 'LSP: Previous diagnostic', buffer = bufnr,
+      desc = 'LSP: Previous diagnostic',
+      buffer = bufnr,
     },
     { '<leader>lr', vim.lsp.buf.rename, desc = 'LSP: Rename', buffer = bufnr },
     { '<leader>ls', vim.lsp.buf.signature_help, desc = 'LSP: Signature help', buffer = bufnr },
@@ -85,8 +87,8 @@ M.init = function()
   M.add({
     { 'jk', '<ESC>', mode = 'i', desc = 'Leave insert' },
     { 'Q', '<NOP>', desc = 'Disable ex mode' },
-    { '<A-j>', '<PageDown><CR>', mode = 'nixt', desc = 'Page Down' },
-    { '<A-k>', '<PageUp><CR>', mode = 'nixt', desc = 'Go to next tab' },
+    { '<A-j>', '<C-d>', mode = 'nixt', desc = 'Scroll Down' },
+    { '<A-k>', '<C-u>', mode = 'nixt', desc = 'Scroll Up' },
     { '<A-h>', ':tabprevious<CR>', mode = 'nixt', desc = 'Go to previous tab' },
     { '<A-l>', ':tabnext<CR>', mode = 'nixt', desc = 'Go to next tab' },
 
@@ -132,18 +134,21 @@ M.init = function()
     {
       '<leader>r',
       ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>',
-      desc = 'Global replace word under cursor', silent = false,
+      desc = 'Global replace word under cursor',
+      silent = false,
     },
     {
       '<leader>r',
       [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-      desc = 'Replace word under cursor', silent = false,
+      desc = 'Replace word under cursor',
+      silent = false,
     },
     {
       '<leader>r',
       [["hy:%s/<C-r>h//gI<left><left><left>]],
       mode = 'x',
-      desc = 'Replace selected text', silent = false,
+      desc = 'Replace selected text',
+      silent = false,
     },
 
     -- Window
@@ -151,6 +156,7 @@ M.init = function()
     { '<leader>wh', editor_utils.close_hidden_buffers, desc = 'Window: close all hidden buffers' },
     { '<leader>wo', ':SymbolsOutline<CR>', desc = 'Toggle symbols outline' },
     { '<leader>wx', '<cmd>!chmod +x %<CR>', desc = 'Toggle file executable' },
+    { '<leader>wd', ':windo diffthis<CR>', desc = 'Diff with split pane' },
 
     { '<LeftDrag>', '', desc = 'Disable left drag' },
     { '<LeftRelease>', '', desc = 'Disable left drag' },
