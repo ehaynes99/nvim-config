@@ -175,15 +175,15 @@ M.init = function()
     -- { '<leader>pn', ':NullLsInfo<CR>', desc = 'LSP: Null-ls info for file' },
 
     -- Debugger
-    { '<leader>db', dap.toggle_breakpoint, desc = 'Debug: toggle breakpoint' },
-    { '<leader>dc', dap.continue, desc = 'Debug: continue' },
-    { '<leader>di', dap.step_into, desc = 'Debug: step into' },
-    { '<leader>do', dap.step_over, desc = 'Debug: step over' },
-    { '<leader>dO', dap.step_out, desc = 'Debug: step out' },
-    { '<leader>dr', dap.repl.toggle, desc = 'Debug: repl toggle' },
-    { '<leader>dl', dap.run_last, desc = 'Debug: run last' },
-    { '<leader>du', dapui.toggle, desc = 'Debug: ui toggle' },
-    { '<leader>dt', dap.terminate, desc = 'Debug: terminate' },
+    -- { '<leader>db', dap.toggle_breakpoint, desc = 'Debug: toggle breakpoint' },
+    -- { '<leader>dc', dap.continue, desc = 'Debug: continue' },
+    -- { '<leader>di', dap.step_into, desc = 'Debug: step into' },
+    -- { '<leader>do', dap.step_over, desc = 'Debug: step over' },
+    -- { '<leader>dO', dap.step_out, desc = 'Debug: step out' },
+    -- { '<leader>dr', dap.repl.toggle, desc = 'Debug: repl toggle' },
+    -- { '<leader>dl', dap.run_last, desc = 'Debug: run last' },
+    -- { '<leader>du', dapui.toggle, desc = 'Debug: ui toggle' },
+    -- { '<leader>dt', dap.terminate, desc = 'Debug: terminate' },
 
     -- Terminal
     { '<ESC><ESC>', '<C-\\><C-n>', mode = 't', desc = 'Leave insert' },
