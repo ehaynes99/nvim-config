@@ -39,6 +39,9 @@ return {
         enable = true,
         update_root = false,
       },
+      notify = {
+        threshold = vim.log.levels.WARN,
+      },
       sync_root_with_cwd = true,
       diagnostics = {
         enable = true,
