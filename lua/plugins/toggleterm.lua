@@ -73,18 +73,25 @@ return {
       jest_term:toggle()
     end)
 
+    local toggle_sideterm
+
     local side_term = Terminal:new({
       direction = 'vertical',
       close_on_exit = true,
       hidden = true,
+      on_open = function(term)
+        vim.keymap.set('t', '<leader><BS>', toggle_sideterm, { buffer = term.bufnr, desc = 'Toggle side terminal' })
+      end,
     })
 
-    vim.keymap.set('n', '<leader><BS>', function()
+    toggle_sideterm = function()
       if side_term:is_open() and not side_term:is_focused() then
         side_term:focus()
       else
         side_term:toggle()
       end
-    end)
+    end
+
+    vim.keymap.set('n', '<leader><BS>', toggle_sideterm, { desc = 'Toggle side terminal' })
   end,
 }
