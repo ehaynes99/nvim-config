@@ -79,9 +79,10 @@ return {
       direction = 'vertical',
       close_on_exit = true,
       hidden = true,
-      on_open = function(term)
-        vim.keymap.set('t', '<leader><BS>', toggle_sideterm, { buffer = term.bufnr, desc = 'Toggle side terminal' })
-      end,
+      -- CAUSES DELAY ON SPACEBAR
+      -- on_open = function(term)
+      --   vim.keymap.set('t', '<leader><BS>', toggle_sideterm, { buffer = term.bufnr, desc = 'Toggle side terminal' })
+      -- end,
     })
 
     toggle_sideterm = function()
