@@ -5,10 +5,8 @@ return {
       -- lualine_a = { 'mode' },
       lualine_a = {},
       lualine_b = { 'branch', 'diff', 'diagnostics' },
-      -- lualine_b = {},
       lualine_c = { { 'filename', newfile_status = true, path = 1 } },
-      -- lualine_x = { 'encoding', 'fileformat', 'filetype' },
-      lualine_x = {},
+      lualine_x = { 'encoding', 'fileformat', 'filetype' },
       lualine_y = {
         function()
           local line_count = vim.api.nvim_buf_line_count(0)
