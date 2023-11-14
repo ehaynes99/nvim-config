@@ -14,6 +14,7 @@ return {
   { 'mbbill/undotree' },
   { 'sindrets/diffview.nvim' },
   { 'rafcamlet/nvim-luapad' },
+  { 'towolf/vim-helm' },
 
   { 'windwp/nvim-ts-autotag' },
   { 'windwp/nvim-autopairs', opts = {
