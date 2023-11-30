@@ -72,6 +72,7 @@ end
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
+    'towolf/vim-helm',
     'saadparwaiz1/cmp_luasnip',
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
