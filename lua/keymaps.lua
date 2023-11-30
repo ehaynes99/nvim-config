@@ -210,8 +210,9 @@ M.init = function()
     {
       '<leader>cc',
       function()
+        vim.api.nvim_feedkeys('y', 'nx', false)
         local mark = vim.api.nvim_buf_get_mark(0, '<')
-        local keys = vim.api.nvim_replace_termcodes('yPgv<ESC>', true, false, true)
+        local keys = vim.api.nvim_replace_termcodes('Pgv<ESC>', true, false, true)
         vim.api.nvim_feedkeys(keys, 'nx', false)
         require('Comment.api').toggle.linewise(vim.fn.visualmode())
         vim.api.nvim_win_set_cursor(0, mark)
