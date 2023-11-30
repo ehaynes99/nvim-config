@@ -1,8 +1,8 @@
-local keymaps = require('keymaps')
-local typescript = require('typescript')
-local installer = require('language_servers.installer')
-
 return function()
+  local keymaps = require('keymaps')
+  local typescript = require('typescript')
+  local installer = require('language_servers.installer')
+
   typescript.setup({
     server = {
       on_attach = function(_, bufnr)
@@ -36,6 +36,7 @@ return function()
             6133, -- unused variable - eslint will handle
             6138, -- unused property - eslint will handle
             80001, -- convert to ES module suggestion
+            80005, -- 'require' call may be converted to an import
             80006, -- may be converted to an async function -- auto-"fix" BREAKS CODE with multiple returns
           },
         },
