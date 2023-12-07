@@ -21,6 +21,7 @@ return {
           '.git/',
           'node_modules',
           'package-lock.json',
+          'pnpm-lock.yaml',
         },
 
         mappings = {
@@ -41,6 +42,7 @@ return {
           '--smart-case',
           '--hidden',
           '--glob=!package-lock.json',
+          '--glob=!pnpm-lock.yaml',
         },
       },
       extensions = {
