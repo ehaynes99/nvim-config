@@ -4,7 +4,7 @@ local installer = require('language_servers.installer')
 return {
   on_attach = function(_, bufnr)
     -- client.server_capabilities.document_formatting = true
-    keymaps.lsp_keymaps(bufnr, ':EslintFixAll<CR>')
+    keymaps.lsp_keymaps(bufnr, '<cmd>:EslintFixAll<CR>')
   end,
   settings = {
     codeAction = {
