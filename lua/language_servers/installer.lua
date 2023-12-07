@@ -17,11 +17,6 @@ M.create_formatter = function(bufnr)
       bufnr = bufnr,
       filter = function(client)
         local supports_formatting = client.supports_method('textDocument/formatting')
-        -- if client.name == 'eslint' then
-        --   return true
-        -- elseif client.name == 'tsserver' then
-        --   return false
-        -- else
         if has_null_ls then
           return client.name == 'null-ls'
         else
@@ -33,9 +28,6 @@ M.create_formatter = function(bufnr)
 end
 
 M.default_capabilities = (function()
-  -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-  -- above was deprecated, but how do we add to it now?
   local capabilities = cmp_nvim_lsp.default_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.foldingRange = {
