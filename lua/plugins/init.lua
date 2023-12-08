@@ -14,7 +14,11 @@ return {
   { 'mbbill/undotree' },
   { 'sindrets/diffview.nvim' },
   { 'rafcamlet/nvim-luapad' },
+
+  -- syntax
   { 'towolf/vim-helm' },
+  { 'kyoh86/vim-jsonl' },
+  { 'mustache/vim-mustache-handlebars' },
 
   { 'windwp/nvim-ts-autotag' },
   { 'windwp/nvim-autopairs', opts = {
