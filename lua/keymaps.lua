@@ -46,7 +46,7 @@ M.lsp_keymaps = function(bufnr, lsp_format)
   local telescope = require('telescope.builtin')
   if lsp_format then
     M.add({
-      { '<leader>lf', lsp_format, desc = 'LSP: Format document', buffer = bufnr },
+      -- { '<leader>lf', lsp_format, desc = 'LSP: Format document', buffer = bufnr },
       { 'qf', lsp_format, mode = 'ni', desc = 'LSP: Format document', buffer = bufnr },
     })
   end
