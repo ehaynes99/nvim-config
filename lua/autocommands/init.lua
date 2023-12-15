@@ -2,7 +2,7 @@ require('autocommands.auto_save')
 
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'bind "q" to close for certain filetypes',
-  pattern = { 'qf', 'help', 'man', 'lspinfo', 'spectre_panel', 'tsplayground' },
+  pattern = { 'qf', 'help', 'vimdoc', 'man', 'lspinfo', 'spectre_panel', 'tsplayground' },
   callback = function(args)
     vim.keymap.set('n', 'q', vim.cmd.close, { buffer = args.buf })
     vim.bo.buflisted = false
@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'enable wrap for certain filetypes',
-  pattern = { 'help' },
+  pattern = { 'help', 'vimdoc' },
   callback = function()
     vim.opt_local.wrap = true
   end,

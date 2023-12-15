@@ -22,7 +22,7 @@ return {
         'python',
         'sql',
         'vim',
-        -- 'help',
+        'vimdoc',
       },
       incremental_selection = {
         enable = true,
