@@ -91,3 +91,20 @@ snippet script 'basic CLI script'
 
 snippet impst 'import { setTimeout }'
         import { setTimeout } from 'node:timers/promises'
+
+snippet csvc 'create a service'
+        export type ${1:ServiceName} = {
+          //
+        }
+
+        export type ${1:ServiceName}Options = {
+          //
+        }
+
+        export const create${1:ServiceName} = ({
+          //
+        }: ${1:ServiceName}Options): ${1:ServiceName} => {
+          return {
+            //
+          }
+        }
