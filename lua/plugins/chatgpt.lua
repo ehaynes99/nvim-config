@@ -2,6 +2,7 @@ local keymaps = require('keymaps')
 
 return {
   'jackMort/ChatGPT.nvim',
+  enabled = false,
   event = 'VeryLazy',
   dependencies = {
     'MunifTanjim/nui.nvim',
