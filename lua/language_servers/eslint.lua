@@ -1,5 +1,4 @@
 local keymaps = require('keymaps')
-local installer = require('language_servers.installer')
 
 return {
   on_attach = function(_, bufnr)
