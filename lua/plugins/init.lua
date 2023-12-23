@@ -14,6 +14,7 @@ return {
   { 'mbbill/undotree' },
   { 'sindrets/diffview.nvim' },
   { 'rafcamlet/nvim-luapad' },
+  { 'nmac427/guess-indent.nvim', config = true },
 
   -- syntax
   { 'towolf/vim-helm' },
