@@ -4,6 +4,7 @@ local M = {}
 M.close_hidden_buffers = function()
   local close_buffers = require('close_buffers')
   close_buffers.delete({ type = 'hidden', force = true })
+  vim.cmd('redraw!')
 end
 
 -- telescope live grep within folder selected in nvim-tree
@@ -44,7 +45,7 @@ end
 M.buf_is_file = function(bufnr)
   bufnr = bufnr or 0
 
-  return vim.api.nvim_buf_get_option(0, 'buftype') == ''
+  return vim.api.nvim_get_option_value('buftype', { buf = 0 }) == ''
 end
 
 -- see `:h options` section '3. Options summary'
