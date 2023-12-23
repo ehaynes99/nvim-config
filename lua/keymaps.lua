@@ -165,10 +165,10 @@ M.init = function()
     { '<C-j>', wincmd('j'), mode = 'nixt', desc = 'Window: focus down' },
     { '<C-k>', wincmd('k'), mode = 'nixt', desc = 'Window: focus up' },
     { '<C-l>', wincmd('l'), mode = 'nixt', desc = 'Window: focus right' },
-    -- { '<C-Up>', ':resize -2<CR>', desc = 'Window: resize ' },
-    -- { '<C-Down>', ':resize +2<CR>', desc = 'Window: resize ' },
-    -- { '<C-Left>', ':vertical resize -2<CR>', desc = 'Window: resize ' },
-    -- { '<C-Right>', ':vertical resize +2<CR>', desc = 'Window: 'resize ' },
+    { '<C-Up>', ':resize +2<CR>', desc = 'Window: resize taller' },
+    { '<C-Down>', ':resize -2<CR>', desc = 'Window: resize shorter' },
+    { '<C-Left>', ':vertical resize -2<CR>', desc = 'Window: resize narrower' },
+    { '<C-Right>', ':vertical resize +2<CR>', desc = 'Window: resize wider' },
 
     -- Various plugin info
     -- { '<leader>pl', ':LspInfo<CR>', desc = 'LSP: LSP info for file' },
