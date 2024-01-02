@@ -81,15 +81,19 @@ end
 
 M.init = function()
   local spectre = require('spectre')
-  local dap = require('dap')
-  local dapui = require('dapui')
   local telescope = require('telescope.builtin')
   local tu = require('utils.telescope')
   M.add({
     { 'jk', '<ESC>', mode = 'i', desc = 'Leave insert' },
     { 'Q', '<NOP>', desc = 'Disable ex mode' },
-    { '<A-j>', '<C-d>', mode = 'nixt', desc = 'Scroll Down' },
-    { '<A-k>', '<C-u>', mode = 'nixt', desc = 'Scroll Up' },
+
+    { '<A-j>', '<cmd>m .+1<cr>==', mode = 'n', desc = 'Move Down' },
+    { '<A-k>', '<cmd>m .-2<cr>==', mode = 'n', desc = 'Move up' },
+    { '<A-j>', '<esc><cmd>m .+1<cr>==gi', mode = 'i', desc = 'Move down' },
+    { '<A-k>', '<esc><cmd>m .-2<cr>==gi', mode = 'i', desc = 'Move up' },
+    { '<A-j>', ":m '>+1<CR>gv=gv", mode = 'x', desc = 'Move down' },
+    { '<A-k>', ":m '<-2<CR>gv=gv", mode = 'x', desc = 'Move up' },
+
     { '<A-h>', ':tabprevious<CR>', mode = 'nixt', desc = 'Go to previous tab' },
     { '<A-l>', ':tabnext<CR>', mode = 'nixt', desc = 'Go to next tab' },
 
@@ -120,8 +124,6 @@ M.init = function()
     { '<C-J>', 'mzJ`z', desc = 'Join lines & preserve cursor' },
     { '<leader>vw', 'ggVG', desc = 'Select all' },
     { 'Y', 'y$', desc = 'Yank to end of line' },
-    { 'J', ":m '>+1<CR>gv=gv", mode = 'x', desc = 'Move lines down' },
-    { 'K', ":m '<-2<CR>gv=gv", mode = 'x', desc = 'Move lines up' },
     { 'j', "v:count ? 'j' : 'gj'", mode = 'nx', desc = 'Move cursor up', expr = true },
     { 'k', "v:count ? 'k' : 'gk'", mode = 'nx', desc = 'Move cursor down', expr = true },
     { '<Down>', "v:count ? 'j' : 'gj'", mode = 'nx', desc = 'Move cursor up', expr = true },
