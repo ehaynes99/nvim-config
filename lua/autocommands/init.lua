@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd('VimResized', {
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   desc = 'leave insert mode when changing buffer or leaving nvim',
   callback = function()
-    local is_file = vim.api.nvim_buf_get_option(0, 'buftype') == ''
+    local is_file = vim.api.nvim_get_option_value('buftype', { buf = 0 }) == ''
     if is_file then
       vim.cmd('stopinsert')
     end

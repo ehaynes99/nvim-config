@@ -56,7 +56,7 @@ M.buf_get_options = function(bufnr, option_names)
     name = vim.api.nvim_buf_get_name(bufnr),
   }
   for _, option in ipairs(option_names) do
-    result[option] = vim.api.nvim_buf_get_option(bufnr, option)
+    result[option] = vim.api.nvim_get_option_value(option, { buf = bufnr })
   end
   return result
 end
