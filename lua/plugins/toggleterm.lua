@@ -62,7 +62,7 @@ return {
       end
 
       print('project_root: ' .. project_root)
-      local cmd = 'npx -y --node-options=--inspect jest --watch --no-coverage ' .. test_file
+      local cmd = 'npx -y --node-options=--inspect jest --reporters="default" --watch --no-coverage ' .. test_file
 
       if jest_term:is_open() then
         jest_term:change_dir(project_root)
