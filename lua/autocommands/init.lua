@@ -54,13 +54,6 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
 --     vim.cmd('checktime')
 --   end,
 -- })
---
--- vim.api.nvim_create_autocmd({ 'BufReadPost', 'FileReadPost' }, {
---   desc = 'open all folds when opening a file',
---   callback = function()
---     vim.cmd('normal zR')
---   end,
--- })
 
 vim.api.nvim_create_autocmd('BufReadPre', {
   desc = 'Disable some slow operations on large files',
@@ -68,10 +61,9 @@ vim.api.nvim_create_autocmd('BufReadPre', {
     local buf = args.buf
     local name = vim.api.nvim_buf_get_name(buf)
 
-    if vim.fn.getfsize(name) > (1024 * 1024) then
+    if vim.fn.getfsize(name) > (2 * 1024 * 1024) then
       vim.b[buf].large_buf = true
       vim.cmd('syntax off')
-      vim.cmd('IndentBlanklineDisable')
       vim.opt_local.foldmethod = 'manual'
       vim.opt_local.spell = false
     else
