@@ -198,10 +198,9 @@ M.init = function()
     { '<C-p>', 'p', mode = 'x', desc = 'Paste and yank' },
     { '<', '<gv', mode = 'x', desc = 'Stay in visual mode after indent left' },
     { '>', '>gv', mode = 'x', desc = 'Stay in visual mode after indent left' },
-    -- '<C-_>' is magic syntax for <C-/> because you can't map the slash character
-    { '<C-_>', require('Comment.api').toggle.linewise.current, mode = 'ni', desc = 'Comment toggle' },
+    { '<C-/>', require('Comment.api').toggle.linewise.current, mode = 'ni', desc = 'Comment toggle' },
     {
-      '<C-_>',
+      '<C-/>',
       function()
         local esc = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
         vim.api.nvim_feedkeys(esc, 'nx', false)
