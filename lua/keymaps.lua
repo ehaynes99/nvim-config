@@ -116,6 +116,10 @@ M.init = function()
     { '<leader>gb', ':BlamerToggle<CR>', desc = 'Git: show blame' },
     { '<Leader>gf', ':OpenInGHFile <CR>', desc = 'Git: open file in github' },
 
+    -- LSP common
+    { '<leader>ll', ':LspRestart<CR>', desc = 'LSP: Restart' },
+    { '<leader>lI', ':LspInfo<CR>', desc = 'LSP: Info' },
+
     -- macros
     { '<leader>q', 'q', desc = 'Start/stop recording macro' },
     { 'q', '<Nop>' },
