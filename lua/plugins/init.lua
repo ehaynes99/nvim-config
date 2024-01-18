@@ -17,9 +17,10 @@ return {
   { 'nmac427/guess-indent.nvim', config = true },
 
   -- syntax
-  -- { 'towolf/vim-helm' },
-  -- { 'kyoh86/vim-jsonl' },
-  -- { 'mustache/vim-mustache-handlebars' },
+  { 'towolf/vim-helm' },
+  { 'kyoh86/vim-jsonl' },
+  { 'mustache/vim-mustache-handlebars' },
+  { 'keith/swift.vim' },
 
   { 'windwp/nvim-ts-autotag' },
   { 'windwp/nvim-autopairs', opts = {
