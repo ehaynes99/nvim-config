@@ -2,7 +2,6 @@ local keymaps = require('keymaps')
 
 return {
   'kevinhwang91/nvim-ufo',
-  enabled = false,
   dependencies = {
     'kevinhwang91/promise-async',
     'neovim/nvim-lspconfig',
@@ -14,7 +13,6 @@ return {
       -- provider_selector = function()
       --   return { 'treesitter', 'indent' }
       -- end,
-      close_fold_kinds = { 'imports' },
       fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
         local prefix = ('🢃🢃🢃 %d '):format(endLnum - lnum)
         local newVirtText = { { prefix, '@keyword.return' } }
