@@ -38,6 +38,10 @@ M.default_capabilities = (function()
 end)()
 
 M.configure_server = function(server_name)
+  if server_name == 'tsserver' then
+    -- configured by `typescript-tools`
+    return
+  end
   local has_config, config = pcall(require, 'language_servers.' .. server_name)
 
   if not has_config then
