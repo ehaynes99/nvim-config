@@ -211,6 +211,7 @@ M.init = function()
       mode = 'x',
       desc = 'Copy and comment visual selection',
     },
+    { '<leader>mp', ':MarkdownPreview<CR>', desc = 'Markdown Preview' },
 
     -- Telescope/legendary
     { '<leader>tt', tu.builtin, desc = 'Telescope: builtin' },
