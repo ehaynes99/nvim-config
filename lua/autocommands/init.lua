@@ -48,12 +48,12 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   end,
 })
 
-vim.api.nvim_create_autocmd('BufEnter', {
-  desc = 'reload file when it changes on disk',
-  callback = function()
-    vim.cmd('checktime')
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--   desc = 'reload file when it changes on disk',
+--   callback = function()
+--     vim.cmd('checktime')
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd('BufReadPre', {
   desc = 'Disable some slow operations on large files',
