@@ -29,6 +29,9 @@ local mason_config = function()
 end
 
 local native_lsp_config = function()
+  -- vim.lsp.set_log_level('debug')
+  -- require('vim.lsp.log').set_format_func(vim.inspect)
+
   vim.diagnostic.config({
     virtual_text = false,
     signs = {
@@ -73,7 +76,7 @@ return {
     'simrat39/rust-tools.nvim',
     'folke/trouble.nvim',
     'b0o/schemastore.nvim',
-    'jose-elias-alvarez/typescript.nvim',
+    'pmizio/typescript-tools.nvim',
   },
   config = function()
     native_lsp_config()

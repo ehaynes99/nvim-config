@@ -1,6 +1,9 @@
 return {
   'pmizio/typescript-tools.nvim',
-  dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'neovim/nvim-lspconfig',
+  },
   config = function()
     local keymaps = require('keymaps')
     local ts_tools = require('typescript-tools')
@@ -8,10 +11,7 @@ return {
 
     ts_tools.setup({
       settings = {
-        publish_diagnostic_on = 'change',
-        expose_as_code_action = {
-          'add_missing_imports',
-        },
+        publish_diagnostic_on = 'insert_leave',
       },
       on_attach = function(_, bufnr)
         keymaps.lsp_keymaps(bufnr) -- no formatter, uses eslint instead
@@ -28,6 +28,8 @@ return {
         })
       end,
       handlers = {
+        -- Disable annoying diagnostics. All message codes:
+        -- https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
         ['textDocument/publishDiagnostics'] = api.filter_diagnostics({
           6133, -- unused variable - eslint will handle
           6138, -- unused property - eslint will handle
