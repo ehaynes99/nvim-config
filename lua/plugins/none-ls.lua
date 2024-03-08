@@ -1,14 +1,14 @@
 return {
-  'jose-elias-alvarez/null-ls.nvim',
+  'nvimtools/none-ls.nvim',
   config = function()
     local null_ls = require('null-ls')
 
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
     local formatting = null_ls.builtins.formatting
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-    local diagnostics = null_ls.builtins.diagnostics
+    -- local diagnostics = null_ls.builtins.diagnostics
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/code_actions
-    local code_actions = null_ls.builtins.code_actions
+    -- local code_actions = null_ls.builtins.code_actions
 
     null_ls.setup({
       debug = false,
@@ -18,11 +18,10 @@ return {
 
         -- python
         formatting.black,
-        diagnostics.flake8,
 
         -- shell scripts
-        diagnostics.shellcheck.with({ extra_args = { '-s', 'bash' } }),
-        code_actions.shellcheck.with({ extra_args = { '-s', 'bash' } }),
+        -- diagnostics.shellcheck.with({ extra_args = { '-s', 'bash' } }),
+        -- code_actions.shellcheck.with({ extra_args = { '-s', 'bash' } }),
         formatting.shfmt.with({ extra_args = { '--case-indent' } }),
         formatting.shellharden,
 
