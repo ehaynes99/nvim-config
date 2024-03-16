@@ -10,6 +10,7 @@ return {
   { 'kazhala/close-buffers.nvim' },
   { 'nvim-pack/nvim-spectre', config = true },
   { 'Almo7aya/openingh.nvim' },
+  -- better quickfix
   { 'kevinhwang91/nvim-bqf' },
   { 'mbbill/undotree' },
   { 'sindrets/diffview.nvim' },
