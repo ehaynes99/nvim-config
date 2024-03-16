@@ -12,6 +12,7 @@ return {
     ts_tools.setup({
       settings = {
         publish_diagnostic_on = 'insert_leave',
+        tsserver_max_memory = 6144,
       },
       on_attach = function(_, bufnr)
         keymaps.lsp_keymaps(bufnr) -- no formatter, uses eslint instead
