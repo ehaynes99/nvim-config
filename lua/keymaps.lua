@@ -134,7 +134,7 @@ M.init = function()
     { '<Down>', "v:count ? 'j' : 'gj'", mode = 'nx', desc = 'Move cursor up', expr = true },
     { '<Up>', "v:count ? 'k' : 'gk'", mode = 'nx', desc = 'Move cursor down', expr = true },
     { '<leader>ww', ':setl wrap!<CR>', desc = 'Toggle soft wrap' },
-    { '<leader>wu', ':UndotreeToggle<CR>', desc = 'Toggle soft wrap' },
+    { '<leader>wu', ':UndotreeToggle<CR>', desc = 'Toggle undo tree' },
     {
       '<leader>r',
       ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>',
