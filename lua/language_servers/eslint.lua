@@ -1,9 +1,11 @@
 local keymaps = require('keymaps')
 
 return {
-  on_attach = function(_, bufnr)
-    -- client.server_capabilities.document_formatting = true
-    keymaps.lsp_keymaps(bufnr, '<cmd>:EslintFixAll<CR>')
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = true
+    keymaps.lsp_keymaps(bufnr, function()
+      vim.lsp.buf.format()
+    end)
   end,
   settings = {
     codeAction = {
@@ -19,11 +21,11 @@ return {
       enable = false,
       mode = 'all',
     },
-    experimental = {
-      useFlatConfig = false,
-    },
+    -- experimental = {
+    --   useFlatConfig = false,
+    -- },
     onIgnoredFiles = 'off',
-    packageManager = 'npm',
+    -- packageManager = 'npm',
     problems = {
       shortenToSingleLine = false,
     },

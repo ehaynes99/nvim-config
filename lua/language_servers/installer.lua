@@ -27,7 +27,7 @@ M.create_formatter = function(bufnr)
   end
 end
 
-M.default_capabilities = (function()
+M.default_capabilities = function()
   local capabilities = cmp_nvim_lsp.default_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.foldingRange = {
@@ -35,7 +35,7 @@ M.default_capabilities = (function()
     lineFoldingOnly = true,
   }
   return capabilities
-end)()
+end
 
 M.configure_server = function(server_name)
   -- if server_name == 'tsserver' then
@@ -55,7 +55,7 @@ M.configure_server = function(server_name)
       on_attach = function(_, bufnr)
         keymaps.lsp_keymaps(bufnr, M.create_formatter(bufnr))
       end,
-      capabilities = M.default_capabilities,
+      capabilities = M.default_capabilities(),
     }
     lspconfig[server_name].setup(vim.tbl_extend('force', default_config, config))
   end

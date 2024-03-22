@@ -6,10 +6,18 @@ return function()
   typescript.setup({
     server = {
       on_attach = function(_, bufnr)
-        keymaps.lsp_keymaps(bufnr) -- no formatter, uses eslint instead
+        -- no formatter, uses eslint instead
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        keymaps.lsp_keymaps(bufnr)
 
         keymaps.add({
-          { 'gs', ':TypescriptGoToSourceDefinition<CR>', desc = 'LSP: TypeScript Goto source definition', buffer = bufnr },
+          {
+            'gs',
+            ':TypescriptGoToSourceDefinition<CR>',
+            desc = 'LSP: TypeScript Goto source definition',
+            buffer = bufnr,
+          },
           {
             '<leader>li',
             ':TypescriptAddMissingImports<CR>',
@@ -27,7 +35,7 @@ return function()
           -- { '<leader>lF', ':TypescriptFixAll<CR>', desc = 'LSP: TypeScript fix all', buffer = bufnr },
         })
       end,
-      capabilities = installer.default_capabilities,
+      capabilities = installer.default_capabilities(),
       settings = {
         diagnostics = {
           ignoredCodes = {
