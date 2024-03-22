@@ -103,6 +103,7 @@ M.init = function()
     { '<leader>?', tu.live_grep_without_tests, desc = 'Find: text excluding tests' },
     { '<leader>fs', ':Telescope grep_string<CR>', desc = 'Find: word under cursor' },
     { '<leader>fp', tu.live_grep_in_project, desc = 'Find: text in project' },
+    { '<leader>fP', tu.live_grep_in_project, desc = 'Find: text in project excluding tests' },
 
     { '<leader>fw', editor_utils.search_tree_dir, desc = 'Find: text within tree dir' },
     { '<leader>fr', spectre.open_file_search, desc = 'Spectre: Find replace' },

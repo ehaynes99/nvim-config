@@ -1,5 +1,7 @@
 local telescope = require('telescope.builtin')
-local git_root = require('utils.project').git_root
+local project_utils = require('utils.project')
+local git_root = project_utils.git_root
+local project_root = project_utils.project_root
 
 local M = {}
 
@@ -22,7 +24,7 @@ M.find_files = function()
 end
 
 M.live_grep_in_project = function()
-  telescope.live_grep({ cwd = git_root(), hidden = true })
+  telescope.live_grep({ cwd = project_root(), hidden = true })
 end
 
 M.live_grep_without_tests = function()
