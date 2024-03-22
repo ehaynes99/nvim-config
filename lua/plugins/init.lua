@@ -5,7 +5,6 @@ return {
 
   -- misc editor improvements
   { 'numToStr/Comment.nvim', config = true, event = 'VeryLazy' },
-  { 'mrjones2014/legendary.nvim', config = true, event = 'VeryLazy' },
   { 'chentoast/marks.nvim', config = true, event = 'VeryLazy' },
   { 'kazhala/close-buffers.nvim' },
   { 'nvim-pack/nvim-spectre', config = true },
