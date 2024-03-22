@@ -2,7 +2,6 @@ return {
   'mfussenegger/nvim-dap',
   lazy = true,
   dependencies = {
-    'rcarriga/nvim-dap-ui',
     'mxsdev/nvim-dap-vscode-js',
     {
       'microsoft/vscode-js-debug',
