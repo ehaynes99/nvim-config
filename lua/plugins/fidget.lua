@@ -1,11 +1,10 @@
 return {
   'j-hui/fidget.nvim',
-  tag = 'legacy',
+  -- tag = 'V1.4.0',
+  -- tag = 'legacy',
   opts = {
-    sources = {
-      ['null-ls'] = {
-        ignore = true,
-      },
+    integration = {
+      ['nvim-tree'] = { enable = true },
     },
   },
 }
