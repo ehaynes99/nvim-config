@@ -5,7 +5,7 @@ return function()
 
   typescript.setup({
     server = {
-      on_attach = function(_, bufnr)
+      on_attach = function(client, bufnr)
         -- no formatter, uses eslint instead
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
