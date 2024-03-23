@@ -52,7 +52,7 @@ return {
           mappings = { -- extend mappings
             i = {
               ['<C-u>'] = lga_actions.quote_prompt(),
-              ['<C-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob ' }),
+              ['<C-g>'] = lga_actions.quote_prompt({ postfix = ' --iglob ' }),
             },
           },
           -- ... also accepts theme settings, for example:

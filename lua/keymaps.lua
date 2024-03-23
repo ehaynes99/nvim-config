@@ -99,7 +99,9 @@ M.init = function()
 
     -- Find
     { '<leader>ff', tu.find_files, desc = 'Find: files' },
-    { '<leader>/', ':Telescope live_grep<CR>', desc = 'Find: text' },
+    -- { "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+    { '<leader>/', require('telescope').extensions.live_grep_args.live_grep_args, desc = 'Find: text' },
+    -- { '<leader>/', ':Telescope live_grep<CR>', desc = 'Find: text' },
     { '<leader>?', tu.live_grep_without_tests, desc = 'Find: text excluding tests' },
     { '<leader>fs', ':Telescope grep_string<CR>', desc = 'Find: word under cursor' },
     { '<leader>fp', tu.live_grep_in_project, desc = 'Find: text in project' },
