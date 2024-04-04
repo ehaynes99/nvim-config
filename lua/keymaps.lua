@@ -161,6 +161,7 @@ M.init = function()
     -- Window
     { '<leader>wc', '<cmd>:BDelete this<CR>', desc = 'Window: close current buffer' },
     { '<leader>wh', editor_utils.close_hidden_buffers, desc = 'Window: close all hidden buffers' },
+    { '<leader>wa', editor_utils.close_all_buffers, desc = 'Window: close all buffers' },
     { '<leader>wo', ':SymbolsOutline<CR>', desc = 'Toggle symbols outline' },
     { '<leader>wx', '<cmd>!chmod +x %<CR>', desc = 'Toggle file executable' },
     { '<leader>wd', ':windo diffthis<CR>', desc = 'Diff with split pane' },

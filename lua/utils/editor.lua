@@ -7,6 +7,12 @@ M.close_hidden_buffers = function()
   vim.cmd('redraw!')
 end
 
+M.close_all_buffers = function()
+  local close_buffers = require('close_buffers')
+  close_buffers.delete({ type = 'all', force = true })
+  vim.cmd('redraw!')
+end
+
 -- telescope live grep within folder selected in nvim-tree
 M.search_tree_dir = function()
   local api = require('nvim-tree.api')
