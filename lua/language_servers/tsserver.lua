@@ -2,9 +2,11 @@ return function()
   local keymaps = require('keymaps')
   local typescript = require('typescript')
   local installer = require('language_servers.installer')
+  local util = require 'lspconfig.util'
 
   typescript.setup({
     server = {
+      root_dir = util.root_pattern('.git'),
       on_attach = function(client, bufnr)
         -- no formatter, uses eslint instead
         client.server_capabilities.documentFormattingProvider = false

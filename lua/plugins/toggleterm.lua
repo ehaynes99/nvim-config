@@ -62,7 +62,8 @@ return {
       end
 
       print('project_root: ' .. project_root)
-      local cmd = 'npx -y jest --reporters="default" --watch --no-coverage ' .. test_file
+      local cmd = 'npx -y jest --watch --no-coverage ' .. test_file
+      -- local cmd = 'npx -y jest --reporters="default" --watch --no-coverage ' .. test_file
       -- local cmd = 'npx -y jest --reporters="default" --no-coverage ' .. test_file
 
       if jest_term:is_open() then

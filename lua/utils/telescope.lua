@@ -27,6 +27,14 @@ M.live_grep_in_project = function()
   telescope.live_grep({ cwd = project_root(), hidden = true })
 end
 
+M.live_grep_in_project_without_tests = function()
+  telescope.live_grep({
+    cwd = project_root(),
+    hidden = true,
+    glob_pattern = '!test/**',
+  })
+end
+
 M.live_grep_without_tests = function()
   telescope.live_grep({
     cwd = git_root(),
