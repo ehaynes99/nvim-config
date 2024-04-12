@@ -7,6 +7,7 @@ return {
       filetypes = {
         ['*'] = false,
         typescript = true,
+        javascript = true,
         rust = true,
         lua = true,
       },
