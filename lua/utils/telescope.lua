@@ -23,6 +23,10 @@ M.find_files = function()
   telescope.find_files({ hidden = true })
 end
 
+M.find_files_in_project = function()
+  telescope.find_files({ cwd = project_root(), hidden = true })
+end
+
 M.live_grep_in_project = function()
   telescope.live_grep({ cwd = project_root(), hidden = true })
 end
