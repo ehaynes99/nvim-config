@@ -11,16 +11,17 @@ return {
 
     treesitter.setup({
       ensure_installed = {
+        'bash',
         'javascript',
-        'typescript',
-        'tsx',
-        'rust',
+        'kotlin',
         'lua',
         'markdown',
         'markdown_inline',
-        'bash',
         'python',
+        'rust',
         'sql',
+        'tsx',
+        'typescript',
         'vim',
         'vimdoc',
       },
