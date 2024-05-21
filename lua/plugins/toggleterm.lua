@@ -62,8 +62,8 @@ return {
       end
 
       print('project_root: ' .. project_root)
-      local cmd = 'npx -y jest --watch --no-coverage ' .. test_file
-      -- local cmd = 'npx -y jest --reporters="default" --watch --no-coverage ' .. test_file
+      -- local cmd = 'npx -y jest --watch --no-coverage ' .. test_file
+      local cmd = 'npx -y jest --reporters="default" --watch --no-coverage --runInBand ' .. test_file
       -- local cmd = 'npx -y jest --reporters="default" --no-coverage ' .. test_file
 
       if jest_term:is_open() then
@@ -99,10 +99,10 @@ return {
 
     local ts_node_term = Terminal:new({
       direction = 'vertical',
-      -- close_on_exit = true,
+      close_on_exit = true,
       hidden = true,
-      close_on_exit = false,
-      on_exit = close_if_successful,
+      -- close_on_exit = false,
+      -- on_exit = close_if_successful,
     })
     local execute_ts_node = function()
       local file = vim.api.nvim_buf_get_name(0)
@@ -113,10 +113,10 @@ return {
         return
       end
 
-      local cmd = 'npx -y nodemon --watch ' .. file .. ' --exec "ts-node ' .. file .. '"'
+      -- local cmd = 'npx -y nodemon --watch ' .. file .. ' --exec "ts-node ' .. file .. '"'
       -- local cmd = 'npx -y ts-node-dev ' .. file
       -- local cmd = 'npx -y esbuild-runner ' .. file
-      -- local cmd = 'npx -y tsx ' .. file
+      local cmd = 'npx -y tsx watch ' .. file
 
       if ts_node_term:is_open() then
         ts_node_term:change_dir(project_root)
