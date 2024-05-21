@@ -2,7 +2,7 @@ return function()
   local keymaps = require('keymaps')
   local typescript = require('typescript')
   local installer = require('language_servers.installer')
-  local util = require 'lspconfig.util'
+  local util = require('lspconfig.util')
 
   typescript.setup({
     server = {
@@ -55,6 +55,11 @@ return function()
         },
       },
       init_options = {
+        maxTsServerMemory = 6144,
+        tsserver = {
+          logDirectory = '/tmp/tsserver_logs',
+          -- logVerbosity = 'verbose',
+        },
         preferences = {
           importModuleSpecifierPreference = 'project-relative',
           includeCompletionsWithSnippetText = true,
