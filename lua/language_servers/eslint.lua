@@ -7,6 +7,7 @@ return {
       vim.lsp.buf.format()
     end)
   end,
+  -- https://github.com/Microsoft/vscode-eslint#settings-options
   settings = {
     codeAction = {
       disableRuleComment = {

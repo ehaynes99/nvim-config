@@ -55,15 +55,17 @@ return function()
         },
       },
       init_options = {
-        maxTsServerMemory = 6144,
+        maxTsServerMemory = 8192,
         tsserver = {
           logDirectory = '/tmp/tsserver_logs',
+          -- logVerbosity = 'normal',
           -- logVerbosity = 'verbose',
         },
         preferences = {
           importModuleSpecifierPreference = 'project-relative',
           includeCompletionsWithSnippetText = true,
           includeCompletionsForImportStatements = true,
+          preferTGoToSourceDefinition = true,
         },
       },
     },
