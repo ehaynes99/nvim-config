@@ -59,6 +59,7 @@ return {
         ignore = true,
         show_on_dirs = true,
         show_on_open_dirs = false,
+        timeout = 1500,
       },
       renderer = {
         root_folder_label = false,
