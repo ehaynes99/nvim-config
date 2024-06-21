@@ -61,10 +61,11 @@ return {
         return
       end
 
-      print('project_root: ' .. project_root)
-      -- local cmd = 'npx -y jest --watch --no-coverage ' .. test_file
       local cmd = 'npx -y jest --reporters="default" --watch --no-coverage --runInBand ' .. test_file
-      -- local cmd = 'npx -y jest --reporters="default" --no-coverage ' .. test_file
+
+      if project_utils.is_module(test_file) then
+        cmd = 'NODE_OPTIONS="$NODE_OPTIONS --experimental-vm-modules" ' .. cmd
+      end
 
       if jest_term:is_open() then
         jest_term:change_dir(project_root)
