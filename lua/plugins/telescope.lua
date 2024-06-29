@@ -19,9 +19,6 @@ return {
         selection_caret = ' ',
         file_ignore_patterns = {
           '.git/',
-          'node_modules',
-          'package-lock.json',
-          'pnpm-lock.yaml',
         },
 
         mappings = {
