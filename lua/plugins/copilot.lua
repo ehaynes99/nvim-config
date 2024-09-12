@@ -3,11 +3,14 @@ return {
   cmd = 'Copilot',
   event = 'InsertEnter',
   config = function()
+    local keymaps = require('keymaps')
     require('copilot').setup({
       filetypes = {
         ['*'] = false,
         typescript = true,
         javascript = true,
+        typescriptreact = true,
+        javascriptreact = true,
         rust = true,
         lua = true,
       },
@@ -20,6 +23,13 @@ return {
           dismiss = 'kk',
           accept_word = '<Nop>',
         },
+      },
+    })
+    keymaps.add({
+      {
+        '<leader>KK',
+        ':Copilot toggle<CR>',
+        desc = 'Copilot: toggle',
       },
     })
     vim.keymap.set(
