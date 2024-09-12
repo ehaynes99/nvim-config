@@ -4,6 +4,8 @@ return function()
   local installer = require('language_servers.installer')
   local util = require('lspconfig.util')
 
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/tsserver.lua
+  -- https://github.com/typescript-language-server/typescript-language-server
   typescript.setup({
     server = {
       root_dir = util.root_pattern('.git'),
