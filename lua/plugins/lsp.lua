@@ -91,6 +91,11 @@ return {
     -- 'pmizio/typescript-tools.nvim',
   },
   config = function()
+    vim.lsp.handlers['workspace/diagnostic/refresh'] = function(_, _, ctx)
+      local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
+      pcall(vim.diagnostic.reset, ns)
+      return true
+    end
     native_lsp_config()
     mason_config()
   end,
