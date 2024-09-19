@@ -4,7 +4,6 @@ return {
   { 'nvim-tree/nvim-web-devicons', priority = 999 },
 
   -- misc editor improvements
-  { 'numToStr/Comment.nvim', config = true, event = 'VeryLazy' },
   { 'chentoast/marks.nvim', config = true, event = 'VeryLazy' },
   { 'kazhala/close-buffers.nvim' },
   { 'nvim-pack/nvim-spectre', config = true },
