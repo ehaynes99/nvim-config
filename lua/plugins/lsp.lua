@@ -11,16 +11,17 @@ local mason_config = function()
 
   mason_lsp.setup({
     ensure_installed = {
-      'cssls',
-      'html',
-      'pyright',
       'bashls',
-      'jsonls',
-      'rust_analyzer',
-      'lua_ls',
-      'tsserver',
+      'cssls',
       'eslint',
+      'html',
+      'jsonls',
+      'lua_ls',
+      'pyright',
+      'rust_analyzer',
       'sqlls',
+      -- managed by typescript-tools
+      -- 'ts_ls',
     },
     automatic_installation = true,
   })

@@ -1,6 +1,5 @@
 return {
   'pmizio/typescript-tools.nvim',
-  enabled = false,
   dependencies = {
     'nvim-lua/plenary.nvim',
     'neovim/nvim-lspconfig',
@@ -9,11 +8,19 @@ return {
     local keymaps = require('keymaps')
     local ts_tools = require('typescript-tools')
     local api = require('typescript-tools.api')
+    local util = require('lspconfig.util')
 
     ts_tools.setup({
+      root_dir = util.root_pattern('.git'),
       settings = {
         publish_diagnostic_on = 'insert_leave',
-        tsserver_max_memory = 6144,
+        tsserver_max_memory = 8192,
+        tsserver_file_preferences = {
+          importModuleSpecifierPreference = 'project-relative',
+          includeCompletionsWithSnippetText = true,
+          includeCompletionsForImportStatements = true,
+          preferTGoToSourceDefinition = true,
+        },
       },
       on_attach = function(_, bufnr)
         keymaps.lsp_keymaps(bufnr) -- no formatter, uses eslint instead
