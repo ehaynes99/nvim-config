@@ -21,7 +21,7 @@ local mason_config = function()
       'rust_analyzer',
       'sqlls',
       -- managed by typescript-tools
-      -- 'ts_ls',
+      'ts_ls',
     },
     automatic_installation = true,
   })
