@@ -22,7 +22,9 @@ return {
           preferTGoToSourceDefinition = true,
         },
       },
-      on_attach = function(_, bufnr)
+      on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
         keymaps.lsp_keymaps(bufnr) -- no formatter, uses eslint instead
 
         keymaps.add({
