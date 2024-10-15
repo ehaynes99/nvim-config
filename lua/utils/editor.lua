@@ -1,18 +1,5 @@
 local M = {}
 
--- close any non-visible buffers
-M.close_hidden_buffers = function()
-  local close_buffers = require('close_buffers')
-  close_buffers.delete({ type = 'hidden', force = true })
-  vim.cmd('redraw!')
-end
-
-M.close_all_buffers = function()
-  local close_buffers = require('close_buffers')
-  close_buffers.delete({ type = 'all', force = true })
-  vim.cmd('redraw!')
-end
-
 -- telescope live grep within folder selected in nvim-tree
 M.search_tree_dir = function()
   local api = require('nvim-tree.api')
@@ -30,17 +17,9 @@ M.search_tree_dir = function()
   end
 end
 
-local all_buffer_opts = {
-  'bufhidden',
-  'buflisted',
-  'buftype',
-  'filetype',
-  'modifiable',
-  'modified',
-  'readonly',
-  'swapfile',
-  'undofile',
-}
+M.is_file = function(bufnr)
+  return vim.bo[bufnr].buflisted and vim.api.nvim_buf_get_name(bufnr) ~= ''
+end
 
 M.all_buffers = function()
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -48,14 +27,39 @@ M.all_buffers = function()
   end
 end
 
-M.buf_is_file = function(bufnr)
-  bufnr = bufnr or 0
+M.file_buffers = function()
+  local all_buffers = vim.api.nvim_list_bufs()
+  return vim.tbl_filter(M.is_file, all_buffers)
+end
 
-  return vim.api.nvim_get_option_value('buftype', { buf = 0 }) == ''
+M.buffers_in_directory = function(path)
+  return vim.tbl_filter(function(buf)
+    local buf_path = vim.api.nvim_buf_get_name(buf)
+    return buf_path:sub(1, #path) == path
+  end, M.file_buffers())
+end
+
+M.buffers_not_in_directory = function(path)
+  return vim.tbl_filter(function(buf)
+    local buf_path = vim.api.nvim_buf_get_name(buf)
+    return buf_path:sub(1, #path) ~= path
+  end, M.file_buffers())
 end
 
 -- see `:h options` section '3. Options summary'
 M.buf_get_options = function(bufnr, option_names)
+  local all_buffer_opts = {
+    'bufhidden',
+    'buflisted',
+    'buftype',
+    'filetype',
+    'modifiable',
+    'modified',
+    'readonly',
+    'swapfile',
+    'undofile',
+  }
+
   option_names = option_names or all_buffer_opts
   local result = {
     id = bufnr,
@@ -67,19 +71,27 @@ M.buf_get_options = function(bufnr, option_names)
   return result
 end
 
--- adapted from: https://github.com/akinsho/bufferline.nvim/blob/4ecfa81e470a589e74adcde3d5bb1727dd407363/lua/bufferline/utils/init.lua#L132-L136
--- The provided api nvim_is_buf_loaded filters out all hidden buffers
-function M.is_valid(bufnr)
-  if not bufnr or bufnr < 1 then
-    return false
-  end
-  local exists = vim.api.nvim_buf_is_valid(bufnr)
-  return vim.bo[bufnr].buflisted and exists
+M.close_hidden_buffers = function()
+  local close_buffers = require('close_buffers')
+  close_buffers.delete({ type = 'hidden', force = true })
+  vim.cmd('redraw!')
 end
 
--- adapted from: https://github.com/akinsho/bufferline.nvim/blob/4ecfa81e470a589e74adcde3d5bb1727dd407363/lua/bufferline/utils/init.lua#L143
-M.get_valid_buffers = function()
-  return vim.tbl_filter(M.is_valid, vim.api.nvim_list_bufs())
+M.close_all_buffers = function()
+  local close_buffers = require('close_buffers')
+  close_buffers.delete({ type = 'all', force = true })
+  vim.cmd('redraw!')
+end
+
+M.close_buffers_not_in_project = function()
+  local project = require('utils.project')
+  local close_buffers = require('close_buffers')
+
+  local project_root = project.project_root()
+  local buffers_to_close = M.buffers_not_in_directory(project_root)
+  for _, buf in ipairs(buffers_to_close) do
+    close_buffers.delete({ type = buf, force = true })
+  end
 end
 
 return M

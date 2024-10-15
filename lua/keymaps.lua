@@ -164,6 +164,7 @@ M.init = function()
     -- Window
     { '<leader>wc', '<cmd>:BDelete this<CR>', desc = 'Window: close current buffer' },
     { '<leader>wh', editor_utils.close_hidden_buffers, desc = 'Window: close all hidden buffers' },
+    { '<leader>wp', editor_utils.close_buffers_not_in_project, desc = 'Window: close buffers not in project' },
     { '<leader>wa', editor_utils.close_all_buffers, desc = 'Window: close all buffers' },
     { '<leader>wo', ':SymbolsOutline<CR>', desc = 'Toggle symbols outline' },
     { '<leader>wx', '<cmd>!chmod +x %<CR>', desc = 'Toggle file executable' },
