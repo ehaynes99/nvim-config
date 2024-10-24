@@ -47,6 +47,7 @@ return {
           80001, -- convert to ES module suggestion
           80005, -- 'require' call may be converted to an import
           80006, -- may be converted to an async function -- auto-"fix" BREAKS CODE with multiple returns
+          80007, -- unnecessary await - eslint will handle
         }),
       },
     })
