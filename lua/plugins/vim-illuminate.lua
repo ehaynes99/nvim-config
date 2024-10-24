@@ -7,6 +7,7 @@ return {
 
     require('keymaps').add({
       { '<leader>;', illuminate.goto_next_reference, desc = 'LSP: Go to next reference' },
+      { ';', illuminate.goto_next_reference, desc = 'LSP: Go to next reference' },
       { '<leader>:', illuminate.goto_prev_reference, desc = 'LSP: Go to previous reference' },
     })
   end,
