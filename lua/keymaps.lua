@@ -121,7 +121,8 @@ M.init = function()
     { '<leader>gh', tu.git_bcommits, desc = 'Git: show commits for file' },
     { '<leader>gB', tu.git_branches, desc = 'Git: branches' },
     { '<leader>gb', ':BlamerToggle<CR>', desc = 'Git: show blame' },
-    { '<Leader>gf', ':OpenInGHFileLines<CR>', mode = 'nx', desc = 'Git: open file in github' },
+    { '<Leader>gf', ':OpenInGHFileLines<CR>', mode = 'nx', desc = 'Git: open selected lines in github' },
+    { '<Leader>gF', ':OpenInGHFile<CR>', mode = 'nx', desc = 'Git: open file in github' },
 
     -- LSP common
     { '<leader>ll', ':LspRestart<CR>', desc = 'LSP: Restart' },
