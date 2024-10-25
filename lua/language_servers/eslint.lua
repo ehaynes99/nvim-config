@@ -4,7 +4,7 @@ return {
   on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = true
     keymaps.lsp_keymaps(bufnr, function()
-      vim.lsp.buf.format()
+      vim.lsp.buf.format({ timeout_ms = 2000 })
     end)
   end,
   -- https://github.com/Microsoft/vscode-eslint#settings-options
