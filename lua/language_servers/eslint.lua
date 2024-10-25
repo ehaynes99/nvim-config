@@ -22,17 +22,13 @@ return {
       enable = false,
       mode = 'all',
     },
-    -- experimental = {
-    --   useFlatConfig = false,
-    -- },
     onIgnoredFiles = 'off',
-    -- packageManager = 'npm',
     problems = {
       shortenToSingleLine = false,
     },
     quiet = false,
     run = 'onType',
-    useESLintClass = false,
+    useESLintClass = true,
     validate = 'on',
     workingDirectory = {
       mode = 'location',
@@ -40,5 +36,8 @@ return {
     enable = true,
     format = true,
     autoFixOnSave = false,
+    -- options = {
+    --   flags = { 'unstable_ts_config' },
+    -- },
   },
 }
