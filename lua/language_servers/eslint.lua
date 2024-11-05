@@ -7,6 +7,7 @@ return {
       vim.lsp.buf.format({ timeout_ms = 2000 })
     end)
   end,
+
   -- https://github.com/Microsoft/vscode-eslint#settings-options
   settings = {
     codeAction = {
@@ -26,18 +27,13 @@ return {
     problems = {
       shortenToSingleLine = false,
     },
-    quiet = false,
     run = 'onType',
-    useESLintClass = true,
     validate = 'on',
     workingDirectory = {
       mode = 'location',
     },
     enable = true,
     format = true,
-    autoFixOnSave = false,
-    -- options = {
-    --   flags = { 'unstable_ts_config' },
-    -- },
   },
 }
+
