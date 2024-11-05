@@ -49,6 +49,12 @@ return {
       close_on_exit = false,
       hidden = true,
       on_exit = close_if_successful,
+      -- on_create = function(term)
+      --   vim.keymap.set('n', 'q', function()
+      --     print('should be quitting now')
+      --     toggleterm.send_lines_to_terminal('q', false, { args = term.id })
+      --   end, { buffer = term.bufnr, desc = 'Close terminal' })
+      -- end,
     })
 
     vim.keymap.set('n', '<leader>T', function()
@@ -63,9 +69,15 @@ return {
 
       local cmd = 'npx -y jest --reporters="default" --watch --no-coverage --runInBand ' .. test_file
 
+      print('is module' .. vim.inspect(project_utils.is_module(test_file)))
       if project_utils.is_module(test_file) then
-        cmd = 'NODE_OPTIONS="$NODE_OPTIONS --experimental-vm-modules" ' .. cmd
+        -- cmd = 'NODE_OPTIONS="$NODE_OPTIONS --experimental-vm-modules" ' .. cmd
+        cmd = 'NODE_OPTIONS="--experimental-vm-modules" ' .. cmd
       end
+
+      print('project root: ' .. project_root)
+      print('test file: ' .. test_file)
+      print('cmd: ' .. cmd)
 
       if jest_term:is_open() then
         jest_term:change_dir(project_root)
@@ -117,7 +129,8 @@ return {
       -- local cmd = 'npx -y nodemon --watch ' .. file .. ' --exec "ts-node ' .. file .. '"'
       -- local cmd = 'npx -y ts-node-dev ' .. file
       -- local cmd = 'npx -y esbuild-runner ' .. file
-      local cmd = 'npx -y tsx watch ' .. file
+      -- local cmd = 'npx -y tsx watch ' .. file
+      local cmd = 'pnpx tsx watch ' .. file
 
       if ts_node_term:is_open() then
         ts_node_term:change_dir(project_root)
