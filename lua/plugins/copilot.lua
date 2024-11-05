@@ -3,6 +3,18 @@ return {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
     event = 'InsertEnter',
+    keys = {
+      {
+        '<leader>ccq',
+        function()
+          local input = vim.fn.input('Quick Chat: ')
+          if input ~= '' then
+            require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+          end
+        end,
+        desc = 'CopilotChat - Quick chat',
+      },
+    },
     config = function()
       local keymaps = require('keymaps')
       require('copilot').setup({
@@ -51,6 +63,7 @@ return {
       },
       build = 'make tiktoken',
       opts = {
+        system_prompt = 'For any code in nodejs or TypeScript, use TypeScript in strict mode, ESM imports, no semicolons, and always prefer arrow functions. Add return type annotations to functions.',
         -- debug = true, -- Enable debugging
         mappings = {
           reset = {
