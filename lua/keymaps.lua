@@ -169,7 +169,7 @@ M.init = function()
     { '<leader>wa', editor_utils.close_all_buffers, desc = 'Window: close all buffers' },
     { '<leader>wo', ':SymbolsOutline<CR>', desc = 'Toggle symbols outline' },
     { '<leader>wx', '<cmd>!chmod +x %<CR>', desc = 'Toggle file executable' },
-    { '<leader>wd', ':windo diffthis<CR>', desc = 'Diff with split pane' },
+    { '<leader>wd', editor_utils.toggle_diff, desc = 'Diff with split pane' },
 
     { '<LeftDrag>', '', desc = 'Disable left drag' },
     { '<LeftRelease>', '', desc = 'Disable left drag' },

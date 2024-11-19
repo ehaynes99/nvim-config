@@ -46,6 +46,14 @@ M.buffers_not_in_directory = function(path)
   end, M.file_buffers())
 end
 
+M.toggle_diff = function()
+  if vim.wo.diff then
+    vim.cmd('windo diffoff!')
+  else
+    vim.cmd('windo diffthis')
+  end
+end
+
 -- see `:h options` section '3. Options summary'
 M.buf_get_options = function(bufnr, option_names)
   local all_buffer_opts = {
