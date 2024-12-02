@@ -106,7 +106,21 @@ M.init = function()
     { '<leader>/', require('telescope').extensions.live_grep_args.live_grep_args, desc = 'Find: text' },
     -- { '<leader>/', ':Telescope live_grep<CR>', desc = 'Find: text' },
     { '<leader>?', tu.live_grep_without_tests, desc = 'Find: text excluding tests' },
-    { '<leader>fs', ':Telescope grep_string<CR>', desc = 'Find: word under cursor' },
+    {
+      '<leader>fs',
+      require('telescope-live-grep-args.shortcuts').grep_word_under_cursor,
+      desc = 'Find: word under cursor',
+    },
+    {
+      '<leader>pfs',
+      tu.live_grep_word_under_cursor_in_project,
+      desc = 'Find: word under cursor in project',
+    },
+    {
+      '<leader>fv',
+      require('telescope-live-grep-args.shortcuts').grep_visual_selection,
+      desc = 'Find: visual selection',
+    },
     { '<leader>fp', tu.live_grep_in_project, desc = 'Find: text in project' },
     { '<leader>fP', tu.live_grep_in_project_without_tests, desc = 'Find: text in project excluding tests' },
 

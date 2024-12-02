@@ -6,7 +6,7 @@ return {
     {
       'microsoft/vscode-js-debug',
       version = '1.x',
-      build = 'npm i && npm run compile vsDebugServerBundle && mv dist out',
+      build = 'rm -rf out/dist && npm i && npm run compile vsDebugServerBundle && mv dist out',
     },
   },
   config = function()
