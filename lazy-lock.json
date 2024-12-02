@@ -1,6 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
-  "CopilotChat.nvim": { "branch": "canary", "commit": "760d291e9c2a0e19ef2882ee77a87e5571ee532f" },
+  "CopilotChat.nvim": { "branch": "main", "commit": "6c7a6871e32bbd7afdc01597fc5605d8991bfbc3" },
   "LuaSnip": { "branch": "master", "commit": "29417eea5b7c4b6beda105ced072855101d9680e" },
   "auto-save.nvim": { "branch": "main", "commit": "5fbcaac0a2698c87a9a1bd2083cb6949505cca12" },
   "auto-session": { "branch": "main", "commit": "542d338ec5ee027638c8e076110b188a465b45d2" },
@@ -22,7 +22,7 @@
   "gx.nvim": { "branch": "main", "commit": "cc70d112b14d18dd7b123a5d5288266a60e8189e" },
   "indent-blankline.nvim": { "branch": "master", "commit": "04e44b09ee3ff189c69ab082edac1ef7ae2e256c" },
   "kanagawa.nvim": { "branch": "master", "commit": "f491b0fe68fffbece7030181073dfe51f45cda81" },
-  "lazy.nvim": { "branch": "main", "commit": "b1134ab82ee4279e31f7ddf7e34b2a99eb9b7bc9" },
+  "lazy.nvim": { "branch": "main", "commit": "7967abe55752aa90532e6bb4bd4663fe27a264cb" },
   "lazydev.nvim": { "branch": "main", "commit": "d5800897d9180cea800023f2429bce0a94ed6064" },
   "lualine.nvim": { "branch": "master", "commit": "640260d7c2d98779cab89b1e7088ab14ea354a02" },
   "luvit-meta": { "branch": "main", "commit": "ce76f6f6cdc9201523a5875a4471dcfe0186eb60" },
