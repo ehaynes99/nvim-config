@@ -98,8 +98,6 @@ M.init = function()
     { '<A-l>', ':tabnext<CR>', mode = 'nixt', desc = 'Go to next tab' },
 
     -- Find
-    { '<leader>ff', tu.find_files, desc = 'Find: files' },
-    { '<leader>fF', tu.find_files_in_project, desc = 'Find: files in project' },
     { 'ff', tu.find_files, desc = 'Find: files' },
     { 'fF', tu.find_files_in_project, desc = 'Find: files in project' },
     -- { "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
