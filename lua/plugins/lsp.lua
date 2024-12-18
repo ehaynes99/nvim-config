@@ -13,7 +13,6 @@ local mason_config = function()
     ensure_installed = {
       'bashls',
       'cssls',
-      'eslint',
       'html',
       'jsonls',
       'lua_ls',
@@ -21,7 +20,9 @@ local mason_config = function()
       'rust_analyzer',
       'sqlls',
       -- managed by typescript-tools
-      'ts_ls',
+      -- 'ts_ls',
+      -- managed by nvim-eslint
+      -- 'eslint',
     },
     automatic_installation = true,
   })
@@ -30,30 +31,19 @@ local mason_config = function()
 end
 
 local native_lsp_config = function()
-  -- vim.lsp.set_log_level('debug')
-  -- require('vim.lsp.log').set_format_func(vim.inspect)
-  local signs = {
-    { name = 'DiagnosticSignError', text = '' },
-    { name = 'DiagnosticSignWarn', text = '' },
-    { name = 'DiagnosticSignHint', text = '' },
-    { name = 'DiagnosticSignInfo', text = '' },
-  }
-
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
-  end
+  vim.lsp.set_log_level('debug')
 
   vim.diagnostic.config({
     virtual_text = false,
     -- new format in nvim 0.10.x
-    -- signs = {
-    --   text = {
-    --     [vim.diagnostic.severity.ERROR] = '',
-    --     [vim.diagnostic.severity.WARN] = '',
-    --     [vim.diagnostic.severity.HINT] = '',
-    --     [vim.diagnostic.severity.INFO] = '',
-    --   },
-    -- },
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = '',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.HINT] = '',
+        [vim.diagnostic.severity.INFO] = '',
+      },
+    },
     update_in_insert = true,
     underline = true,
     severity_sort = true,
@@ -61,7 +51,8 @@ local native_lsp_config = function()
       focusable = true,
       style = 'minimal',
       border = 'rounded',
-      source = 'always',
+      -- source = 'always',
+      source = true,
       header = '',
       prefix = '',
     },
