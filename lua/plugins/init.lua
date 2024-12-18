@@ -22,9 +22,6 @@ return {
   { 'keith/swift.vim' },
 
   { 'windwp/nvim-ts-autotag' },
-  { 'windwp/nvim-autopairs', opts = {
-    check_ts = true,
-    enable_check_bracket_line = false,
-  } },
   { 'kylechui/nvim-surround', config = true },
 }
+
