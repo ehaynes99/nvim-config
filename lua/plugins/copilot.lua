@@ -1,8 +1,10 @@
 return {
   {
     'zbirenbaum/copilot.lua',
+    enabled = true,
     cmd = 'Copilot',
     event = 'InsertEnter',
+    commit = '86537b286f18783f8b67bccd78a4ef4345679625',
     config = function()
       local keymaps = require('keymaps')
       require('copilot').setup({
@@ -44,6 +46,7 @@ return {
   {
     {
       'CopilotC-Nvim/CopilotChat.nvim',
+      enabled = true,
       dependencies = {
         { 'zbirenbaum/copilot.lua' },
         { 'nvim-lua/plenary.nvim' },
