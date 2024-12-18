@@ -182,6 +182,7 @@ M.init = function()
     { '<leader>wo', ':SymbolsOutline<CR>', desc = 'Toggle symbols outline' },
     { '<leader>wx', '<cmd>!chmod +x %<CR>', desc = 'Toggle file executable' },
     { '<leader>wd', editor_utils.toggle_diff, desc = 'Diff with split pane' },
+    { '<leader>wn', ':set rnu!<CR>', desc = 'Toggle relative line numbers' },
 
     { '<LeftDrag>', '', desc = 'Disable left drag' },
     { '<LeftRelease>', '', desc = 'Disable left drag' },
@@ -202,7 +203,6 @@ M.init = function()
     { '<ESC><ESC>', '<C-\\><C-n>', mode = 't', desc = 'Leave insert' },
 
     -- Editor
-    { '<leader>n', ':set rnu!<CR>', desc = 'Toggle relative line numbers' },
     { '<leader>h', ':nohlsearch<CR>', desc = 'Window: cancel highlight' },
     { 'p', '"_dP', mode = 'x', desc = 'Paste without copying replaced' },
     { '<C-p>', 'p', mode = 'x', desc = 'Paste and yank' },
