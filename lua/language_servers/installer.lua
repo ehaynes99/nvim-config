@@ -38,8 +38,8 @@ M.default_capabilities = function()
 end
 
 M.configure_server = function(server_name)
-  if server_name == 'ts_ls' then
-    -- configured by `typescript-tools`
+  if server_name == 'ts_ls' or server_name == 'eslint' then
+    -- configured by `typescript-tools` or `nvim-eslint`, respectively
     return
   end
   local has_config, config = pcall(require, 'language_servers.' .. server_name)

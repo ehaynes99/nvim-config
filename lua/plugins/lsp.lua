@@ -31,7 +31,7 @@ local mason_config = function()
 end
 
 local native_lsp_config = function()
-  vim.lsp.set_log_level('debug')
+  -- vim.lsp.set_log_level('debug')
 
   vim.diagnostic.config({
     virtual_text = false,
