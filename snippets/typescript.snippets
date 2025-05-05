@@ -27,23 +27,23 @@ snippet trycatch 'Try-Catch'
         try {
           $0
         } catch (error) {
-          console.error(error)
+          //
         }
 
 snippet tryfinally 'Try-Finally'
         try {
           $0
         } finally {
-          
+          //
         }
 
 snippet trycatfin 'Try-Catch-finally'
         try {
           $0
         } catch (error) {
-          console.error(error)
+          //
         } finally {
-
+          //
         }
 
 snippet /** 'jsdoc'
@@ -102,19 +102,27 @@ snippet csvc 'create a service'
           //
         }
 
-        export type ${1:ServiceName}Options = {
+        export const ${1:ServiceName} = (
           //
-        }
-
-        export const create${1:ServiceName} = ({
-          //
-        }: ${1:ServiceName}Options): ${1:ServiceName} => {
+        ): ${1:ServiceName} => {
           return {
             //
           }
         }
-snippet impval 'import TypeBox Value'
-        import { Value } from '@sinclair/typebox/value'
 
-snippet impcomp 'import TypeBox TypeCompiler'
-        import { TypeCompiler } from '@sinclair/typebox/compiler'
+snippet test 'Jest Test'
+        import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from '@jest/globals'
+
+        describe(${1:description}, () => {
+          beforeAll(async () => {})
+
+          afterAll(async () => {})
+
+          beforeEach(async () => {})
+
+          afterEach(async () => {})
+
+          it('behavior', async () => {
+            //
+          })
+        })
