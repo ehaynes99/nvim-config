@@ -37,6 +37,27 @@ M.project_root = function(path)
   end
 end
 
+M.package_json = function(path)
+  path = path or vim.api.nvim_buf_get_name(0)
+  local package_file = vim.fs.find('package.json', {
+    path = path,
+    upward = true,
+    type = 'file',
+    stop = vim.fn.expand('$HOME'),
+    limit = 1,
+  })[1]
+  if package_file then
+    return vim.fn.json_decode(vim.fn.readfile(package_file))
+  end
+end
+
+M.package_json_script_names = function(path)
+  local package = M.package_json(path)
+  if package then
+    return vim.tbl_keys(package.scripts or {})
+  end
+end
+
 M.package_manager = function(path)
   path = path or vim.api.nvim_buf_get_name(0)
   local lockfiles = {
