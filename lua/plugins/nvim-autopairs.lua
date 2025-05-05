@@ -10,6 +10,7 @@ return {
     npairs.add_rules({
       Rule('```', '```', { 'markdown', 'vimwiki', 'copilot-chat' }),
       Rule('```.*$', '```', { 'markdown', 'vimwiki', 'copilot-chat' }),
+      -- Rule('""".*$', '"""', { 'graphql' }),
 
       -- Rule('```', '```\n\n```', { 'markdown', 'vimwiki', 'copilot-chat' }):set_end_pair_length(4), -- Counts the \n\n``` as 4 characters
       -- Rule('```.*$', '```\n\n```', { 'markdown', 'vimwiki', 'copilot-chat' }):set_end_pair_length(4),

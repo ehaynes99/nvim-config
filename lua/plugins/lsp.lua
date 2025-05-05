@@ -19,6 +19,7 @@ local mason_config = function()
       'pyright',
       'rust_analyzer',
       'sqlls',
+      'graphql',
       -- managed by typescript-tools
       -- 'ts_ls',
       -- managed by nvim-eslint

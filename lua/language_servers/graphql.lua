@@ -1,0 +1,27 @@
+return {
+  filetypes = { 'graphql', 'typescript', 'typescriptreact' },
+  root_dir = require('lspconfig.util').root_pattern(
+    'graphql.config.ts',
+    'graphql.config.cts',
+    'graphql.config.mts',
+    'graphql.config.js',
+    'graphql.config.cjs',
+    'graphql.config.mjs',
+    'graphql.config.json',
+    'graphql.config.yaml',
+    'graphql.config.yml',
+    'graphql.config.toml',
+    '.graphqlrc',
+    '.graphqlrc.ts',
+    '.graphqlrc.cts',
+    '.graphqlrc.mts',
+    '.graphqlrc.js',
+    '.graphqlrc.cjs',
+    '.graphqlrc.mjs',
+    '.graphqlrc.json',
+    '.graphqlrc.yml',
+    '.graphqlrc.yaml',
+    '.graphqlrc.toml',
+    'package.json'
+  ),
+}

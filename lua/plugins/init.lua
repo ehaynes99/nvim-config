@@ -23,5 +23,6 @@ return {
 
   { 'windwp/nvim-ts-autotag' },
   { 'kylechui/nvim-surround', config = true },
+  -- { 'jparise/vim-graphql' },
 }
 
