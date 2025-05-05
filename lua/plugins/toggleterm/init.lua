@@ -44,9 +44,9 @@ return {
       gitui_term:toggle()
     end, { desc = 'Toggle gitui' })
 
-    local jest_term = Terminal:new({
+    local test_term = Terminal:new({
       direction = 'vertical',
-      close_on_exit = false,
+      close_on_exit = true,
       hidden = true,
       on_exit = close_if_successful,
       -- on_create = function(term)
@@ -67,25 +67,27 @@ return {
         return
       end
 
-      local cmd = 'npx -y jest --reporters="default" --watch --no-coverage --runInBand ' .. test_file
+      -- local cmd = 'node_modules/jest/bin/jest.js --reporters="default" --watch --no-coverage --runInBand ' .. test_file
+      --
+      -- if project_utils.is_module(test_file) then
+      --   cmd = 'NODE_OPTIONS="--experimental-vm-modules" ' .. cmd
+      -- end
 
-      print('is module' .. vim.inspect(project_utils.is_module(test_file)))
-      if project_utils.is_module(test_file) then
-        -- cmd = 'NODE_OPTIONS="$NODE_OPTIONS --experimental-vm-modules" ' .. cmd
-        cmd = 'NODE_OPTIONS="--experimental-vm-modules" ' .. cmd
-      end
+      -- local cmd = 'pnpm test --watch --disableConsoleIntercept ' .. test_file
+      local cmd = 'pnpx vitest --watch --disableConsoleIntercept ' .. test_file
+
 
       print('project root: ' .. project_root)
       print('test file: ' .. test_file)
       print('cmd: ' .. cmd)
 
-      if jest_term:is_open() then
-        jest_term:change_dir(project_root)
+      if test_term:is_open() then
+        test_term:change_dir(project_root)
       else
-        jest_term.dir = project_root
+        test_term.dir = project_root
       end
-      jest_term.cmd = cmd
-      jest_term:toggle()
+      test_term.cmd = cmd
+      test_term:toggle()
     end)
 
     local toggle_sideterm
