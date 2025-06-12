@@ -239,6 +239,7 @@ M.init = function()
     { '<leader>tk', tu.keymaps, desc = 'Telescope: keymaps' },
     { '<leader>tc', telescope.commands, desc = 'Telescope: commands' },
     { '<leader>tb', tu.buffers, desc = 'Find: buffers' },
+    { '<leader>fb', tu.buffers, desc = 'Find: buffers' },
     { '<leader>td', telescope.diagnostics, desc = 'Telescope: commands' },
     { '<leader>th', telescope.help_tags, desc = 'Telescope: help tags' },
     { '<leader>tr', telescope.resume, desc = 'Telescope: resume' },
