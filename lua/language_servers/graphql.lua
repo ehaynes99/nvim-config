@@ -1,5 +1,6 @@
 return {
-  filetypes = { 'graphql', 'typescript', 'typescriptreact' },
+  -- filetypes = { 'graphql', 'typescript', 'typescriptreact' },
+  filetypes = { 'graphql' },
   root_dir = require('lspconfig.util').root_pattern(
     'graphql.config.ts',
     'graphql.config.cts',
