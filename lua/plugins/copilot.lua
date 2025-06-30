@@ -56,6 +56,7 @@ return {
           '<leader>C',
           '<cmd>:CopilotChatToggle<CR>',
           desc = 'CopilotChat - Toggle',
+          mode = { 'n', 'x' },
         },
         {
           '<leader>cq',
@@ -72,13 +73,20 @@ return {
       },
       build = 'make tiktoken',
       opts = {
-        model = 'claude-3.5-sonnet',
-        system_prompt = 'For any code in nodejs or TypeScript, use TypeScript in strict mode, ESM imports, no semicolons, and always prefer arrow functions. Add return type annotations to functions.',
+        model = 'claude-3.7-sonnet',
+        system_prompt = 'Be brief unless asked for details. Code-only unless I ask otherwise. If asked about a specific part of some code, only display changes for that part unless asked to expand. Do not address existing errors in code unless I ask you to; that usually means I have something close to what I want, but I want you to solve something else. For any code in nodejs or TypeScript, use TypeScript in strict mode, ESM imports, no semicolons, and always prefer arrow functions. Add return type annotations to functions.',
         -- debug = true, -- Enable debugging
         mappings = {
           reset = {
             normal = '<C-x>',
             insert = '<C-x>',
+          },
+          stop = {
+            normal = '<C-c>',
+            callback = function()
+              local copilot = require('CopilotChat')
+              copilot.stop()
+            end,
           },
         },
       },
