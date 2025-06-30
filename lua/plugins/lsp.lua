@@ -1,7 +1,6 @@
 local mason_config = function()
   local mason = require('mason')
   local mason_lsp = require('mason-lspconfig')
-  local installer = require('language_servers.installer')
 
   mason.setup({
     ui = {
@@ -17,7 +16,6 @@ local mason_config = function()
       'jsonls',
       'lua_ls',
       'pyright',
-      'rust_analyzer',
       'sqlls',
       'graphql',
       -- managed by typescript-tools
@@ -27,12 +25,66 @@ local mason_config = function()
     },
     automatic_installation = true,
   })
-
-  mason_lsp.setup_handlers({ installer.configure_server })
 end
 
 local native_lsp_config = function()
   -- vim.lsp.set_log_level('debug')
+  local lspconfig = require('lspconfig')
+  local cmp_nvim_lsp = require('cmp_nvim_lsp')
+  local keymaps = require('keymaps')
+
+  local create_formatter = function(bufnr)
+    return function()
+      local filetype = vim.bo.filetype
+      local null_ls = require('null-ls')
+      local null_ls_sources = require('null-ls.sources')
+      local has_null_ls = #null_ls_sources.get_available(filetype, null_ls.methods.FORMATTING) > 0
+
+      vim.lsp.buf.format({
+        async = true,
+        bufnr = bufnr,
+        filter = function(client)
+          local supports_formatting = client.supports_method('textDocument/formatting')
+          if has_null_ls then
+            return client.name == 'null-ls'
+          else
+            return supports_formatting
+          end
+        end,
+      })
+    end
+  end
+
+  local default_capabilities = function()
+    local capabilities = cmp_nvim_lsp.default_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true,
+    }
+    return capabilities
+  end
+
+  local configure_server = function(server_name)
+    if server_name == 'ts_ls' or server_name == 'eslint' then
+      -- configured by `typescript-tools` or `nvim-eslint`, respectively
+      return
+    end
+
+    local has_config, config = pcall(require, 'language_servers.' .. server_name)
+    if not has_config then
+      config = {}
+    end
+
+    local default_config = {
+      on_attach = function(_, bufnr)
+        keymaps.lsp_keymaps(bufnr, create_formatter(bufnr))
+      end,
+      capabilities = default_capabilities(),
+    }
+
+    lspconfig[server_name].setup(vim.tbl_extend('force', default_config, config))
+  end
 
   vim.diagnostic.config({
     virtual_text = false,
@@ -68,6 +120,20 @@ local native_lsp_config = function()
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = 'rounded',
   })
+
+  -- Configure servers manually
+  for _, server_name in ipairs({
+    'bashls',
+    'cssls',
+    'html',
+    'jsonls',
+    'lua_ls',
+    'pyright',
+    'sqlls',
+    'graphql',
+  }) do
+    configure_server(server_name)
+  end
 end
 
 return {
@@ -75,13 +141,11 @@ return {
   dependencies = {
     'towolf/vim-helm',
     'saadparwaiz1/cmp_luasnip',
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
+    'mason-org/mason.nvim',
+    'mason-org/mason-lspconfig.nvim',
     'simrat39/rust-tools.nvim',
     'folke/trouble.nvim',
     'b0o/schemastore.nvim',
-    'jose-elias-alvarez/typescript.nvim',
-    -- 'pmizio/typescript-tools.nvim',
   },
   config = function()
     vim.lsp.handlers['workspace/diagnostic/refresh'] = function(_, _, ctx)
