@@ -63,7 +63,7 @@ vim.api.nvim_create_autocmd('BufReadPre', {
 
     if vim.fn.getfsize(name) > (2 * 1024 * 1024) then
       vim.b[buf].large_buf = true
-      vim.cmd('syntax off')
+      -- vim.cmd('syntax off')
       vim.opt_local.foldmethod = 'manual'
       vim.opt_local.spell = false
     else
