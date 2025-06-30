@@ -6,7 +6,6 @@ return {
     event = 'InsertEnter',
     commit = '86537b286f18783f8b67bccd78a4ef4345679625',
     config = function()
-      local keymaps = require('keymaps')
       require('copilot').setup({
         filetypes = {
           ['*'] = false,
@@ -28,13 +27,7 @@ return {
           },
         },
       })
-      keymaps.add({
-        {
-          '<leader>KK',
-          ':Copilot toggle<CR>',
-          desc = 'Copilot: toggle',
-        },
-      })
+      vim.keymap.set('n', '<leader>KK', ':Copilot toggle<CR>', { desc = 'Copilot: toggle' })
       vim.keymap.set(
         'n',
         '<leader>wk',

@@ -4,7 +4,6 @@ return {
     'nvim-telescope/telescope.nvim',
   },
   config = function()
-    local keymaps = require('keymaps')
     require('auto-session').setup({
       log_level = 'error',
       auto_session_suppress_dirs = {
@@ -18,16 +17,10 @@ return {
       session_lens = {},
     })
 
-    keymaps.add({
-      { '<leader>tS', require('auto-session.session-lens').search_session, desc = 'Telescope: autocommands' },
-      {
-        '<leader>xD',
-        function()
-          vim.cmd('SessionDelete')
-          vim.cmd(':qa')
-        end,
-        desc = 'auto-session: delete session',
-      },
-    })
+    vim.keymap.set('n', '<leader>tS', require('auto-session.session-lens').search_session, { desc = 'Telescope: autocommands' })
+    vim.keymap.set('n', '<leader>xD', function()
+      vim.cmd('SessionDelete')
+      vim.cmd(':qa')
+    end, { desc = 'auto-session: delete session' })
   end,
 }

@@ -72,19 +72,6 @@ vim.api.nvim_create_autocmd('BufReadPre', {
   end,
 })
 
--- vim.api.nvim_create_autocmd({ 'BufEnter' }, {
---   pattern = 'NvimTree*',
---   callback = function()
---     local view = require('nvim-tree.view')
---     local is_visible = view.is_visible()
---
---     local api = require('nvim-tree.api')
---     if not is_visible then
---       api.tree.open()
---     end
---   end,
--- })
-
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'Close buffers that will break with sessions',
   pattern = { 'NvimTree', 'Trouble' },
@@ -105,6 +92,9 @@ vim.api.nvim_create_autocmd('BufRead', {
   desc = 'Add SQL formatting',
   pattern = { '*.sql' },
   callback = function(args)
+    local command = ':%!'
+      .. vim.fn.stdpath('data')
+      .. '/mason/packages/sqlfluff/venv/bin/sqlfluff format --dialect postgres -<CR>'
     vim.lsp.buf.format({
       async = true,
       bufnr = args.buf,
@@ -112,13 +102,9 @@ vim.api.nvim_create_autocmd('BufRead', {
         return client.name == 'null-ls'
       end,
     })
-    require('keymaps').add({
-      {
-        '<leader>lf',
-        ':%!' .. vim.fn.stdpath('data') .. '/mason/packages/sqlfluff/venv/bin/sqlfluff format --dialect postgres -<CR>',
-        desc = 'Format SQL file',
-        buffer = args.buf,
-      },
+    vim.keymap.set({ 'n', 'i' }, 'qf', command, {
+      desc = 'Format SQL file',
+      buffer = args.buf,
     })
   end,
 })

@@ -12,7 +12,6 @@ return {
   config = function()
     local dap = require('dap')
     local dapui = require('dapui')
-    local keymaps = require('keymaps')
 
     vim.fn.sign_define('DapBreakpoint', { text = '', texthl = '@exception' })
     vim.fn.sign_define(
@@ -31,26 +30,20 @@ return {
       'DapStopped',
       { text = '', texthl = 'DapStopped', linehl = 'DapStopped', numhl = 'DapStopped' }
     )
-    keymaps.add({
-      { '<leader>db', dap.toggle_breakpoint, desc = 'Debug: toggle breakpoint' },
-      { '<leader>dc', dap.continue, desc = 'Debug: continue' },
-      { '<leader>dq', dap.disconnect, desc = 'Debug: disconnect' },
-      { '<leader>ds', dap.step_over, desc = 'Debug: step over' },
-      { '<leader>di', dap.step_into, desc = 'Debug: step into' },
-      { '<leader>do', dap.step_out, desc = 'Debug: step out' },
-      { '<leader>dr', dap.repl.toggle, desc = 'Debug: repl toggle' },
-      { '<leader>dl', dap.run_last, desc = 'Debug: run last' },
-      { '<leader>du', dapui.toggle, desc = 'Debug: ui toggle' },
-      { '<leader>dt', dapui.toggle, desc = 'Debug: ui toggle' },
-      { '<leader>dT', dap.terminate, desc = 'Debug: terminate (use disconnect)' },
-      {
-        '<leader>dS',
-        function()
-          dapui.float_element('stacks')
-        end,
-        desc = 'Debug: show stack',
-      },
-    })
+    vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: toggle breakpoint' })
+    vim.keymap.set('n', '<leader>dc', dap.continue, { desc = 'Debug: continue' })
+    vim.keymap.set('n', '<leader>dq', dap.disconnect, { desc = 'Debug: disconnect' })
+    vim.keymap.set('n', '<leader>ds', dap.step_over, { desc = 'Debug: step over' })
+    vim.keymap.set('n', '<leader>di', dap.step_into, { desc = 'Debug: step into' })
+    vim.keymap.set('n', '<leader>do', dap.step_out, { desc = 'Debug: step out' })
+    vim.keymap.set('n', '<leader>dr', dap.repl.toggle, { desc = 'Debug: repl toggle' })
+    vim.keymap.set('n', '<leader>dl', dap.run_last, { desc = 'Debug: run last' })
+    vim.keymap.set('n', '<leader>du', dapui.toggle, { desc = 'Debug: ui toggle' })
+    vim.keymap.set('n', '<leader>dt', dapui.toggle, { desc = 'Debug: ui toggle' })
+    vim.keymap.set('n', '<leader>dT', dap.terminate, { desc = 'Debug: terminate (use disconnect)' })
+    vim.keymap.set('n', '<leader>dS', function()
+      dapui.float_element('stacks')
+    end, { desc = 'Debug: show stack' })
 
     require('dap-vscode-js').setup({
       debugger_path = vim.fn.stdpath('data') .. '/lazy/vscode-js-debug',

@@ -67,16 +67,9 @@ return {
         client.server_capabilities.documentRangeFormattingProvider = false
         keymaps.lsp_keymaps(bufnr) -- no formatter, uses eslint instead
 
-        keymaps.add({
-          {
-            '<leader>li',
-            ':TSToolsAddMissingImports<CR>',
-            desc = 'LSP: TSToolsAddMissingImports',
-            buffer = bufnr,
-          },
-          { '<leader>lR', ':TSToolsRenameFile<CR>', desc = 'LSP: TypescriptRenameFile', buffer = bufnr },
-          { 'gs', ':TSToolsGoToSourceDefinition<CR>', desc = 'LSP: TSToolsGoToSourceDefinition' },
-        })
+        vim.keymap.set('n', '<leader>li', ':TSToolsAddMissingImports<CR>', { desc = 'LSP: TSToolsAddMissingImports', buffer = bufnr })
+        vim.keymap.set('n', '<leader>lR', ':TSToolsRenameFile<CR>', { desc = 'LSP: TypescriptRenameFile', buffer = bufnr })
+        vim.keymap.set('n', 'gs', ':TSToolsGoToSourceDefinition<CR>', { desc = 'LSP: TSToolsGoToSourceDefinition', buffer = bufnr })
         -- hydrate_pnpm_monorepo()
       end,
       handlers = {
