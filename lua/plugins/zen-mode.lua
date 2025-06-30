@@ -1,6 +1,9 @@
 return {
   'folke/zen-mode.nvim',
-  keys = { { '<leader>wz', '<cmd>ZenMode<CR>', mode = { 'n' } } },
+  keys = {
+    { '<leader>wm', '<cmd>ZenMode<CR>', mode = { 'n' } },
+    { '<C-m>', '<cmd>ZenMode<CR>', mode = { 'n', 'i' } },
+  },
   opts = {
     window = {
       backdrop = 0.9,
