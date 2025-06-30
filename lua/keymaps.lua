@@ -87,6 +87,16 @@ M.init = function()
     { 'jk', '<ESC>', mode = 'i', desc = 'Leave insert' },
     { 'Q', '<NOP>', desc = 'Disable ex mode' },
 
+    { '/', function()
+      vim.api.nvim_feedkeys('/', 'n', false)
+      vim.api.nvim_feedkeys('\\v', 'n', false)
+    end, mode = 'n', desc = 'Regex search forward by default' },
+
+    { '?', function()
+      vim.api.nvim_feedkeys('?', 'n', false)
+      vim.api.nvim_feedkeys('\\v', 'n', false)
+    end, mode = 'n', desc = 'Regex search backward by default' },
+
     { '<A-j>', '<cmd>m .+1<cr>==', mode = 'n', desc = 'Move Down' },
     { '<A-k>', '<cmd>m .-2<cr>==', mode = 'n', desc = 'Move up' },
     { '<A-j>', '<esc><cmd>m .+1<cr>==gi', mode = 'i', desc = 'Move down' },
