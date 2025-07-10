@@ -1,32 +1,3 @@
-local mason_config = function()
-  local mason = require('mason')
-  local mason_lsp = require('mason-lspconfig')
-
-  mason.setup({
-    ui = {
-      border = 'rounded',
-    },
-  })
-
-  mason_lsp.setup({
-    ensure_installed = {
-      'bashls',
-      'cssls',
-      'html',
-      'jsonls',
-      'lua_ls',
-      'pyright',
-      'sqlls',
-      'graphql',
-      -- managed by typescript-tools
-      -- 'ts_ls',
-      -- managed by nvim-eslint
-      -- 'eslint',
-    },
-    automatic_installation = true,
-  })
-end
-
 local native_lsp_config = function()
   -- vim.lsp.set_log_level('debug')
   local lspconfig = require('lspconfig')
@@ -141,10 +112,6 @@ return {
   dependencies = {
     'towolf/vim-helm',
     'saadparwaiz1/cmp_luasnip',
-    'mason-org/mason.nvim',
-    'mason-org/mason-lspconfig.nvim',
-    'simrat39/rust-tools.nvim',
-    'folke/trouble.nvim',
     'b0o/schemastore.nvim',
   },
   config = function()
@@ -154,6 +121,5 @@ return {
       return true
     end
     native_lsp_config()
-    mason_config()
   end,
 }
