@@ -21,6 +21,7 @@ return {
         'python',
         'rust',
         'sql',
+        'swift',
         'tsx',
         'typescript',
         'vim',
