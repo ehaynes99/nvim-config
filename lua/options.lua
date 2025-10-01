@@ -43,7 +43,7 @@ vim.opt.iskeyword:append('-') -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ 'c', 'r', 'o' }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.linebreak = true
-vim.opt.sessionoptions = 'blank,buffers,curdir,folds,tabpages,winsize'
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 -- will be merged soon: https://github.com/neovim/neovim/pull/19243
 -- vim.opt.splitkeep = 'screen'
 
