@@ -54,7 +54,7 @@ local native_lsp_config = function()
       capabilities = default_capabilities(),
     }
 
-    lspconfig[server_name].setup(vim.tbl_extend('force', default_config, config))
+    vim.lsp.config(server_name, vim.tbl_extend('force', default_config, config))
   end
 
   vim.diagnostic.config({
