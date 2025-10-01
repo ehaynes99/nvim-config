@@ -86,25 +86,3 @@ vim.api.nvim_create_autocmd('FileType', {
     })
   end,
 })
-
--- TODO: figure out better SQL lsp integration
-vim.api.nvim_create_autocmd('BufRead', {
-  desc = 'Add SQL formatting',
-  pattern = { '*.sql' },
-  callback = function(args)
-    local command = ':%!'
-      .. vim.fn.stdpath('data')
-      .. '/mason/packages/sqlfluff/venv/bin/sqlfluff format --dialect postgres -<CR>'
-    vim.lsp.buf.format({
-      async = true,
-      bufnr = args.buf,
-      filter = function(client)
-        return client.name == 'null-ls'
-      end,
-    })
-    vim.keymap.set({ 'n', 'i' }, 'qf', command, {
-      desc = 'Format SQL file',
-      buffer = args.buf,
-    })
-  end,
-})
