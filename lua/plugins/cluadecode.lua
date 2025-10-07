@@ -6,15 +6,10 @@ return {
       terminal = {
         auto_close = false,
       },
+      focus_after_send = true,
       -- log_level = 'debug',
     })
     
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = 'claudecode',
-      callback = function()
-        vim.bo.buflisted = false
-      end,
-    })
   end,
   keys = {
     { "<leader>a", nil, desc = "AI/Claude Code" },
@@ -24,7 +19,7 @@ return {
     { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
     { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
     { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-    { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+    { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "x", desc = "Send to Claude" },
     {
       "<leader>as",
       "<cmd>ClaudeCodeTreeAdd<cr>",
