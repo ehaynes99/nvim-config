@@ -57,7 +57,7 @@ M.live_grep_in_project_without_tests = function()
     -- use this instead of cmd because of https://github.com/BurntSushi/ripgrep/issues/2770
     search_dirs = { project_root() },
     hidden = true,
-    glob_pattern = '!test/**',
+    additional_args = { '--glob', '!**/test/**', '--glob', '!**/tests/**' },
   })
 end
 
@@ -65,7 +65,7 @@ M.live_grep_without_tests = function()
   lga({
     cwd = git_root(),
     hidden = true,
-    glob_pattern = '!test/**',
+    additional_args = { '--glob', '!**/test/**', '--glob', '!**/tests/**' },
   })
 end
 
