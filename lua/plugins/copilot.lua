@@ -15,6 +15,7 @@ return {
           javascriptreact = true,
           rust = true,
           lua = true,
+          graphql = true,
         },
         suggestion = {
           auto_trigger = true,
