@@ -108,6 +108,7 @@ M.init = function()
   set({ 'n', 'x' }, '<Up>', "v:count ? 'k' : 'gk'", { desc = 'Move cursor down', expr = true })
   set('n', '<leader>ww', ':setl wrap!<CR>', { desc = 'Toggle soft wrap' })
   set('n', '<leader>wu', ':UndotreeToggle<CR>', { desc = 'Toggle undo tree' })
+  set('n', '<leader>ws', ':tabdo wincmd =<CR>', { desc = 'Make windows even' })
   set('n', '<leader>r', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', { desc = 'Global replace word under cursor', silent = false })
   set('x', '<leader>r', [["hy:%s/<C-r>h//gI<left><left><left>]], { desc = 'Replace selected text', silent = false })
 
