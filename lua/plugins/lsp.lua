@@ -1,6 +1,5 @@
 local native_lsp_config = function()
   -- vim.lsp.set_log_level('debug')
-  local lspconfig = require('lspconfig')
   local cmp_nvim_lsp = require('cmp_nvim_lsp')
   local keymaps = require('keymaps')
 
@@ -48,14 +47,27 @@ local native_lsp_config = function()
     end
 
     local default_config = {
-      on_attach = function(_, bufnr)
-        keymaps.lsp_keymaps(bufnr, create_formatter(bufnr))
-      end,
       capabilities = default_capabilities(),
     }
 
-    vim.lsp.config(server_name, vim.tbl_extend('force', default_config, config))
+    local merged_config = vim.tbl_extend('force', default_config, config)
+
+    vim.lsp.config(server_name, merged_config)
+    vim.lsp.enable(server_name)
   end
+
+  -- Set up LspAttach autocommand for keymaps
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+      local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if not client then
+        return
+      end
+
+      keymaps.lsp_keymaps(bufnr, create_formatter(bufnr))
+    end,
+  })
 
   vim.diagnostic.config({
     virtual_text = false,
@@ -96,12 +108,13 @@ local native_lsp_config = function()
   for _, server_name in ipairs({
     'bashls',
     'cssls',
+    'gopls',
+    'graphql',
     'html',
     'jsonls',
     'lua_ls',
     'pyright',
     'sqlls',
-    'graphql',
   }) do
     configure_server(server_name)
   end

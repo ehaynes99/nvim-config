@@ -12,6 +12,7 @@ return {
     treesitter.setup({
       ensure_installed = {
         'bash',
+        'go',
         'html',
         'javascript',
         'kotlin',
