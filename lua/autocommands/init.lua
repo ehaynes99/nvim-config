@@ -48,12 +48,19 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   end,
 })
 
--- vim.api.nvim_create_autocmd('BufEnter', {
---   desc = 'reload file when it changes on disk',
---   callback = function()
---     vim.cmd('checktime')
---   end,
--- })
+vim.api.nvim_create_autocmd('BufEnter', {
+  desc = 'Set buffer navigation keymaps for normal file buffers',
+  callback = function(args)
+    local buftype = vim.api.nvim_get_option_value('buftype', { buf = args.buf })
+    local buflisted = vim.api.nvim_get_option_value('buflisted', { buf = args.buf })
+
+    -- Only set keymaps for normal files (empty buftype, listed buffers)
+    if buftype == '' and buflisted then
+      vim.keymap.set('n', '<S-l>', ':bnext<CR>', { desc = 'Window: next buffer', buffer = args.buf })
+      vim.keymap.set('n', '<S-h>', ':bprevious<CR>', { desc = 'Window: previous buffer', buffer = args.buf })
+    end
+  end,
+})
 
 vim.api.nvim_create_autocmd('BufReadPre', {
   desc = 'Disable some slow operations on large files',
