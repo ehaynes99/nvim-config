@@ -52,6 +52,14 @@ M.live_grep_word_under_cursor_in_project = function()
   })
 end
 
+M.live_grep_word_under_cursor_without_tests = function()
+  require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({
+    cwd = git_root(),
+    hidden = true,
+    additional_args = { '--glob', '!**/test/**', '--glob', '!**/tests/**' },
+  })
+end
+
 M.live_grep_in_project_without_tests = function()
   lga({
     -- use this instead of cmd because of https://github.com/BurntSushi/ripgrep/issues/2770
