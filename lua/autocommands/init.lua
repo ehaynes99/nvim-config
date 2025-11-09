@@ -48,6 +48,14 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+  desc = 'Check for file changes when entering buffer or window',
+  callback = function()
+    print('checking for file changes: ' .. vim.api.nvim_buf_get_name(0) .. '')
+    vim.cmd('checktime')
+  end,
+})
+
 vim.api.nvim_create_autocmd('BufEnter', {
   desc = 'Set buffer navigation keymaps for normal file buffers',
   callback = function(args)
@@ -94,9 +102,3 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.api.nvim_create_autocmd('FocusGained', {
-  desc = 'Check for file changes when focus gained',
-  callback = function()
-    vim.cmd('checktime')
-  end,
-})
