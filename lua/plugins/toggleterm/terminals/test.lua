@@ -4,7 +4,7 @@ local terminal_utils = require('plugins.toggleterm.terminals.terminal_utils')
 return function(Terminal)
   local term = Terminal:new({
     direction = 'vertical',
-    close_on_exit = false,
+    -- close_on_exit = false,
     hidden = true,
     on_exit = terminal_utils.close_if_successful,
   })
