@@ -175,7 +175,6 @@ M.init = function()
 
   -- Testing
   set('n', '<leader>xl', '<cmd>:Luapad<CR>', { desc = 'Luapad' })
-  set('n', '<leader>xd', '<cmd>:e ~/.cache/nvim/nvim-erich.log<CR>', { desc = 'Show debug log' })
   set('n', '<leader>xx', '<cmd>:LuaRun<CR>', { desc = 'Run current file' })
   set('n', '<leader>xb', require('utils.editor').all_buffers, { desc = 'Print buffer info' })
 end
