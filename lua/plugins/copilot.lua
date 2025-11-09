@@ -16,6 +16,7 @@ return {
           rust = true,
           lua = true,
           graphql = true,
+          go = true,
         },
         suggestion = {
           auto_trigger = true,
