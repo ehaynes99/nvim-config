@@ -79,7 +79,7 @@ return {
         highlight_git = true,
       },
       view = {
-        width = 60,
+        width = 50,
         -- float = {
         --   enable = true,
         --   quit_on_focus_loss = true,
