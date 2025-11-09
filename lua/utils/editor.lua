@@ -22,9 +22,88 @@ M.is_file = function(bufnr)
 end
 
 M.all_buffers = function()
+  -- Collect all buffer information
+  local lines = {}
+  local highlights = {} -- Store line numbers where buffer names appear
+
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    print(vim.inspect(M.buf_get_options(buf)))
+    local buf_info = M.buf_get_options(buf)
+
+    -- Add buffer name (will be highlighted)
+    local buf_name = buf_info.name ~= '' and buf_info.name or '[No Name]'
+    table.insert(lines, buf_name)
+    table.insert(highlights, #lines) -- Track this line for highlighting
+
+    -- Define property order (excluding 'name' which is displayed as header)
+    local property_order = {
+      'id',
+      'buftype',
+      'buflisted',
+      'bufhidden',
+      'filetype',
+      'modified',
+      'modifiable',
+      'readonly',
+      'swapfile',
+      'undofile',
+    }
+
+    -- Format and add properties in order
+    for _, key in ipairs(property_order) do
+      local value = buf_info[key]
+      if value ~= nil then
+        local formatted_value
+        if type(value) == 'string' then
+          formatted_value = "'" .. value .. "'"
+        else
+          formatted_value = tostring(value)
+        end
+        table.insert(lines, '  ' .. key .. ': ' .. formatted_value)
+      end
+    end
+
+    -- Add blank line separator
+    table.insert(lines, '')
   end
+
+  -- Create scratch buffer
+  local scratch_buf = vim.api.nvim_create_buf(false, true)
+
+  -- Set buffer name for identification
+  vim.api.nvim_buf_set_name(scratch_buf, '[Buffer List]')
+
+  -- Set buffer options before adding content
+  vim.api.nvim_set_option_value('buftype', 'nofile', { buf = scratch_buf })
+  vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = scratch_buf })
+  vim.api.nvim_set_option_value('swapfile', false, { buf = scratch_buf })
+
+  vim.api.nvim_buf_set_lines(scratch_buf, 0, -1, false, lines)
+
+  -- Add highlighting for buffer names (make them bold)
+  for _, line_num in ipairs(highlights) do
+    vim.api.nvim_buf_add_highlight(scratch_buf, -1, 'Bold', line_num - 1, 0, -1)
+  end
+
+  -- Make buffer read-only after setting content
+  vim.api.nvim_set_option_value('modifiable', false, { buf = scratch_buf })
+
+  -- Open in a split
+  vim.cmd('split')
+  vim.api.nvim_win_set_buf(0, scratch_buf)
+
+  -- Add autocommand to ensure buffer is wiped when window closes
+  vim.api.nvim_create_autocmd('WinClosed', {
+    buffer = scratch_buf,
+    once = true,
+    callback = function()
+      if vim.api.nvim_buf_is_valid(scratch_buf) then
+        vim.api.nvim_buf_delete(scratch_buf, { force = true })
+      end
+    end,
+  })
+
+  -- Add keymap to close with 'q'
+  vim.keymap.set('n', 'q', ':close<CR>', { buffer = scratch_buf, noremap = true, silent = true })
 end
 
 M.file_buffers = function()
