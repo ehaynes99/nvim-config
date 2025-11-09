@@ -57,7 +57,6 @@ return {
           '<leader>cq',
           mode = { 'n', 'v' },
           function()
-            print('Quick Chat')
             local input = vim.fn.input('Quick Chat: ')
             if input ~= '' then
               require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })

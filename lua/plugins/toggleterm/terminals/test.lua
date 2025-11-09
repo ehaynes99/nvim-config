@@ -14,15 +14,15 @@ return function(Terminal)
     local project_root = project_utils.project_root(test_file)
 
     if not project_root then
-      print('could not find project root: ' .. test_file)
+      vim.notify('could not find project root: ' .. test_file, vim.log.levels.ERROR)
       return
     end
 
     local cmd = 'pnpx vitest run --project default --watch --disableConsoleIntercept ' .. test_file
 
-    print('project root: ' .. project_root)
-    print('test file: ' .. test_file)
-    print('cmd: ' .. cmd)
+    -- print('project root: ' .. project_root)
+    -- print('test file: ' .. test_file)
+    -- print('cmd: ' .. cmd)
 
     if term:is_open() then
       term:change_dir(project_root)

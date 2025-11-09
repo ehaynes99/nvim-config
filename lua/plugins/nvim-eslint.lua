@@ -19,7 +19,7 @@ return {
         client.server_capabilities.documentFormattingProvider = true
 
         require('keymaps').lsp_keymaps(bufnr, function()
-          print('formatting with eslint')
+          vim.notify('formatting with eslint', vim.log.levels.DEBUG)
           vim.lsp.buf.format({ timeout_ms = 5000 })
         end)
       end,

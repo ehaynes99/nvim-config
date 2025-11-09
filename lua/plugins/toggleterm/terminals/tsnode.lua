@@ -12,7 +12,7 @@ return function(Terminal)
     local project_root = project_utils.project_root(file)
 
     if not project_root then
-      print('could not find project root: ' .. file)
+      vim.notify('could not find project root: ' .. file, vim.log.levels.ERROR)
       return
     end
 

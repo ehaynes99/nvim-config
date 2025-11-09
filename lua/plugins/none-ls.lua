@@ -43,7 +43,7 @@ return {
       on_attach = function(client, bufnr)
         if client.supports_method('textDocument/formatting') then
           vim.keymap.set('n', 'qf', function()
-            print('formatting with ' .. client.name .. '...')
+            vim.notify('formatting with ' .. client.name .. '...', vim.log.levels.DEBUG)
             vim.lsp.buf.format({ bufnr = bufnr, name = 'null-ls' })
           end, { desc = 'Format with null-ls', buffer = bufnr })
         end
