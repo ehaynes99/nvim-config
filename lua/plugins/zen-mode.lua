@@ -2,7 +2,7 @@ return {
   'folke/zen-mode.nvim',
   keys = {
     { '<leader>wm', '<cmd>ZenMode<CR>', mode = { 'n' } },
-    { '<C-m>', '<cmd>ZenMode<CR>', mode = { 'n', 'i' } },
+    { '<A-m>', '<cmd>ZenMode<CR>', mode = { 'n', 'i' } },
   },
   opts = {
     window = {
