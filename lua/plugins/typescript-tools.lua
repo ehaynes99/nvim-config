@@ -11,7 +11,9 @@ return {
     local util = require('lspconfig.util')
 
     ts_tools.setup({
-      root_dir = util.root_pattern('.git'),
+      root_dir = function(bufnr, onDir)
+        return onDir(util.root_pattern('.git')(bufnr))
+      end,
       settings = {
         publish_diagnostic_on = 'insert_leave',
         tsserver_max_memory = 8192,
@@ -27,9 +29,24 @@ return {
         client.server_capabilities.documentRangeFormattingProvider = false
         keymaps.lsp_keymaps(bufnr) -- no formatter, uses eslint instead
 
-        vim.keymap.set('n', '<leader>li', ':TSToolsAddMissingImports<CR>', { desc = 'LSP: TSToolsAddMissingImports', buffer = bufnr })
-        vim.keymap.set('n', '<leader>lR', ':TSToolsRenameFile<CR>', { desc = 'LSP: TypescriptRenameFile', buffer = bufnr })
-        vim.keymap.set('n', 'gs', ':TSToolsGoToSourceDefinition<CR>', { desc = 'LSP: TSToolsGoToSourceDefinition', buffer = bufnr })
+        vim.keymap.set(
+          'n',
+          '<leader>li',
+          ':TSToolsAddMissingImports<CR>',
+          { desc = 'LSP: TSToolsAddMissingImports', buffer = bufnr }
+        )
+        vim.keymap.set(
+          'n',
+          '<leader>lR',
+          ':TSToolsRenameFile<CR>',
+          { desc = 'LSP: TypescriptRenameFile', buffer = bufnr }
+        )
+        vim.keymap.set(
+          'n',
+          'gs',
+          ':TSToolsGoToSourceDefinition<CR>',
+          { desc = 'LSP: TSToolsGoToSourceDefinition', buffer = bufnr }
+        )
         -- hydrate_pnpm_monorepo()
       end,
       handlers = {
