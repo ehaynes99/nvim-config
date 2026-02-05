@@ -36,7 +36,7 @@ local native_lsp_config = function()
   end
 
   local configure_server = function(server_name)
-    if server_name == 'ts_ls' or server_name == 'eslint' then
+    if server_name == 'ts_ls' or server_name == 'eslint' or server_name == 'typescript-tools' then
       -- configured by `typescript-tools` or `nvim-eslint`, respectively
       return
     end
