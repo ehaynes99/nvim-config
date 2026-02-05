@@ -2,30 +2,25 @@ local cmp_mapping = function()
   local cmp = require('cmp')
   local luasnip = require('luasnip')
 
-  -- from the wiki, but I can't tell what this does...
-  local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-  end
-
   return cmp.mapping.preset.insert({
     ['<C-k>'] = cmp.mapping.select_prev_item(),
     ['<C-j>'] = cmp.mapping.select_next_item(),
-    ---@diagnostic disable-next-line: missing-parameter
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping.complete(),
     -- Prevent autocomplete unless explicitly tabbing into the list
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.locally_jumpable(1) then
+        luasnip.jump(1)
       else
         fallback()
       end
     end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if luasnip.jumpable(-1) then
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()
@@ -66,7 +61,17 @@ return {
   config = function()
     local cmp = require('cmp')
 
+    local context = require('cmp.config.context')
+
     cmp.setup({
+      enabled = function()
+        -- Disable completion in comments
+        if vim.api.nvim_get_mode().mode == 'c' then
+          return true -- Keep enabled in command mode
+        end
+        return not context.in_treesitter_capture('comment')
+          and not context.in_syntax_group('Comment')
+      end,
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
