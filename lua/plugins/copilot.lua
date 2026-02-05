@@ -4,7 +4,6 @@ return {
     enabled = true,
     cmd = 'Copilot',
     event = 'InsertEnter',
-    commit = '86537b286f18783f8b67bccd78a4ef4345679625',
     config = function()
       require('copilot').setup({
         filetypes = {
@@ -22,7 +21,7 @@ return {
           auto_trigger = true,
           keymap = {
             accept = 'kj',
-            next = '<C-i>',
+            next = '<C-]>',
             prev = '<C-u>',
             dismiss = 'kk',
             accept_word = '<Nop>',
