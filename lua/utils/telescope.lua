@@ -29,8 +29,6 @@ end
 
 M.find_files_in_project = function()
   telescope.find_files({
-    -- doesn't work
-    -- search_dirs = { project_root() },
     cwd = project_root(),
     hidden = true,
   })
