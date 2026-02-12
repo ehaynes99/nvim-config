@@ -139,7 +139,8 @@ M.init = function()
   set('n', '<C-Right>', ':vertical resize +2<CR>', { desc = 'Window: resize wider' })
 
   -- Terminal
-  set('t', '<ESC><ESC>', '<C-\\><C-n>', { desc = 'Leave insert' })
+  -- set('t', '<ESC><ESC>', '<C-\\><C-n>', { desc = 'Leave insert' })
+  set('t', '<C-]>', '<C-\\><C-n>', { desc = 'Leave insert in terminals' })
 
   -- Editor
   set('n', '<leader>h', ':nohlsearch<CR>', { desc = 'Window: cancel highlight' })
