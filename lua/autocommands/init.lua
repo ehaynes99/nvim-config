@@ -29,12 +29,24 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('VimResized', {
   desc = 'resize windows when vim is resized',
   callback = function()
+    local in_terminal = vim.bo.buftype == 'terminal'
+
+    if in_terminal then
+      vim.cmd('stopinsert')
+    end
+
     vim.cmd('tabdo wincmd =')
 
-    -- prefer left side of cursor visible to right side
-    local cursor = vim.api.nvim_win_get_cursor(0)
-    vim.cmd([[ normal 999zh ]])
-    vim.api.nvim_win_set_cursor(0, cursor)
+    if not in_terminal then
+      -- prefer left side of cursor visible to right side
+      local cursor = vim.api.nvim_win_get_cursor(0)
+      vim.cmd([[ normal 999zh ]])
+      vim.api.nvim_win_set_cursor(0, cursor)
+    end
+
+    if in_terminal then
+      vim.cmd('startinsert')
+    end
   end,
 })
 
