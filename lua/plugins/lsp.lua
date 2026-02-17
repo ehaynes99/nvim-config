@@ -1,6 +1,5 @@
 local native_lsp_config = function()
   -- vim.lsp.set_log_level('debug')
-  local cmp_nvim_lsp = require('cmp_nvim_lsp')
   local keymaps = require('keymaps')
 
   local create_formatter = function(bufnr)
@@ -25,8 +24,9 @@ local native_lsp_config = function()
     end
   end
 
-  local default_capabilities = function()
-    local capabilities = cmp_nvim_lsp.default_capabilities()
+  -- Set default capabilities for all LSP servers
+  local function make_capabilities()
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities.textDocument.foldingRange = {
       dynamicRegistration = false,
@@ -35,26 +35,9 @@ local native_lsp_config = function()
     return capabilities
   end
 
-  local configure_server = function(server_name)
-    if server_name == 'ts_ls' or server_name == 'eslint' or server_name == 'typescript-tools' then
-      -- configured by `typescript-tools` or `nvim-eslint`, respectively
-      return
-    end
-
-    local has_config, config = pcall(require, 'language_servers.' .. server_name)
-    if not has_config then
-      config = {}
-    end
-
-    local default_config = {
-      capabilities = default_capabilities(),
-    }
-
-    local merged_config = vim.tbl_extend('force', default_config, config)
-
-    vim.lsp.config(server_name, merged_config)
-    vim.lsp.enable(server_name)
-  end
+  vim.lsp.config('*', {
+    capabilities = make_capabilities(),
+  })
 
   -- Set up LspAttach autocommand for keymaps
   vim.api.nvim_create_autocmd('LspAttach', {
@@ -71,13 +54,12 @@ local native_lsp_config = function()
 
   vim.diagnostic.config({
     virtual_text = false,
-    -- new format in nvim 0.10.x
     signs = {
       text = {
-        [vim.diagnostic.severity.ERROR] = '',
-        [vim.diagnostic.severity.WARN] = '',
-        [vim.diagnostic.severity.HINT] = '',
-        [vim.diagnostic.severity.INFO] = '',
+        [vim.diagnostic.severity.ERROR] = '',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.HINT] = '',
+        [vim.diagnostic.severity.INFO] = '',
       },
     },
     update_in_insert = true,
@@ -87,14 +69,11 @@ local native_lsp_config = function()
       focusable = true,
       style = 'minimal',
       border = 'rounded',
-      -- source = 'always',
       source = true,
       header = '',
       prefix = '',
     },
   })
-
-  require('lspconfig.ui.windows').default_options.border = 'rounded'
 
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = 'rounded',
@@ -103,21 +82,6 @@ local native_lsp_config = function()
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = 'rounded',
   })
-
-  -- Configure servers manually
-  for _, server_name in ipairs({
-    'bashls',
-    'cssls',
-    'gopls',
-    'graphql',
-    'html',
-    'jsonls',
-    'lua_ls',
-    'pyright',
-    'sqlls',
-  }) do
-    configure_server(server_name)
-  end
 end
 
 return {
