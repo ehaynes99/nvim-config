@@ -6,6 +6,7 @@ return {
       exclude = {
         'rust_analyzer',
         'ts_ls',
+        'tsgo',
         'eslint',
       },
     },
@@ -18,6 +19,7 @@ return {
       'pyright',
       'sqlls',
       'graphql',
+      'tsgo',
       -- managed by typescript-tools
       -- 'ts_ls',
       -- managed by nvim-eslint
