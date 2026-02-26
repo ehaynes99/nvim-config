@@ -42,6 +42,13 @@ return {
       notify = {
         threshold = vim.log.levels.WARN,
       },
+      filesystem_watchers = {
+        max_events = 99999,
+        ignore_dirs = {
+          'node_modules',
+          '.git',
+        },
+      },
       sync_root_with_cwd = true,
       diagnostics = {
         enable = true,
