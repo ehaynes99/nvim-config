@@ -28,6 +28,22 @@ return {
           },
         },
       })
+      -- Hide copilot suggestions when cursor is inside a comment
+      vim.api.nvim_create_autocmd('CursorMovedI', {
+        group = vim.api.nvim_create_augroup('copilot_hide_in_comments', { clear = true }),
+        callback = function()
+          local ok, node = pcall(vim.treesitter.get_node)
+          if not ok or not node then
+            return
+          end
+          local node_type = node:type()
+          vim.b.copilot_suggestion_hidden = node_type == 'comment'
+            or node_type == 'comment_content'
+            or node_type == 'line_comment'
+            or node_type == 'block_comment'
+        end,
+      })
+
       vim.keymap.set('n', '<leader>KK', ':Copilot toggle<CR>', { desc = 'Copilot: toggle' })
       vim.keymap.set(
         'n',
