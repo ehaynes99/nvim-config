@@ -81,6 +81,15 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufLeave', {
+  desc = 'Clear search highlight when leaving a buffer',
+  callback = function()
+    vim.schedule(function()
+      vim.v.hlsearch = 0
+    end)
+  end,
+})
+
 vim.api.nvim_create_autocmd('BufReadPre', {
   desc = 'Disable some slow operations on large files',
   callback = function(args)
