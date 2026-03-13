@@ -2,6 +2,23 @@ return {
   -- 'coder/claudecode.nvim',
   dir = '/home/erich/workspace/ehaynes99/claudecode.nvim',
   config = function()
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'claudecode',
+      callback = function(ev)
+        vim.bo[ev.buf].buflisted = false
+        vim.cmd('wincmd =')
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('BufWinEnter', {
+      desc = 'Rebalance windows when claudecode terminal is shown',
+      callback = function(ev)
+        if vim.bo[ev.buf].filetype == 'claudecode' then
+          vim.cmd('wincmd =')
+        end
+      end,
+    })
+
     require('claudecode').setup({
       terminal = {
         auto_close = true,
@@ -23,7 +40,8 @@ return {
     { '<leader>aC', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
     { '<leader>am', '<cmd>ClaudeCodeSelectModel<cr>', desc = 'Select Claude model' },
     { '<leader>ab', '<cmd>ClaudeCodeAdd %<cr>', desc = 'Add current buffer' },
-    { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'x', desc = 'Send to Claude' },
+    { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'x', desc = 'Send selection to Claude' },
+    { '<leader>as', '<cmd>.ClaudeCodeSend<cr>', mode = 'n', desc = 'Send line to Claude' },
     {
       '<leader>as',
       '<cmd>ClaudeCodeTreeAdd<cr>',
