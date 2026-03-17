@@ -88,7 +88,6 @@ M.init = function()
   set('n', '<leader>gc', tu.git_commits, { desc = 'Git: show commits' })
   set('n', '<leader>gh', tu.git_bcommits, { desc = 'Git: show commits for file' })
   set('n', '<leader>gB', tu.git_branches, { desc = 'Git: branches' })
-  set('n', '<leader>gb', ':BlamerToggle<CR>', { desc = 'Git: show blame' })
   set({ 'n', 'x' }, '<Leader>gf', ':OpenInGHFileLines<CR>', { desc = 'Git: open selected lines in github' })
   set({ 'n', 'x' }, '<Leader>gF', ':OpenInGHFile<CR>', { desc = 'Git: open file in github' })
 
