@@ -81,7 +81,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
-vim.api.nvim_create_autocmd('BufLeave', {
+vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   desc = 'Clear search highlight when leaving a buffer',
   callback = function()
     vim.schedule(function()
