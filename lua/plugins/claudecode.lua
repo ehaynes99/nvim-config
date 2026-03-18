@@ -11,10 +11,15 @@ return {
     })
 
     vim.api.nvim_create_autocmd('BufWinEnter', {
-      desc = 'Rebalance windows when claudecode terminal is shown',
+      desc = 'Rebalance windows and enter insert mode when claudecode terminal is shown',
       callback = function(ev)
         if vim.bo[ev.buf].filetype == 'claudecode' then
           vim.cmd('wincmd =')
+          vim.schedule(function()
+            if vim.api.nvim_buf_is_valid(ev.buf) and vim.api.nvim_get_current_buf() == ev.buf then
+              vim.cmd('startinsert')
+            end
+          end)
         end
       end,
     })
