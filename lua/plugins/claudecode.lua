@@ -1,28 +1,27 @@
 return {
   -- 'coder/claudecode.nvim',
-  dir = '/home/erich/workspace/ehaynes99/claudecode.nvim',
+  'ehaynes99/claudecode.nvim',
+  -- dir = '/home/erich/workspace/ehaynes99/claudecode.nvim',
+  branch = 'merged-fixes',
   config = function()
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'claudecode',
       callback = function(ev)
         vim.bo[ev.buf].buflisted = false
-        vim.cmd('wincmd =')
+        vim.schedule(function()
+          vim.cmd('wincmd =')
+        end)
       end,
     })
 
-    vim.api.nvim_create_autocmd('BufWinEnter', {
-      desc = 'Rebalance windows and enter insert mode when claudecode terminal is shown',
-      callback = function(ev)
-        if vim.bo[ev.buf].filetype == 'claudecode' then
-          vim.cmd('wincmd =')
-          vim.schedule(function()
-            if vim.api.nvim_buf_is_valid(ev.buf) and vim.api.nvim_get_current_buf() == ev.buf then
-              vim.cmd('startinsert')
-            end
-          end)
-        end
-      end,
-    })
+    -- vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'TermOpen' }, {
+    --   desc = 'Enter insert mode when focusing claudecode terminal',
+    --   callback = function()
+    --     if vim.bo.filetype == 'claudecode' then
+    --       vim.cmd('startinsert')
+    --     end
+    --   end,
+    -- })
 
     require('claudecode').setup({
       terminal = {
