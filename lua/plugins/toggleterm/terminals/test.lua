@@ -1,6 +1,8 @@
 local project_utils = require('utils.project')
 local terminal_utils = require('plugins.toggleterm.terminals.terminal_utils')
 
+local M = {}
+
 local filter_flag = function(pm, name)
   if not name then return '' end
   if pm == 'pnpm' then
@@ -13,7 +15,22 @@ local filter_flag = function(pm, name)
   return ''
 end
 
-return function(Terminal)
+M.detect_type = function(file)
+  local dir = vim.fs.dirname(file)
+  local function has_file(marker)
+    return vim.fs.find(marker, { upward = true, path = dir })[1] ~= nil
+  end
+  local function has_dir(marker)
+    return vim.fs.find(marker, { upward = true, path = dir, type = 'directory' })[1] ~= nil
+  end
+  if has_file('package.json') then return 'node' end
+  if has_file('Cargo.toml') then return 'rust' end
+  if has_file('go.mod') then return 'golang' end
+  if has_dir('lua') then return 'lua' end
+  return nil
+end
+
+M.node = function(Terminal)
   local term = Terminal:new({
     direction = 'vertical',
     -- close_on_exit = false,
@@ -62,6 +79,53 @@ return function(Terminal)
     end
     term.cmd = cmd
     term:toggle()
+  end
+
+  return { run = run }
+end
+
+M.rust = function(_Terminal)
+  return {
+    run = function()
+      vim.notify('Test script is not configured for rust', vim.log.levels.WARN)
+    end,
+  }
+end
+
+M.golang = function(_Terminal)
+  return {
+    run = function()
+      vim.notify('Test script is not configured for golang', vim.log.levels.WARN)
+    end,
+  }
+end
+
+M.lua = function(_Terminal)
+  return {
+    run = function()
+      vim.notify('Test script is not configured for lua', vim.log.levels.WARN)
+    end,
+  }
+end
+
+return function(Terminal)
+  local handlers = {}
+
+  local get_handler = function(lang)
+    if not handlers[lang] then
+      handlers[lang] = M[lang](Terminal)
+    end
+    return handlers[lang]
+  end
+
+  local run = function()
+    local test_file = vim.api.nvim_buf_get_name(0)
+    local lang = M.detect_type(test_file)
+    if not lang then
+      vim.notify('Could not detect project type for: ' .. test_file, vim.log.levels.WARN)
+      return
+    end
+    get_handler(lang).run()
   end
 
   return { run = run }
