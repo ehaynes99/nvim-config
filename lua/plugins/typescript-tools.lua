@@ -54,7 +54,7 @@ return {
         -- Disable annoying diagnostics. All message codes:
         -- https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
         ['textDocument/publishDiagnostics'] = api.filter_diagnostics({
-          -- 6133, -- unused variable - eslint will handle
+          6133, -- unused variable - eslint will handle
           -- 6138, -- unused property - eslint will handle
           6192, -- unused imports - eslint will handle
           80001, -- convert to ES module suggestion
