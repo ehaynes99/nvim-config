@@ -63,7 +63,9 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
 vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
   desc = 'Check for file changes when entering buffer or window',
   callback = function()
-    vim.cmd('checktime')
+    if vim.bo.buftype == '' then
+      vim.cmd('checktime')
+    end
   end,
 })
 

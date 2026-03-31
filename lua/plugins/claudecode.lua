@@ -1,33 +1,36 @@
 return {
   -- 'coder/claudecode.nvim',
-  'ehaynes99/claudecode.nvim',
-  -- dir = '/home/erich/workspace/ehaynes99/claudecode.nvim',
-  branch = 'merged-fixes',
+  -- 'ehaynes99/claudecode.nvim',
+  dir = '/home/erich/workspace/ehaynes99/claudecode.nvim',
+  -- branch = 'merged-fixes',
   config = function()
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'claudecode',
       callback = function(ev)
         vim.bo[ev.buf].buflisted = false
         vim.schedule(function()
-          vim.cmd('wincmd =')
+          vim.cmd('noautocmd wincmd =')
+          vim.cmd('startinsert')
         end)
       end,
     })
 
-    -- vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'TermOpen' }, {
-    --   desc = 'Enter insert mode when focusing claudecode terminal',
-    --   callback = function()
-    --     if vim.bo.filetype == 'claudecode' then
-    --       vim.cmd('startinsert')
-    --     end
-    --   end,
-    -- })
+    vim.api.nvim_create_autocmd('BufEnter', {
+      desc = 'Equalize windows and enter insert mode when focusing claudecode terminal',
+      callback = function()
+        if vim.bo.filetype == 'claudecode' then
+          vim.cmd('noautocmd wincmd =')
+          vim.cmd('startinsert')
+        end
+      end,
+    })
 
     require('claudecode').setup({
       terminal = {
         auto_close = true,
         -- buflisted = false,
       },
+      env = { CLAUDE_CODE_NO_FLICKER = '1' },
       focus_after_send = true,
       diff_opts = {
         keep_terminal_focus = true, -- If true, moves focus back to terminal after diff opens
