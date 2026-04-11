@@ -4,7 +4,7 @@ return {
 
   config = function()
     require('auto-session').setup({
-      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      suppressed_dirs = { '~/', '~/workspace', '~/Downloads', '/', '~/tmp',  },
       -- log_level = 'debug',
       purge_after_minutes = 10080, -- 7 days
     })
@@ -18,5 +18,6 @@ return {
     end
 
     vim.keymap.set('n', '<leader>xd', delete_and_quit, { desc = 'Delete auto-session and quit' })
+    vim.keymap.set('n', '<leader>xD', delete_and_quit, { desc = 'Delete auto-session and quit' })
   end,
 }
