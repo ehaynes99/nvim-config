@@ -10,6 +10,17 @@ return {
   cmd = { 'tsgo', '--lsp', '--stdio' },
   filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
   root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+
+    vim.keymap.set('n', '<leader>li', function()
+      vim.lsp.buf.code_action({
+        apply = true,
+        context = { only = { 'source.addMissingImports.ts' }, diagnostics = {} },
+      })
+    end, { desc = 'LSP: Add missing imports', buffer = bufnr })
+  end,
   handlers = {
     ['textDocument/publishDiagnostics'] = function(err, result, ctx, config)
       if result and result.diagnostics then

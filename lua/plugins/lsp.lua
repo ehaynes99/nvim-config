@@ -49,18 +49,6 @@ local native_lsp_config = function()
       end
 
       keymaps.lsp_keymaps(bufnr, create_formatter(bufnr))
-
-      if client.name == 'tsgo' then
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-
-        vim.keymap.set('n', '<leader>li', function()
-          vim.lsp.buf.code_action({
-            apply = true,
-            context = { only = { 'source.addMissingImports.ts' }, diagnostics = {} },
-          })
-        end, { desc = 'LSP: Add missing imports', buffer = bufnr })
-      end
     end,
   })
 
