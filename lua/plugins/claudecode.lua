@@ -2,6 +2,7 @@ return {
   -- 'coder/claudecode.nvim',
   -- 'ehaynes99/claudecode.nvim',
   dir = '/home/erich/workspace/ehaynes99/claudecode.nvim',
+  lazy = false,
   -- branch = 'merged-fixes',
   config = function()
     vim.api.nvim_create_autocmd('FileType', {
@@ -10,27 +11,57 @@ return {
         vim.bo[ev.buf].buflisted = false
         vim.schedule(function()
           vim.cmd('noautocmd wincmd =')
-          vim.cmd('startinsert')
         end)
+
+        -- Buffer-local <C-]> that flags explicit normal mode
+        vim.keymap.set('t', '<C-]>', function()
+          vim.b[ev.buf].claudecode_explicit_normal = true
+          vim.cmd([[stopinsert]])
+        end, { buffer = ev.buf, desc = 'Leave insert in claudecode terminal' })
       end,
     })
 
-    vim.api.nvim_create_autocmd('BufEnter', {
-      desc = 'Equalize windows and enter insert mode when focusing claudecode terminal',
+    -- Clear the explicit normal flag when user re-enters terminal mode
+    vim.api.nvim_create_autocmd('TermEnter', {
+      desc = 'Clear explicit normal mode flag for claudecode terminal',
       callback = function()
         if vim.bo.filetype == 'claudecode' then
-          vim.cmd('noautocmd wincmd =')
-          vim.cmd('startinsert')
+          vim.b.claudecode_explicit_normal = false
         end
       end,
     })
+
+    -- Equalize windows when entering a claudecode buffer
+    vim.api.nvim_create_autocmd('BufEnter', {
+      desc = 'Equalize windows when focusing claudecode terminal',
+      callback = function()
+        if vim.bo.filetype == 'claudecode' then
+          vim.cmd('noautocmd wincmd =')
+        end
+      end,
+    })
+
+    -- Poll: force insert mode unless user explicitly requested normal mode
+    local timer = vim.uv.new_timer()
+    timer:start(50, 50, vim.schedule_wrap(function()
+      if vim.api.nvim_get_mode().mode ~= 'nt' then
+        return
+      end
+      if vim.bo.filetype ~= 'claudecode' then
+        return
+      end
+      if vim.b.claudecode_explicit_normal then
+        return
+      end
+      vim.cmd('startinsert')
+    end))
 
     require('claudecode').setup({
       terminal = {
         auto_close = true,
         -- buflisted = false,
       },
-      env = { CLAUDE_CODE_NO_FLICKER = '1' },
+      -- env = { CLAUDE_CODE_NO_FLICKER = '1' },
       focus_after_send = true,
       diff_opts = {
         keep_terminal_focus = true, -- If true, moves focus back to terminal after diff opens
