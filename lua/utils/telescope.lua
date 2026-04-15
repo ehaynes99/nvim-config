@@ -75,8 +75,50 @@ M.live_grep_without_tests = function()
   })
 end
 
+local git_commit_entry_maker = function()
+  local entry_display = require('telescope.pickers.entry_display')
+  local displayer = entry_display.create({
+    separator = ' ',
+    items = {
+      { width = 8 },
+      { width = 10 },
+      { width = 20 },
+      { remaining = true },
+    },
+  })
+
+  return function(entry)
+    if entry == '' then
+      return nil
+    end
+
+    local sha, date, author, msg = entry:match('([^\t]+)\t([^\t]+)\t([^\t]+)\t(.*)')
+    if not sha then
+      return nil
+    end
+
+    return {
+      value = sha,
+      ordinal = sha .. ' ' .. author .. ' ' .. date .. ' ' .. msg,
+      display = function()
+        return displayer({
+          { sha, 'TelescopeResultsIdentifier' },
+          { date, 'TelescopeResultsNumber' },
+          { author, 'TelescopeResultsComment' },
+          msg,
+        })
+      end,
+    }
+  end
+end
+
+local git_commit_opts = {
+  git_command = { 'git', 'log', '--format=%h%x09%ad%x09%an%x09%s', '--date=format:%Y-%m-%d' },
+  entry_maker = git_commit_entry_maker(),
+}
+
 M.git_bcommits = function()
-  telescope.git_bcommits({ cwd = git_root() })
+  telescope.git_bcommits(vim.tbl_extend('force', git_commit_opts, { cwd = git_root() }))
 end
 
 M.git_branches = function()
@@ -84,12 +126,7 @@ M.git_branches = function()
 end
 
 M.git_commits = function()
-  -- git log --pretty="%C(Cyan)%an %C(reset)%ad %s" --date=short
-  telescope.git_commits({
-    cwd = git_root(),
-    -- git_command = 'git log --pretty="%C(reset)%ad %C(Cyan)%an %C(reset)%s" --date=short',
-    -- git_command = 'git log --pretty="%C(Cyan)%an %C(reset)%ad %s" --date=short',
-  })
+  telescope.git_commits(vim.tbl_extend('force', git_commit_opts, { cwd = git_root() }))
 end
 
 M.git_files = function()
