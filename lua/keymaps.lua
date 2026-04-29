@@ -17,7 +17,6 @@ local M = {}
 M.lsp_keymaps = function(bufnr, lsp_format)
   local telescope = require('telescope.builtin')
   if lsp_format then
-    -- set('<leader>lf', lsp_format, { desc = 'LSP: Format document', buffer = bufnr })
     set({ 'n', 'i' }, 'qf', lsp_format, { desc = 'LSP: Format document', buffer = bufnr })
   end
   set('n', 'gD', vim.lsp.buf.declaration, { desc = 'LSP: Goto declaration', buffer = bufnr })
@@ -25,7 +24,7 @@ M.lsp_keymaps = function(bufnr, lsp_format)
   set('n', 'gt', telescope.lsp_type_definitions, { desc = 'LSP: Goto type definition', buffer = bufnr })
   set('n', 'gi', telescope.lsp_implementations, { desc = 'LSP: Goto implementation', buffer = bufnr })
   set('n', 'gr', telescope.lsp_references, { desc = 'LSP: Find references', buffer = bufnr })
-  set('n', 'gR', vim.lsp.buf.references, { desc = 'LSP: Find references', buffer = bufnr })
+  set('n', 'gR', require('utils.telescope').lsp_references_without_tests, { desc = 'LSP: Find references excluding tests', buffer = bufnr })
   set('n', '<leader>ld', vim.diagnostic.open_float, { desc = 'LSP: Open diagnostics', buffer = bufnr })
   set('n', '<leader>lh', vim.lsp.buf.hover, { desc = 'LSP: Hover tooltip', buffer = bufnr })
   set('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'LSP: Code actions native', buffer = bufnr })

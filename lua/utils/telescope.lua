@@ -67,6 +67,12 @@ M.live_grep_in_project_without_tests = function()
   })
 end
 
+M.lsp_references_without_tests = function()
+  telescope.lsp_references({
+    file_ignore_patterns = { '/tests?/' },
+  })
+end
+
 M.live_grep_without_tests = function()
   lga({
     cwd = git_root(),
