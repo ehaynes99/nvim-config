@@ -6,7 +6,7 @@ return {
       exclude = {
         'rust_analyzer',
         'ts_ls',
-        'tsgo',
+        -- 'tsgo',
         'eslint',
       },
     },
