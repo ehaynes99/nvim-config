@@ -58,6 +58,7 @@ return {
 
     require('claudecode').setup({
       terminal = {
+        provider = 'native',
         auto_close = true,
         -- buflisted = false,
       },

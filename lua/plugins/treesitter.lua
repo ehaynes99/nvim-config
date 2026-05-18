@@ -59,7 +59,7 @@ return {
         enable = true,
         additional_vim_regex_highlighting = false,
         disable = function(_, bufnr)
-          return vim.b[bufnr].large_buf or false
+          return vim.b[bufnr].snacks_bigfile or false
         end,
       },
 
