@@ -1,7 +1,8 @@
 return {
   -- 'esmuellert/nvim-eslint',
-  -- 'ehaynes99/nvim-eslint',
-  dir = '/home/erich/workspace/ehaynes99/nvim-eslint',
+  'ehaynes99/nvim-eslint',
+  branch = 'node-args',
+  -- dir = '/home/erich/workspace/ehaynes99/nvim-eslint',
   config = function()
     local nvim = require('nvim-eslint')
     nvim.setup({
