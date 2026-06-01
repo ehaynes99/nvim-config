@@ -18,10 +18,7 @@ end
 local function refresh_all_buffers(client_id)
   for _, bufnr in ipairs(vim.lsp.get_buffers_by_client_id(client_id)) do
     if vim.api.nvim_buf_is_loaded(bufnr) then
-      vim.lsp.util._refresh(ms.textDocument_diagnostic, {
-        bufnr = bufnr,
-        client_id = client_id,
-      })
+      vim.lsp.diagnostic._refresh(bufnr, client_id)
     end
   end
 end

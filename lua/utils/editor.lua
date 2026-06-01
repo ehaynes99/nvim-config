@@ -170,6 +170,16 @@ M.close_all_buffers = function()
   vim.cmd('redraw!')
 end
 
+M.reload_all_buffers = function()
+  for _, buf in ipairs(M.file_buffers()) do
+    if not vim.bo[buf].modified then
+      vim.api.nvim_buf_call(buf, function()
+        vim.cmd('edit')
+      end)
+    end
+  end
+end
+
 M.close_buffers_not_in_project = function()
   local project = require('utils.project')
   local close_buffers = require('close_buffers')
