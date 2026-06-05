@@ -3,7 +3,17 @@ local native_lsp_config = function()
   local keymaps = require('keymaps')
 
   local create_formatter = function(bufnr)
-    return function()
+    -- Pick the right formatter: oxfmt > null-ls > any other LSP with formatting.
+    local function run_format()
+      local clients = vim.lsp.get_clients({ bufnr = bufnr })
+      for _, c in ipairs(clients) do
+        if c.name == 'oxfmt' then
+          vim.notify('formatting with oxfmt', vim.log.levels.DEBUG)
+          vim.lsp.buf.format({ async = true, bufnr = bufnr, name = 'oxfmt' })
+          return
+        end
+      end
+
       local filetype = vim.bo.filetype
       local null_ls = require('null-ls')
       local null_ls_sources = require('null-ls.sources')
@@ -21,6 +31,23 @@ local native_lsp_config = function()
           end
         end,
       })
+    end
+
+    return function()
+      local oxlint = vim.lsp.get_clients({ bufnr = bufnr, name = 'oxlint' })[1]
+      if not oxlint then
+        run_format()
+        return
+      end
+
+      vim.notify('oxlint fixAll', vim.log.levels.DEBUG)
+      oxlint:exec_cmd({
+        title = 'Apply Oxlint automatic fixes',
+        command = 'oxc.fixAll',
+        arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+      }, { bufnr = bufnr }, function()
+        vim.schedule(run_format)
+      end)
     end
   end
 
@@ -92,5 +119,9 @@ return {
       return true
     end
     native_lsp_config()
+
+    -- Both servers ship with nvim-lspconfig; root_markers gate startup on config files.
+    vim.lsp.enable('oxlint')
+    vim.lsp.enable('oxfmt')
   end,
 }

@@ -76,5 +76,31 @@ return {
         enable = true,
       },
     })
+
+    -- nvim-treesitter master branch is archived and ships a broken
+    -- `set-lang-from-info-string!` directive under Neovim 0.11+ where
+    -- `match[id]` is now `TSNode[]` instead of `TSNode`. Re-register it
+    -- with a list-aware implementation so markdown fenced-code injections
+    -- (used by render-markdown.nvim, LSP hovers, etc.) stop crashing.
+    local alias_to_lang = {
+      ex = 'elixir',
+      pl = 'perl',
+      sh = 'bash',
+      uxn = 'uxntal',
+      ts = 'typescript',
+    }
+    vim.treesitter.query.add_directive('set-lang-from-info-string!', function(match, _, bufnr, pred, metadata)
+      local node = match[pred[2]]
+      if type(node) == 'table' then
+        node = node[#node]
+      end
+      if not node then
+        return
+      end
+      local alias = vim.treesitter.get_node_text(node, bufnr):lower()
+      metadata['injection.language'] = vim.filetype.match({ filename = 'a.' .. alias })
+        or alias_to_lang[alias]
+        or alias
+    end, { force = true, all = false })
   end,
 }

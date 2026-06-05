@@ -16,6 +16,8 @@ return {
       'html',
       'jsonls',
       'lua_ls',
+      'oxfmt',
+      'oxlint',
       'pyright',
       'sqlls',
       'graphql',
