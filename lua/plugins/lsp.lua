@@ -59,6 +59,13 @@ local native_lsp_config = function()
       dynamicRegistration = false,
       lineFoldingOnly = true,
     }
+    -- Force every server onto utf-16. Neovim advertises {utf-8, utf-16, utf-32}
+    -- by default, and tsgo grabs utf-8 while oxlint/oxfmt/eslint/copilot stay on
+    -- utf-16. Mixed offset encodings on one buffer is unsupported and corrupts
+    -- LSP change tracking (_changetracking.lua buf_state errors on every keystroke,
+    -- then broken positions/highlighting). Offering only utf-16 keeps them aligned.
+    capabilities.general = capabilities.general or {}
+    capabilities.general.positionEncodings = { 'utf-16' }
     return capabilities
   end
 
