@@ -43,18 +43,22 @@ return {
 
     -- Poll: force insert mode unless user explicitly requested normal mode
     local timer = vim.uv.new_timer()
-    timer:start(50, 50, vim.schedule_wrap(function()
-      if vim.api.nvim_get_mode().mode ~= 'nt' then
-        return
-      end
-      if vim.bo.filetype ~= 'claudecode' then
-        return
-      end
-      if vim.b.claudecode_explicit_normal then
-        return
-      end
-      vim.cmd('startinsert')
-    end))
+    timer:start(
+      50,
+      50,
+      vim.schedule_wrap(function()
+        if vim.api.nvim_get_mode().mode ~= 'nt' then
+          return
+        end
+        if vim.bo.filetype ~= 'claudecode' then
+          return
+        end
+        if vim.b.claudecode_explicit_normal then
+          return
+        end
+        vim.cmd('startinsert')
+      end)
+    )
 
     require('claudecode').setup({
       terminal = {
@@ -82,6 +86,14 @@ return {
     { '<leader>as', '<cmd>.ClaudeCodeSend<cr>', mode = 'n', desc = 'Send line to Claude' },
     {
       '<leader>as',
+      function()
+        vim.api.nvim_err_writeln("Use <leader>ab")
+      end,
+      desc = 'Add file',
+      ft = { 'NvimTree', 'neo-tree', 'oil' },
+    },
+    {
+      '<leader>ab',
       '<cmd>ClaudeCodeTreeAdd<cr>',
       desc = 'Add file',
       ft = { 'NvimTree', 'neo-tree', 'oil' },
