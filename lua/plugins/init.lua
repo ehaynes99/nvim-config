@@ -20,7 +20,8 @@ return {
   { 'mustache/vim-mustache-handlebars' },
   { 'keith/swift.vim' },
 
-  { 'windwp/nvim-ts-autotag' },
+  -- standalone on nvim-treesitter `main` (no longer a treesitter module)
+  { 'windwp/nvim-ts-autotag', config = true },
   { 'kylechui/nvim-surround', config = true },
   -- { 'jparise/vim-graphql' },
 }
