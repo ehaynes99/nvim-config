@@ -1,5 +1,28 @@
 require('autocommands.auto_save')
 
+-- Poll file mtimes every 200ms; call checktime only when something changed on disk.
+-- Handles external changes (branch switches, tool edits) without requiring a buffer switch.
+local _buf_mtimes = {}
+local _disk_poll = vim.uv.new_timer()
+_disk_poll:start(200, 200, vim.schedule_wrap(function()
+  local changed = false
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].buftype == '' then
+      local name = vim.api.nvim_buf_get_name(bufnr)
+      if name ~= '' then
+        local mtime = vim.fn.getftime(name)
+        if _buf_mtimes[bufnr] and mtime ~= _buf_mtimes[bufnr] then
+          changed = true
+        end
+        _buf_mtimes[bufnr] = mtime
+      end
+    end
+  end
+  if changed then
+    vim.cmd('silent! checktime')
+  end
+end))
+
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'bind "q" to close for certain filetypes',
   pattern = { 'qf', 'help', 'vimdoc', 'man', 'lspinfo', 'spectre_panel', 'tsplayground' },

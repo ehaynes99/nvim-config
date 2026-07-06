@@ -82,7 +82,10 @@ return {
       callback = function(args)
         if
           args.data.client_id == client.id
-          and args.data.method == ms.textDocument_didChange
+          and (
+            args.data.method == ms.textDocument_didChange
+            or args.data.method == ms.textDocument_didOpen
+          )
         then
           schedule_cross_buffer_refresh(client.id)
         end
