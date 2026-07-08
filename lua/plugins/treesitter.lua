@@ -17,7 +17,9 @@
 
 local ensure_installed = {
   'bash',
+  'diff',
   'go',
+  'graphql',
   'html',
   'javascript',
   'kotlin',
