@@ -48,9 +48,19 @@ local function schedule_cross_buffer_refresh(client_id)
 end
 
 return {
-  cmd = { 'tsgo', '--lsp', '--stdio' },
+  -- Prefer a project-local tsgo (npm install @typescript/native-preview) over global.
+  cmd = function(dispatchers, config)
+    local cmd = 'tsgo'
+    if (config or {}).root_dir then
+      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
+      if vim.fn.executable(local_cmd) == 1 then
+        cmd = local_cmd
+      end
+    end
+    return vim.lsp.rpc.start({ cmd, '--lsp', '--stdio' }, dispatchers)
+  end,
   filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
-  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock', '.git' },
   -- Tell tsgo we accept workspace/diagnostic/refresh; without this it skips
   -- sending the refresh signal entirely (see RefreshDiagnostics in tsgo).
   capabilities = {
@@ -99,13 +109,6 @@ return {
         result.items = filter_diagnostics(result.items)
       end
       return vim.lsp.diagnostic.on_diagnostic(err, result, ctx)
-    end,
-    -- Push-model fallback (kept in case tsgo ever publishes via this channel).
-    [ms.textDocument_publishDiagnostics] = function(err, result, ctx)
-      if result and result.diagnostics then
-        result.diagnostics = filter_diagnostics(result.diagnostics)
-      end
-      return vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
     end,
     -- If tsgo ever does send a refresh request, honor it.
     ['workspace/diagnostic/refresh'] = function(_, _, ctx)
