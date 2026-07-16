@@ -1,10 +1,9 @@
 return {
   'ThePrimeagen/refactoring.nvim',
+  lazy = false,
   dependencies = {
-    { 'nvim-lua/plenary.nvim' },
-    { 'nvim-treesitter/nvim-treesitter' },
+    { 'lewis6991/async.nvim' },
   },
-  config = true,
   keys = {
     {
       '<leader>wr',
@@ -14,7 +13,23 @@ return {
       mode = 'x',
       desc = 'Refactor: Select',
     },
-    { '<leader>we', ':Refactor extract_var ', mode = 'x', desc = 'Refactor: Extract variable' },
-    { '<leader>wi', ':Refactor inline_var', mode = {'n', 'x'}, desc = 'Refactor: Inline variable' },
+    {
+      '<leader>we',
+      function()
+        return require('refactoring').extract_var()
+      end,
+      expr = true,
+      mode = 'x',
+      desc = 'Refactor: Extract variable',
+    },
+    {
+      '<leader>wi',
+      function()
+        return require('refactoring').inline_var()
+      end,
+      expr = true,
+      mode = { 'n', 'x' },
+      desc = 'Refactor: Inline variable',
+    },
   },
 }
