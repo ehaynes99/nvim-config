@@ -87,7 +87,7 @@ M.init = function()
   set('n', '<leader>gh', tu.git_bcommits, { desc = 'Git: show commits for file' })
   set('n', '<leader>gB', tu.git_branches, { desc = 'Git: branches' })
   -- LSP common
-  set('n', '<leader>ll', require('utils.editor').reload_all_buffers, { desc = 'Reload all buffers' })
+  set('n', '<leader>ll', require('utils.project').restart_lsp, { desc = 'LSP: Restart all' })
   set('n', '<leader>lI', ':LspInfo<CR>', { desc = 'LSP: Info' })
 
   -- Macros

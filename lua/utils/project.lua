@@ -151,4 +151,20 @@ M.is_module = function(path)
   error('could not find package.json: ' .. path)
 end
 
+M.restart_lsp = function()
+  for _, client in ipairs(vim.lsp.get_clients()) do
+    client.stop()
+  end
+  -- Re-trigger auto-start on all loaded buffers after clients have exited.
+  vim.defer_fn(function()
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].buftype == '' then
+        vim.api.nvim_buf_call(bufnr, function()
+          vim.cmd('doautocmd FileType')
+        end)
+      end
+    end
+  end, 500)
+end
+
 return M
