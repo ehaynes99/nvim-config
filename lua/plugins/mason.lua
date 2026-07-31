@@ -35,6 +35,15 @@ return {
       'mason-org/mason.nvim',
       config = true,
       opts = {
+        ui = {
+          border = 'rounded',
+        },
+      },
+    },
+    {
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+      dependencies = { 'mason-org/mason.nvim' },
+      opts = {
         ensure_installed = {
           -- Formatters and linters (not LSP servers)
           'sqlfluff',
@@ -42,9 +51,7 @@ return {
           'black',
           'shfmt',
           'shellharden',
-        },
-        ui = {
-          border = 'rounded',
+          'tree-sitter-cli',
         },
       },
     },
