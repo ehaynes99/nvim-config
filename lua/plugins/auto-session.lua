@@ -7,6 +7,7 @@ return {
       suppressed_dirs = { '~/', '~/workspace', '~/Downloads', '/', '~/tmp',  },
       -- log_level = 'debug',
       purge_after_minutes = 10080, -- 7 days
+      close_filetypes_on_save = { 'checkhealth', 'claudecode' },
     })
 
     -- Delete session and quit without saving a new one
