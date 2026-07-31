@@ -1,9 +1,9 @@
 return {
   -- 'coder/claudecode.nvim',
-  -- 'ehaynes99/claudecode.nvim',
-  dir = '/home/erich/workspace/ehaynes99/claudecode.nvim',
+  -- dir = '/home/erich/workspace/ehaynes99/claudecode.nvim',
+  'ehaynes99/claudecode.nvim',
+  branch = 'merged-fixes',
   lazy = false,
-  -- branch = 'merged-fixes',
   config = function()
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'claudecode',
