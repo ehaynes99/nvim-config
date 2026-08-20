@@ -24,13 +24,21 @@ M.keymaps = function()
 end
 
 M.find_files = function()
-  telescope.find_files({ hidden = true })
+  telescope.find_files({ hidden = true, follow = true })
 end
 
 M.find_files_in_project = function()
   telescope.find_files({
     cwd = project_root(),
     hidden = true,
+    follow = true,
+  })
+end
+
+M.live_grep = function()
+  lga({
+    hidden = true,
+    additional_args = { '--follow' },
   })
 end
 
@@ -39,6 +47,9 @@ M.live_grep_in_project = function()
     -- use this instead of cmd because of https://github.com/BurntSushi/ripgrep/issues/2770
     search_dirs = { project_root() },
     hidden = true,
+    -- live_grep_args builds its rg command from vimgrep_arguments/additional_args only,
+    -- it does not honor the `follow` opt that telescope.builtin.live_grep understands
+    additional_args = { '--follow' },
   })
 end
 
@@ -47,6 +58,7 @@ M.live_grep_word_under_cursor_in_project = function()
     -- use this instead of cmd because of https://github.com/BurntSushi/ripgrep/issues/2770
     search_dirs = { project_root() },
     hidden = true,
+    additional_args = { '--follow' },
   })
 end
 
@@ -54,7 +66,7 @@ M.live_grep_word_under_cursor_without_tests = function()
   require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({
     cwd = git_root(),
     hidden = true,
-    additional_args = { '--glob', '!**/test/**', '--glob', '!**/tests/**' },
+    additional_args = { '--follow', '--glob', '!**/test/**', '--glob', '!**/tests/**', '--glob', '!**/__tests__/**', '--glob', '!**/*.test.ts', '--glob', '!**/*.test.tsx' },
   })
 end
 
@@ -63,13 +75,13 @@ M.live_grep_in_project_without_tests = function()
     -- use this instead of cmd because of https://github.com/BurntSushi/ripgrep/issues/2770
     search_dirs = { project_root() },
     hidden = true,
-    additional_args = { '--glob', '!**/test/**', '--glob', '!**/tests/**' },
+    additional_args = { '--follow', '--glob', '!**/test/**', '--glob', '!**/tests/**', '--glob', '!**/__tests__/**', '--glob', '!**/*.test.ts', '--glob', '!**/*.test.tsx' },
   })
 end
 
 M.lsp_references_without_tests = function()
   telescope.lsp_references({
-    file_ignore_patterns = { '/tests?/' },
+    file_ignore_patterns = { '/tests?/', '/__tests__/', '%.test%.tsx?$' },
   })
 end
 
@@ -77,7 +89,7 @@ M.live_grep_without_tests = function()
   lga({
     cwd = git_root(),
     hidden = true,
-    additional_args = { '--glob', '!**/test/**', '--glob', '!**/tests/**' },
+    additional_args = { '--follow', '--glob', '!**/test/**', '--glob', '!**/tests/**', '--glob', '!**/__tests__/**', '--glob', '!**/*.test.ts', '--glob', '!**/*.test.tsx' },
   })
 end
 

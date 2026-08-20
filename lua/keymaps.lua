@@ -67,7 +67,7 @@ M.init = function()
   -- Find
   set('n', '<leader>ff', tu.find_files, { desc = 'Find: files' })
   set('n', '<leader>fF', tu.find_files_in_project, { desc = 'Find: files in project' })
-  set('n', '<leader>/', require('telescope').extensions.live_grep_args.live_grep_args, { desc = 'Find: text' })
+  set('n', '<leader>/', tu.live_grep, { desc = 'Find: text' })
   set('n', '<leader>?', tu.live_grep_without_tests, { desc = 'Find: text excluding tests' })
   set('n', '<leader>fs', require('telescope-live-grep-args.shortcuts').grep_word_under_cursor, { desc = 'Find: word under cursor' })
   set('n', '<leader>fs', require('telescope-live-grep-args.shortcuts').grep_word_under_cursor, { desc = 'Find: word under cursor' })
