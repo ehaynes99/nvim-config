@@ -12,6 +12,7 @@ return {
     },
     ensure_installed = {
       'bashls',
+      'biome',
       'cssls',
       'html',
       'jsonls',

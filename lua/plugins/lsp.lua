@@ -1,11 +1,22 @@
 local native_lsp_config = function()
   -- vim.lsp.set_log_level('debug')
   local keymaps = require('keymaps')
+  local toolchain = require('utils.js_toolchain')
 
   local create_formatter = function(bufnr)
-    -- Pick the right formatter: oxfmt > null-ls > any other LSP with formatting.
+    -- Pick the right formatter: biome > oxfmt > null-ls > any other LSP with formatting.
+    -- biome must win even if oxfmt/oxlint are (incorrectly) still attached -- they ship
+    -- without `workspace_required`, so nvim-lspconfig attaches them to every JS/TS buffer
+    -- regardless of whether that project has an oxlint/oxfmt config at all.
     local function run_format()
       local clients = vim.lsp.get_clients({ bufnr = bufnr })
+      for _, c in ipairs(clients) do
+        if c.name == 'biome' then
+          vim.notify('formatting with biome', vim.log.levels.DEBUG)
+          vim.lsp.buf.format({ async = true, bufnr = bufnr, name = 'biome' })
+          return
+        end
+      end
       for _, c in ipairs(clients) do
         if c.name == 'oxfmt' then
           vim.notify('formatting with oxfmt', vim.log.levels.DEBUG)
@@ -34,6 +45,24 @@ local native_lsp_config = function()
     end
 
     return function()
+      local biome = vim.lsp.get_clients({ bufnr = bufnr, name = 'biome' })[1]
+      if biome then
+        vim.notify('biome fixAll', vim.log.levels.DEBUG)
+        local params = vim.lsp.util.make_range_params(nil, biome.offset_encoding)
+        params.context = { only = { 'source.fixAll.biome' }, diagnostics = {} }
+        biome.request('textDocument/codeAction', params, function(_, result)
+          for _, action in ipairs(result or {}) do
+            if action.edit then
+              vim.lsp.util.apply_workspace_edit(action.edit, biome.offset_encoding)
+            elseif action.command then
+              biome:exec_cmd(action.command, { bufnr = bufnr })
+            end
+          end
+          vim.schedule(run_format)
+        end, bufnr)
+        return
+      end
+
       local oxlint = vim.lsp.get_clients({ bufnr = bufnr, name = 'oxlint' })[1]
       if not oxlint then
         run_format()
@@ -86,6 +115,18 @@ local native_lsp_config = function()
     end,
   })
 
+  -- When a project has a biome config, biome owns JS/TS linting and formatting.
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if not client or (client.name ~= 'oxlint' and client.name ~= 'oxfmt') then return end
+      if not toolchain.JS_LIKE[vim.bo[args.buf].filetype] then return end
+      if toolchain.has_biome_config(args.buf) then
+        vim.lsp.buf_detach_client(args.buf, args.data.client_id)
+      end
+    end,
+  })
+
   vim.diagnostic.config({
     virtual_text = false,
     signs = {
@@ -127,8 +168,9 @@ return {
     end
     native_lsp_config()
 
-    -- Both servers ship with nvim-lspconfig; root_markers gate startup on config files.
+    -- All three ship with nvim-lspconfig; root_markers gate startup on config files.
     vim.lsp.enable('oxlint')
     vim.lsp.enable('oxfmt')
+    vim.lsp.enable('biome')
   end,
 }
