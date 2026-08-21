@@ -39,6 +39,13 @@ return {
         ui = {
           border = 'rounded',
         },
+        -- Crashdummyy's registry ships a more up-to-date `roslyn` package
+        -- (matching VS Code's version) than the one on nuget.org in the
+        -- core registry.
+        registries = {
+          'github:mason-org/mason-registry',
+          'github:Crashdummyy/mason-registry',
+        },
       },
     },
     {
@@ -53,6 +60,8 @@ return {
           'shfmt',
           'shellharden',
           'tree-sitter-cli',
+          -- managed by roslyn.nvim, not mason-lspconfig
+          'roslyn',
         },
       },
     },

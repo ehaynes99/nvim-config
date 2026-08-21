@@ -17,6 +17,7 @@
 
 local ensure_installed = {
   'bash',
+  'c_sharp',
   'diff',
   'go',
   'graphql',
