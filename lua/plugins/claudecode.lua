@@ -1,3 +1,45 @@
+local function relative_path()
+  return vim.fn.expand('%:.')
+end
+
+local function copy_ref(ref)
+  vim.fn.setreg('"', ref)
+  vim.fn.setreg('+', ref)
+  vim.notify('Copied ' .. ref, vim.log.levels.INFO)
+end
+
+local function copy_buffer_ref()
+  copy_ref('@' .. relative_path())
+end
+
+local function copy_line_ref()
+  copy_ref(string.format('@%s#L%d', relative_path(), vim.fn.line('.')))
+end
+
+local function copy_selection_ref()
+  local start_line = vim.fn.line('v')
+  local end_line = vim.fn.line('.')
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+  if start_line == end_line then
+    copy_ref(string.format('@%s#L%d', relative_path(), start_line))
+  else
+    copy_ref(string.format('@%s#L%d-%d', relative_path(), start_line, end_line))
+  end
+  vim.cmd('normal! \27')
+end
+
+local function copy_tree_node_ref()
+  local api = require('nvim-tree.api')
+  local node = api.tree.get_node_under_cursor()
+  if not node then
+    return
+  end
+  local path = vim.fn.fnamemodify(node.absolute_path, ':.')
+  copy_ref('@' .. path)
+end
+
 return {
   -- 'coder/claudecode.nvim',
   -- dir = '/home/erich/workspace/ehaynes99/claudecode.nvim',
@@ -82,21 +124,22 @@ return {
     { '<leader>ar', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
     { '<leader>am', '<cmd>ClaudeCodeSelectModel<cr>', desc = 'Select Claude model' },
     { '<leader>ab', '<cmd>ClaudeCodeAdd %<cr>', desc = 'Add current buffer' },
+    { '<leader>aB', copy_buffer_ref, desc = 'Copy current buffer ref' },
     { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'x', desc = 'Send selection to Claude' },
     { '<leader>as', '<cmd>.ClaudeCodeSend<cr>', mode = 'n', desc = 'Send line to Claude' },
-    {
-      '<leader>as',
-      function()
-        vim.api.nvim_err_writeln("Use <leader>ab")
-      end,
-      desc = 'Add file',
-      ft = { 'NvimTree', 'neo-tree', 'oil' },
-    },
+    { '<leader>aS', copy_selection_ref, mode = 'x', desc = 'Copy selection ref' },
+    { '<leader>aS', copy_line_ref, mode = 'n', desc = 'Copy line ref' },
     {
       '<leader>ab',
       '<cmd>ClaudeCodeTreeAdd<cr>',
       desc = 'Add file',
       ft = { 'NvimTree', 'neo-tree', 'oil' },
+    },
+    {
+      '<leader>aB',
+      copy_tree_node_ref,
+      desc = 'Copy file ref',
+      ft = { 'NvimTree' },
     },
     -- Diff management
     { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
