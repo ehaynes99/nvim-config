@@ -4,11 +4,32 @@ local lua_utils = require('utils.lua')
 local curry = lua_utils.curry
 local set = vim.keymap.set
 
+local herdr_directions = { h = 'left', j = 'down', k = 'up', l = 'right' }
+
+-- Hand focus off to herdr when we're already at the edge of the nvim layout, so the
+-- same chord keeps moving into the neighboring herdr pane. Targets our own pane
+-- rather than --current: the server's focused pane isn't necessarily the one we're in.
+local focus_herdr_pane = function(key)
+  local pane = vim.env.HERDR_PANE_ID
+  if not pane or pane == '' then
+    return
+  end
+  local herdr = vim.env.HERDR_BIN_PATH
+  if not herdr or herdr == '' then
+    herdr = 'herdr'
+  end
+  vim.system({ herdr, 'pane', 'focus', '--direction', herdr_directions[key], '--pane', pane })
+end
+
 -- For some reason, mapping to '<ESC> :wincmd h<CR>' doesn't work if a file is empty
 local wincmd = function(key)
   return function()
     vim.cmd('stopinsert')
+    local previous = vim.api.nvim_get_current_win()
     vim.cmd('wincmd ' .. key)
+    if vim.api.nvim_get_current_win() == previous then
+      focus_herdr_pane(key)
+    end
   end
 end
 
