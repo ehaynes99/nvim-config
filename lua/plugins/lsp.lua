@@ -95,6 +95,10 @@ local native_lsp_config = function()
     -- then broken positions/highlighting). Offering only utf-16 keeps them aligned.
     capabilities.general = capabilities.general or {}
     capabilities.general.positionEncodings = { 'utf-16' }
+    -- Opt in to client-side file watching (Nvim defaults it off). Without it
+    -- tsc and gopls serve stale diagnostics after edits made outside the editor.
+    capabilities.workspace = capabilities.workspace or {}
+    capabilities.workspace.didChangeWatchedFiles = { dynamicRegistration = true }
     return capabilities
   end
 

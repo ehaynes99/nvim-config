@@ -1,3 +1,6 @@
+-- Only keys lspconfig's bundled tsc.lua doesn't define: rtp lsp/*.lua are
+-- deep-merged and the plugin's copy wins, so cmd/root_dir/settings stay there.
+
 local filtered_codes = {
   [6192] = true, -- unused imports (eslint handles)
   [80001] = true, -- convert to ES module
@@ -14,7 +17,7 @@ local function filter_diagnostics(diagnostics)
   end, diagnostics or {})
 end
 
--- tsgo currently doesn't call refresh on in-editor file changes (only on file-watcher events).
+-- tsc currently doesn't call refresh on in-editor file changes (only on file-watcher events).
 local function refresh_all_buffers(client_id)
   for _, bufnr in ipairs(vim.lsp.get_buffers_by_client_id(client_id)) do
     if vim.api.nvim_buf_is_loaded(bufnr) then
@@ -48,21 +51,7 @@ local function schedule_cross_buffer_refresh(client_id)
 end
 
 return {
-  -- Prefer a project-local tsgo (npm install @typescript/native-preview) over global.
-  cmd = function(dispatchers, config)
-    local cmd = 'tsgo'
-    if (config or {}).root_dir then
-      local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
-      if vim.fn.executable(local_cmd) == 1 then
-        cmd = local_cmd
-      end
-    end
-    return vim.lsp.rpc.start({ cmd, '--lsp', '--stdio' }, dispatchers)
-  end,
-  filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
-  root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock', '.git' },
-  -- Tell tsgo we accept workspace/diagnostic/refresh; without this it skips
-  -- sending the refresh signal entirely (see RefreshDiagnostics in tsgo).
+  -- Without this tsc skips sending the refresh signal entirely.
   capabilities = {
     workspace = {
       diagnostics = {
@@ -84,9 +73,8 @@ return {
       })
     end, { desc = 'LSP: Add missing imports', buffer = bufnr })
 
-    -- Workaround for stale cross-file diagnostics. tsgo doesn't reschedule
-    -- diagnostic refresh on DidChangeFile (only on file-watcher events), so
-    -- editing one file never invalidates diagnostics in dependent open buffers.
+    -- tsc only refreshes off workspace/didChangeWatchedFiles, so an in-editor
+    -- edit never invalidates diagnostics in dependent open buffers.
     vim.api.nvim_create_autocmd('LspNotify', {
       buffer = bufnr,
       callback = function(args)
@@ -110,7 +98,7 @@ return {
       end
       return vim.lsp.diagnostic.on_diagnostic(err, result, ctx)
     end,
-    -- If tsgo ever does send a refresh request, honor it.
+    -- If tsc ever does send a refresh request, honor it.
     ['workspace/diagnostic/refresh'] = function(_, _, ctx)
       refresh_all_buffers(ctx.client_id)
       return vim.NIL

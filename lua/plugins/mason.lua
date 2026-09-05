@@ -5,8 +5,6 @@ return {
     automatic_enable = {
       exclude = {
         'rust_analyzer',
-        'ts_ls',
-        -- 'tsgo',
         'eslint',
       },
     },
@@ -22,7 +20,7 @@ return {
       'pyright',
       'sqlls',
       'graphql',
-      'tsgo',
+      'tsc',
       'rust_analyzer',
       -- managed by nvim-eslint
       -- 'eslint',
