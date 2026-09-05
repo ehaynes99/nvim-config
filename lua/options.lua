@@ -43,6 +43,26 @@ vim.opt.whichwrap:append('<,>,[,],h,l') -- keys allowed to move to the previous/
 vim.opt.iskeyword:append('-') -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ 'c', 'r', 'o' }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.clipboard = 'unnamedplus'
+
+-- Over SSH the remote host's clipboard is useless, so ask the local terminal to
+-- set its own clipboard via OSC 52. Neovim only falls back to OSC 52 on its own
+-- when 'clipboard' is empty, so opt in explicitly.
+if vim.env.SSH_TTY then
+  local osc52 = require('vim.ui.clipboard.osc52')
+  -- OSC 52 reads require querying the terminal, which few terminals answer and
+  -- which blocks for a second on every paste. Read back the unnamed register
+  -- instead: yanks still round-trip, and pasting text copied outside nvim falls
+  -- back to the terminal's own paste.
+  local function paste()
+    return vim.fn.getreg('"', 1, true)
+  end
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = { ['+'] = osc52.copy('+'), ['*'] = osc52.copy('*') },
+    paste = { ['+'] = paste, ['*'] = paste },
+  }
+end
+
 vim.opt.linebreak = true
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 -- will be merged soon: https://github.com/neovim/neovim/pull/19243
