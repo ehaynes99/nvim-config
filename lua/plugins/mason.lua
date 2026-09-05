@@ -24,8 +24,6 @@ return {
       'graphql',
       'tsgo',
       'rust_analyzer',
-      -- managed by typescript-tools
-      -- 'ts_ls',
       -- managed by nvim-eslint
       -- 'eslint',
     },
