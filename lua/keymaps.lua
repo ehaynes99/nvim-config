@@ -1,4 +1,5 @@
 local editor_utils = require('utils.editor')
+local herdr_utils = require('utils.herdr')
 local lua_utils = require('utils.lua')
 
 local curry = lua_utils.curry
@@ -8,7 +9,12 @@ local set = vim.keymap.set
 local wincmd = function(key)
   return function()
     vim.cmd('stopinsert')
+    local previous = vim.api.nvim_get_current_win()
     vim.cmd('wincmd ' .. key)
+    -- Already at the edge of nvim's layout: carry on into the neighboring herdr pane.
+    if vim.api.nvim_get_current_win() == previous then
+      herdr_utils.focus_neighbor(key)
+    end
   end
 end
 
@@ -168,6 +174,11 @@ M.init = function()
   set('n', '<leader>th', telescope.help_tags, { desc = 'Telescope: help tags' })
   set('n', '<leader>tr', telescope.resume, { desc = 'Telescope: resume' })
   set('n', '<leader>ta', telescope.autocommands, { desc = 'Telescope: autocommands' })
+
+  -- Claude, running in the neighboring herdr pane. These only build a
+  -- reference and type it into that pane's prompt; nothing here drives the
+  -- Claude session itself.
+  herdr_utils.attach_keymaps()
 
   -- Testing
   set('n', '<leader>xl', '<cmd>:Luapad<CR>', { desc = 'Luapad' })

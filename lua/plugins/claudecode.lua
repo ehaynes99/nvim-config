@@ -45,6 +45,11 @@ return {
   -- dir = '/home/erich/workspace/ehaynes99/claudecode.nvim',
   'ehaynes99/claudecode.nvim',
   branch = 'merged-fixes',
+  -- Inside herdr, Claude runs in its own pane and utils.herdr owns the
+  -- <leader>a maps, so this plugin stays out of the way entirely. Everywhere
+  -- else -- dotfiles, this config, anything without worktrees -- it is the
+  -- normal in-terminal Claude and keeps its own mappings.
+  enabled = not require('utils.herdr').is_active(),
   lazy = false,
   config = function()
     vim.api.nvim_create_autocmd('FileType', {
