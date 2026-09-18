@@ -1,0 +1,20 @@
+#!/bin/sh
+# $GIT_EDITOR for gitui: opens the file in the nvim that spawned it.
+#
+# gitui splits $GIT_EDITOR on whitespace and appends the absolute path as the
+# last argument, so anything beyond `cmd arg arg` has to live in a script.
+
+file=$1
+
+[ -n "$NVIM" ] || exec nvim "$@"
+
+# Files git reads back once the editor exits need a blocking editor, which the
+# RPC handoff below is not.
+case "${file##*/}" in
+  COMMIT_EDITMSG | MERGE_MSG | TAG_EDITMSG | git-rebase-todo) exec nvim "$@" ;;
+esac
+
+# Vimscript single-quoted strings escape a quote by doubling it.
+escaped=$(printf '%s' "$file" | sed "s/'/''/g")
+
+exec nvim --server "$NVIM" --remote-expr "v:lua.GituiEdit('$escaped')" >/dev/null 2>&1

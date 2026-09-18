@@ -30,6 +30,9 @@ return function(Terminal)
   local term = Terminal:new({
     hidden = true,
     close_on_exit = false,
+    env = {
+      GIT_EDITOR = vim.fn.stdpath('config') .. '/scripts/gitui-edit',
+    },
     float_opts = {
       border = 'rounded',
     },
@@ -38,6 +41,17 @@ return function(Terminal)
       vim.keymap.set('t', '<ESC>', '<ESC>', { buffer = t.bufnr, nowait = true })
     end,
   })
+
+  -- Called over RPC by scripts/gitui-edit. gitui blocks until the editor exits,
+  -- so return immediately and do the work once it has redrawn.
+  _G.GituiEdit = function(path)
+    vim.schedule(function()
+      term:close()
+      vim.cmd('stopinsert')
+      vim.cmd.edit(vim.fn.fnameescape(path))
+    end)
+    return 0
+  end
 
   local toggle = function()
     local project_dir = project_utils.git_root() or vim.fn.getcwd()
