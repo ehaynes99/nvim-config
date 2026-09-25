@@ -172,7 +172,11 @@ return {
     end
     native_lsp_config()
 
-    -- All three ship with nvim-lspconfig; root_markers gate startup on config files.
+    -- All three ship with nvim-lspconfig. oxlint/oxfmt's root_dir calls on_dir(nil) when no
+    -- config is found, which nvim treats as single-file mode and attaches anyway;
+    -- workspace_required makes a missing root_dir skip startup instead.
+    vim.lsp.config('oxlint', { workspace_required = true })
+    vim.lsp.config('oxfmt', { workspace_required = true })
     vim.lsp.enable('oxlint')
     vim.lsp.enable('oxfmt')
     vim.lsp.enable('biome')
