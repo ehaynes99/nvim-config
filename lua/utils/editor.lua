@@ -106,6 +106,14 @@ M.all_buffers = function()
   vim.keymap.set('n', 'q', ':close<CR>', { buffer = scratch_buf, noremap = true, silent = true })
 end
 
+-- 'buftype' = nofile short circuits nvim's modified check, so the buffer never
+-- blocks `:qa` no matter what is typed into it. `:w <name>` still works.
+M.scratch_buffer = function()
+  local bufnr = vim.api.nvim_create_buf(true, true)
+  vim.api.nvim_win_set_buf(0, bufnr)
+  return bufnr
+end
+
 M.file_buffers = function()
   local all_buffers = vim.api.nvim_list_bufs()
   return vim.tbl_filter(M.is_file, all_buffers)

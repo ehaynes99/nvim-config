@@ -115,6 +115,17 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
   end,
 })
 
+vim.api.nvim_create_autocmd('VimEnter', {
+  desc = 'Make the startup [No Name] buffer disposable',
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    if vim.api.nvim_buf_get_name(bufnr) == '' and vim.bo[bufnr].buftype == '' and not vim.bo[bufnr].modified then
+      vim.bo[bufnr].buftype = 'nofile'
+      vim.bo[bufnr].swapfile = false
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'Close buffers that will break with sessions',
   pattern = { 'NvimTree', 'Trouble' },

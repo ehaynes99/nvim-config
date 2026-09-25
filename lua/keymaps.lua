@@ -183,7 +183,8 @@ M.init = function()
   -- Testing
   set('n', '<leader>xl', '<cmd>:Luapad<CR>', { desc = 'Luapad' })
   set('n', '<leader>xx', '<cmd>:LuaRun<CR>', { desc = 'Run current file' })
-  set('n', '<leader>xb', require('utils.editor').all_buffers, { desc = 'Print buffer info' })
+  set('n', '<leader>xb', editor_utils.all_buffers, { desc = 'Print buffer info' })
+  set('n', '<leader>xs', editor_utils.scratch_buffer, { desc = 'Open a disposable scratch buffer' })
 end
 
 return M
