@@ -136,7 +136,14 @@ local git_commit_opts = {
 }
 
 M.git_bcommits = function()
-  telescope.git_bcommits(vim.tbl_extend('force', git_commit_opts, { cwd = git_root() }))
+  -- Telescope treats the cursor line as a regex for the preview jump; a line like `a.*+` throws E871
+  -- and aborts the diff highlighting. Supplying current_file stops it computing that raw line.
+  local line = vim.trim(vim.api.nvim_get_current_line())
+  telescope.git_bcommits(vim.tbl_extend('force', git_commit_opts, {
+    cwd = git_root(),
+    current_file = vim.api.nvim_buf_get_name(0),
+    current_line = line ~= '' and '\\V' .. vim.fn.escape(line, '\\') or nil,
+  }))
 end
 
 M.git_branches = function()
