@@ -4,23 +4,14 @@ local native_lsp_config = function()
   local toolchain = require('utils.js_toolchain')
 
   local create_formatter = function(bufnr)
-    -- Pick the right formatter: biome > oxfmt > null-ls > any other LSP with formatting.
     -- biome must win even if oxfmt/oxlint are (incorrectly) still attached -- they ship
     -- without `workspace_required`, so nvim-lspconfig attaches them to every JS/TS buffer
     -- regardless of whether that project has an oxlint/oxfmt config at all.
     local function run_format()
-      local clients = vim.lsp.get_clients({ bufnr = bufnr })
-      for _, c in ipairs(clients) do
-        if c.name == 'biome' then
-          vim.notify('formatting with biome', vim.log.levels.DEBUG)
-          vim.lsp.buf.format({ async = true, bufnr = bufnr, name = 'biome' })
-          return
-        end
-      end
-      for _, c in ipairs(clients) do
-        if c.name == 'oxfmt' then
-          vim.notify('formatting with oxfmt', vim.log.levels.DEBUG)
-          vim.lsp.buf.format({ async = true, bufnr = bufnr, name = 'oxfmt' })
+      for _, name in ipairs({ 'biome', 'oxfmt', 'ruff' }) do
+        if vim.lsp.get_clients({ bufnr = bufnr, name = name })[1] then
+          vim.notify('formatting with ' .. name, vim.log.levels.DEBUG)
+          vim.lsp.buf.format({ async = true, bufnr = bufnr, name = name })
           return
         end
       end
@@ -45,22 +36,24 @@ local native_lsp_config = function()
     end
 
     return function()
-      local biome = vim.lsp.get_clients({ bufnr = bufnr, name = 'biome' })[1]
-      if biome then
-        vim.notify('biome fixAll', vim.log.levels.DEBUG)
-        local params = vim.lsp.util.make_range_params(nil, biome.offset_encoding)
-        params.context = { only = { 'source.fixAll.biome' }, diagnostics = {} }
-        biome.request('textDocument/codeAction', params, function(_, result)
-          for _, action in ipairs(result or {}) do
-            if action.edit then
-              vim.lsp.util.apply_workspace_edit(action.edit, biome.offset_encoding)
-            elseif action.command then
-              biome:exec_cmd(action.command, { bufnr = bufnr })
+      for _, name in ipairs({ 'biome', 'ruff' }) do
+        local client = vim.lsp.get_clients({ bufnr = bufnr, name = name })[1]
+        if client then
+          vim.notify(name .. ' fixAll', vim.log.levels.DEBUG)
+          local params = vim.lsp.util.make_range_params(nil, client.offset_encoding)
+          params.context = { only = { 'source.fixAll.' .. name }, diagnostics = {} }
+          client:request('textDocument/codeAction', params, function(_, result)
+            for _, action in ipairs(result or {}) do
+              if action.edit then
+                vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
+              elseif action.command then
+                client:exec_cmd(action.command, { bufnr = bufnr })
+              end
             end
-          end
-          vim.schedule(run_format)
-        end, bufnr)
-        return
+            vim.schedule(run_format)
+          end, bufnr)
+          return
+        end
       end
 
       local oxlint = vim.lsp.get_clients({ bufnr = bufnr, name = 'oxlint' })[1]
@@ -180,5 +173,32 @@ return {
     vim.lsp.enable('oxlint')
     vim.lsp.enable('oxfmt')
     vim.lsp.enable('biome')
+
+    local python = require('utils.python_toolchain')
+    vim.lsp.config('ruff', {
+      root_dir = python.root_dir,
+      cmd = function(dispatchers, config)
+        local exe = python.venv_bin(config.root_dir, 'ruff') or 'ruff'
+        return vim.lsp.rpc.start({ exe, 'server' }, dispatchers, { cwd = config.root_dir })
+      end,
+      on_attach = function(client)
+        client.server_capabilities.hoverProvider = false
+      end,
+    })
+    vim.lsp.config('basedpyright', {
+      root_dir = python.root_dir,
+      before_init = function(_, config)
+        local venv = python.find_venv(config.root_dir)
+        if venv then
+          config.settings.python = { pythonPath = vim.fs.joinpath(venv, 'bin', 'python') }
+        end
+      end,
+      settings = {
+        basedpyright = {
+          disableOrganizeImports = true,
+          analysis = { typeCheckingMode = 'off' },
+        },
+      },
+    })
   end,
 }

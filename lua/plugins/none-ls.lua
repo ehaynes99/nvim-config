@@ -16,9 +16,6 @@ return {
         -- lua
         formatting.stylua,
 
-        -- python
-        formatting.black,
-
         -- shell scripts
         -- diagnostics.shellcheck.with({ extra_args = { '-s', 'bash' } }),
         -- code_actions.shellcheck.with({ extra_args = { '-s', 'bash' } }),

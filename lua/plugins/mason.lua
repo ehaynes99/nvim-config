@@ -17,7 +17,8 @@ return {
       'lua_ls',
       'oxfmt',
       'oxlint',
-      'pyright',
+      'basedpyright',
+      'ruff',
       'sqlls',
       'graphql',
       'tsc',
@@ -52,7 +53,6 @@ return {
           -- Formatters and linters (not LSP servers)
           'sqlfluff',
           'stylua',
-          'black',
           'shfmt',
           'shellharden',
           'tree-sitter-cli',
