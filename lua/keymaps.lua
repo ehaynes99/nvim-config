@@ -67,8 +67,8 @@ M.init = function()
   set('x', '<A-j>', ":m '>+1<CR>gv=gv", { desc = 'Move down' })
   set('x', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move up' })
 
-  set({ 'n', 'i', 'x', 't' }, '<A-h>', ':tabprevious<CR>', { desc = 'Go to previous tab' })
-  set({ 'n', 'i', 'x', 't' }, '<A-l>', ':tabnext<CR>', { desc = 'Go to next tab' })
+  set({ 'n', 'i', 'x', 't' }, '<A-h>', '<cmd>tabprevious<CR>', { desc = 'Go to previous tab' })
+  set({ 'n', 'i', 'x', 't' }, '<A-l>', '<cmd>tabnext<CR>', { desc = 'Go to next tab' })
 
   -- Find
   set('n', '<leader>ff', tu.find_files, { desc = 'Find: files' })
