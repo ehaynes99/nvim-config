@@ -1,8 +1,5 @@
 return {
-  -- 'esmuellert/nvim-eslint',
-  'ehaynes99/nvim-eslint',
-  branch = 'node-args',
-  -- dir = '/home/erich/workspace/ehaynes99/nvim-eslint',
+  'esmuellert/nvim-eslint',
   config = function()
     local toolchain = require('utils.js_toolchain')
     local nvim = require('nvim-eslint')
