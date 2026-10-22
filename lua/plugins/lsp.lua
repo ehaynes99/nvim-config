@@ -3,72 +3,73 @@ local native_lsp_config = function()
   local keymaps = require('keymaps')
   local toolchain = require('utils.js_toolchain')
 
-  local create_formatter = function(bufnr)
-    -- biome must win even if oxfmt/oxlint are (incorrectly) still attached -- they ship
-    -- without `workspace_required`, so nvim-lspconfig attaches them to every JS/TS buffer
-    -- regardless of whether that project has an oxlint/oxfmt config at all.
-    local function run_format()
-      for _, name in ipairs({ 'biome', 'oxfmt', 'ruff' }) do
-        if vim.lsp.get_clients({ bufnr = bufnr, name = name })[1] then
-          vim.notify('formatting with ' .. name, vim.log.levels.DEBUG)
-          vim.lsp.buf.format({ async = true, bufnr = bufnr, name = name })
-          return
-        end
-      end
-
-      local filetype = vim.bo.filetype
-      local null_ls = require('null-ls')
-      local null_ls_sources = require('null-ls.sources')
-      local has_null_ls = #null_ls_sources.get_available(filetype, null_ls.methods.FORMATTING) > 0
-
-      vim.lsp.buf.format({
-        async = true,
-        bufnr = bufnr,
-        filter = function(client)
-          local supports_formatting = client.supports_method('textDocument/formatting')
-          if has_null_ls then
-            return client.name == 'null-ls'
-          else
-            return supports_formatting
-          end
-        end,
-      })
-    end
-
-    return function()
-      for _, name in ipairs({ 'biome', 'ruff' }) do
-        local client = vim.lsp.get_clients({ bufnr = bufnr, name = name })[1]
-        if client then
-          vim.notify(name .. ' fixAll', vim.log.levels.DEBUG)
-          local params = vim.lsp.util.make_range_params(nil, client.offset_encoding)
-          params.context = { only = { 'source.fixAll.' .. name }, diagnostics = {} }
-          client:request('textDocument/codeAction', params, function(_, result)
-            for _, action in ipairs(result or {}) do
-              if action.edit then
-                vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
-              elseif action.command then
-                client:exec_cmd(action.command, { bufnr = bufnr })
-              end
-            end
-            vim.schedule(run_format)
-          end, bufnr)
-          return
-        end
-      end
-
-      local oxlint = vim.lsp.get_clients({ bufnr = bufnr, name = 'oxlint' })[1]
-      if not oxlint then
-        run_format()
+  -- biome must win even if oxfmt/oxlint are (incorrectly) still attached -- they ship
+  -- without `workspace_required`, so nvim-lspconfig attaches them to every JS/TS buffer
+  -- regardless of whether that project has an oxlint/oxfmt config at all.
+  local function format(bufnr)
+    for _, name in ipairs({ 'biome', 'oxfmt', 'ruff' }) do
+      if vim.lsp.get_clients({ bufnr = bufnr, name = name })[1] then
+        vim.notify('formatting with ' .. name, vim.log.levels.DEBUG)
+        vim.lsp.buf.format({ async = true, bufnr = bufnr, name = name })
         return
       end
+    end
 
-      vim.notify('oxlint fixAll', vim.log.levels.DEBUG)
-      oxlint:exec_cmd({
-        title = 'Apply Oxlint automatic fixes',
-        command = 'oxc.fixAll',
-        arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
-      }, { bufnr = bufnr }, function()
-        vim.schedule(run_format)
+    local null_ls = require('null-ls')
+    local null_ls_sources = require('null-ls.sources')
+    local has_null_ls = #null_ls_sources.get_available(vim.bo[bufnr].filetype, null_ls.methods.FORMATTING) > 0
+
+    vim.lsp.buf.format({
+      async = true,
+      bufnr = bufnr,
+      filter = function(client)
+        if has_null_ls then
+          return client.name == 'null-ls'
+        end
+        return client.supports_method('textDocument/formatting')
+      end,
+    })
+  end
+
+  local function fix_all(bufnr, on_done)
+    for _, name in ipairs({ 'biome', 'ruff' }) do
+      local client = vim.lsp.get_clients({ bufnr = bufnr, name = name })[1]
+      if client then
+        vim.notify(name .. ' fixAll', vim.log.levels.DEBUG)
+        local params = vim.lsp.util.make_range_params(nil, client.offset_encoding)
+        params.context = { only = { 'source.fixAll.' .. name }, diagnostics = {} }
+        client:request('textDocument/codeAction', params, function(_, result)
+          for _, action in ipairs(result or {}) do
+            if action.edit then
+              vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
+            elseif action.command then
+              client:exec_cmd(action.command, { bufnr = bufnr })
+            end
+          end
+          on_done()
+        end, bufnr)
+        return
+      end
+    end
+
+    local oxlint = vim.lsp.get_clients({ bufnr = bufnr, name = 'oxlint' })[1]
+    if not oxlint then
+      on_done()
+      return
+    end
+
+    vim.notify('oxlint fixAll', vim.log.levels.DEBUG)
+    oxlint:exec_cmd({
+      title = 'Apply Oxlint automatic fixes',
+      command = 'oxc.fixAll',
+      arguments = { { uri = vim.uri_from_bufnr(bufnr) } },
+    }, { bufnr = bufnr }, on_done)
+  end
+
+  local create_formatter = function(bufnr)
+    return function()
+      fix_all(bufnr, function()
+        vim.schedule(function() format(bufnr) end)
       end)
     end
   end
