@@ -19,7 +19,8 @@ end
 
 -- tsc currently doesn't call refresh on in-editor file changes (only on file-watcher events).
 local function refresh_all_buffers(client_id)
-  for _, bufnr in ipairs(vim.lsp.get_buffers_by_client_id(client_id)) do
+  local client = vim.lsp.get_client_by_id(client_id)
+  for bufnr in pairs(client and client.attached_buffers or {}) do
     if vim.api.nvim_buf_is_loaded(bufnr) then
       vim.lsp.diagnostic._refresh(bufnr, client_id)
     end
