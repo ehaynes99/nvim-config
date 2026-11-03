@@ -23,6 +23,22 @@ _disk_poll:start(200, 200, vim.schedule_wrap(function()
   end
 end))
 
+if require('utils.herdr').is_active() then
+  local idle_limit = 36 * 60 * 60
+  local last_input = os.time()
+  -- Focus changes bypass on_key, so cycling through worktrees doesn't count as use.
+  vim.on_key(function()
+    last_input = os.time()
+  end)
+  vim.uv.new_timer():start(600000, 600000, vim.schedule_wrap(function()
+    if os.time() - last_input > idle_limit then
+      vim.cmd('silent! wall')
+      -- Fails on unnamed modified buffers or running terminal jobs; leave those open.
+      pcall(vim.cmd, 'qa')
+    end
+  end))
+end
+
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'bind "q" to close for certain filetypes',
   pattern = { 'qf', 'help', 'vimdoc', 'man', 'lspinfo', 'spectre_panel', 'tsplayground' },
