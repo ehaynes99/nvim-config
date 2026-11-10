@@ -175,6 +175,21 @@ return {
     vim.lsp.enable('oxfmt')
     vim.lsp.enable('biome')
 
+    -- npx from the project root prefers the project's local fallow over a global install.
+    vim.lsp.config('fallow', {
+      filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+      workspace_required = true,
+      root_dir = function(bufnr, on_dir)
+        local fname = vim.api.nvim_buf_get_name(bufnr)
+        local markers = require('lspconfig.util').insert_package_json({ '.fallowrc.json' }, 'fallow', fname)
+        on_dir(vim.fs.root(bufnr, markers))
+      end,
+      cmd = function(dispatchers, config)
+        return vim.lsp.rpc.start({ 'npx', '-y', '-p', 'fallow', 'fallow-lsp' }, dispatchers, { cwd = config.root_dir })
+      end,
+    })
+    vim.lsp.enable('fallow')
+
     local python = require('utils.python_toolchain')
     vim.lsp.config('ruff', {
       root_dir = python.root_dir,
